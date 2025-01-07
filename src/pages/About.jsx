@@ -6,19 +6,19 @@ export default function About() {
       name: 'Shoyeb Chaudhari',
       role: 'Developer',
       image: `${image}`,
-      bio: 'With over 15 years of experience in AI and ML, Sarah leads our vision for innovative technology solutions.',
+      bio: 'hi',
     },
     {
       name: 'Nachiket Shinde',
       role: 'Developer',
       image: `${image}`,
-      bio: 'Michael brings extensive experience in full-stack development and cloud architecture.',
+      bio: 'hi',
     },
     {
       name: 'Afroz Sheikh',
       role: 'Developer',
       image: `${image}`,
-      bio: 'Emily specializes in turning complex data into actionable insights for our clients.',
+      bio: 'hi',
     },
   ];
 
