@@ -9,7 +9,7 @@ export default function About() {
       bio: 'With over 15 years of experience in AI and ML, Sarah leads our vision for innovative technology solutions.',
     },
     {
-      name: 'Nahciket Shinde',
+      name: 'Nachiket Shinde',
       role: 'Developer',
       image: `${image}`,
       bio: 'Michael brings extensive experience in full-stack development and cloud architecture.',

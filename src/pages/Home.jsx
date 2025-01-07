@@ -36,7 +36,7 @@ const technologies = [
   'React-Native',
   'SQL',
   'No-SQL',
-  'Dot-Net'
+  '.Net'
 ];
 
 

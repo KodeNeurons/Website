@@ -1,6 +1,7 @@
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import imagee from './android-chrome-192x192-photoaidcom-cropped.png'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -17,6 +18,9 @@ export default function Navbar() {
     <header className="fixed w-full bg-white shadow-sm z-50">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
+          <img src={imagee}
+          className='h-9'
+          alt="loho" />
           <Link to="/" className="-m-1.5 p-1.5 text-2xl font-bold text-blue-600">
             KodeNeurons
           </Link>
