@@ -12,7 +12,7 @@ export default function About() {
       name: 'Nachiket Shinde',
       role: 'Co-Founder & Developer',
       image: `${image}`,
-      bio: 'hi',
+      bio: 'A dedicated coder with expertise in AI, ML, and software development. Focused on building innovative solutions, exploring new technologies, and solving real-world problems creatively.',
     },
     {
       name: 'Afroz Sheikh',
