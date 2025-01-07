@@ -42,7 +42,7 @@ export default function Contact() {
               height="800px"
              src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAWERg_NUMjNZUjFXOTM4WllGVVFQUzBTNUZZQlRJQS4u&embed=true"
               allowFullScreen
-             
+             title="Project Discussion"
               
               className="w-full h-[600px] bg-gray-50"
             >
