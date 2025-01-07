@@ -53,16 +53,17 @@ export default function Home() {
             <p className="mt-6 text-lg leading-8 text-gray-600">
               We leverage cutting-edge technologies to deliver innovative solutions across artificial intelligence,
               machine learning, data science, and software development.
+              <p className='font-bold '> At Very Affordable Prices</p>
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
   <Link
     to="/contact"
     className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
   >
-    Get started
+    Book Your Project
   </Link>
   <Link to="/projects" className="text-sm font-semibold leading-6 text-gray-900">
-    View projects <span aria-hidden="true">→</span>
+    View Our Previous Projects <span aria-hidden="true">→</span>
   </Link>
 </div>
 
