@@ -4,6 +4,9 @@ import dia from "./images/diabetes.jpg"
 import emo from './images/emotiondetect.jpg'
 import fwi from './images/fwii.png'
 import vrksha from './images/vruksha.jpg'
+import todo from './images/todo.jpg'
+import care from './images/careconnect.jpg'
+import cc from './images/cc.jpg'
 const projects = [
     {
       id: "1",
@@ -63,6 +66,37 @@ const projects = [
         "A data-driven project that predicts movie ratings by analyzing historical movie data. It considers features like genre, director, and cast to build machine learning models that estimate ratings accurately. The project showcases techniques like data preprocessing, feature engineering, and hyperparameter tuning.",
       technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
     },
+
+
+        {
+          id: "8",
+          title: "Hospital and Blood Donor System",
+          image: `${care}`, 
+          description: "A system designed to manage hospital data and blood donor information efficiently, facilitating easy access to blood donors and hospital services.",
+          technologies: ["Java", "XML", "Firebase"],
+        },
+        {
+          id: "9",
+          title: "Campus Circle",
+          image: `${cc}`, 
+          description: "A social networking platform specifically designed for campus communities, enabling students to connect, share resources, and participate in campus events.",
+          technologies: ["Java", "XML", "Firebase"],
+        },
+        {
+          id: "10",
+          title: "Weather Tracker",
+          image : "https://jumpgrowth.com/app-of-week-weather-forecast-the-best-weather-forecast-app" , 
+          description: "A weather tracking application providing real-time weather updates, forecasts, and alerts using a clean and intuitive UI.",
+          technologies: ["Java", "XML", "OpenWeather API"],
+        },
+        {
+          id: "11",
+          title: "To-Do List",
+          image: `${todo}`, 
+          description: "A task management app that allows users to create, edit, and manage tasks with priority settings and reminders.",
+          technologies: ["Java", "XML", "SQLite"],
+        }
+      
   ];
 
   export default projects
