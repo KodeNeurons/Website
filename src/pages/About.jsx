@@ -4,21 +4,21 @@ export default function About() {
   const team = [
     {
       name: 'Shoyeb Chaudhari',
-      role: 'Developer',
+      role: 'Co-Founder & Developer',
       image: `${image}`,
-      bio: 'hi',
+      bio: 'A coder specializing in Android development, PHP, SQL, Firebase, and web technologies, constantly striving to build innovative and impactful solutions.',
     },
     {
       name: 'Nachiket Shinde',
-      role: 'Developer',
+      role: 'Co-Founder & Developer',
       image: `${image}`,
       bio: 'hi',
     },
     {
       name: 'Afroz Sheikh',
-      role: 'Developer',
+      role: 'Co-Founder & Developer',
       image: `${image}`,
-      bio: 'hi',
+      bio: 'A passionate coder and beginner in machine learning, skilled in building innovative projects, from AI-powered platforms to React-based applications, driven by creativity and growth.',
     },
   ];
 
