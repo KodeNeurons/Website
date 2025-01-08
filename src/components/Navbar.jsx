@@ -5,7 +5,7 @@ import imagee from './android-chrome-192x192-photoaidcom-cropped.png'
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Projects', href: '/projects' },
+  { name: 'Our Projects', href: '/projects' },
   { name: 'About', href: '/about' },
   { name: 'Book Your Project', href: '/contact' },
 ];
