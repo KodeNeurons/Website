@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -7,10 +8,21 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode); // Flip the dark mode state
+  };
+
+  // Dynamically add/remove the "dark" class to the body tag
+  useEffect(() => {
+    document.body.classList.toggle('dark', isDarkMode);
+  }, [isDarkMode]);
+
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
-        <Navbar />
+        <Navbar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
         <main className="flex-grow pt-16">
           <Routes>
             <Route path="/" element={<Home />} />

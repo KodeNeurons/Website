@@ -41,14 +41,14 @@ const technologies = [
 
 export default function Home() {
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-gray-900">
       <div className="relative isolate">
         <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
           <div className="text-center">
-            <h1 className="font-bold tracking-tight text-gray-900 text-5xl">
+            <h1 className="font-bold tracking-tight text-gray-900 dark:text-gray-100 text-5xl">
               Professional Projects at Affordable Prices
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
               Looking for custom project development? We create professional solutions 
               in AI, Web Development, Mobile Apps, and more - all at competitive prices!
             </p>
@@ -59,7 +59,7 @@ export default function Home() {
               >
                 Book Your Project
               </Link>
-              <Link to="/projects" className="text-sm font-semibold leading-6 text-gray-900">
+              <Link to="/projects" className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
                 View Our Projects <span aria-hidden="true">→</span>
               </Link>
             </div>
@@ -69,11 +69,11 @@ export default function Home() {
 
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-blue-600">Why Choose Us?</h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-base font-semibold leading-7 text-blue-600 dark:text-blue-400">Why Choose Us?</h2>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
             Your Trusted Technology Partner
           </p>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
+          <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
             We understand your needs and deliver projects that meet your requirements while being cost-effective.
           </p>
         </div>
@@ -81,11 +81,11 @@ export default function Home() {
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-4">
             {features.map((feature) => (
               <div key={feature.name} className="flex flex-col">
-                <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
-                  <feature.icon className="h-5 w-5 flex-none text-blue-600" aria-hidden="true" />
+                <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900 dark:text-gray-100">
+                  <feature.icon className="h-5 w-5 flex-none text-blue-600 dark:text-blue-400" aria-hidden="true" />
                   {feature.name}
                 </dt>
-                <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
+                <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600 dark:text-gray-400">
                   <p className="flex-auto">{feature.description}</p>
                 </dd>
               </div>
@@ -94,12 +94,12 @@ export default function Home() {
         </div>
 
         <div className="mt-20 mb-20">
-          <h3 className="text-2xl font-semibold text-center mb-8">Solutions We Offer</h3>
+          <h3 className="text-2xl font-semibold text-center text-gray-900 dark:text-gray-100 mb-8">Solutions We Offer</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {technologies.map((tech) => (
               <span
                 key={tech}
-                className="px-4 py-2 bg-gray-100 rounded-full text-gray-700 font-medium hover:bg-blue-100 cursor-pointer"
+                className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 font-medium hover:bg-blue-100 dark:hover:bg-blue-600 cursor-pointer"
               >
                 {tech}
               </span>

@@ -1,4 +1,4 @@
-import image from './pngtree-web-programmer-avatar-png-image_12529205.png'
+import image from './pngtree-web-programmer-avatar-png-image_12529205.png';
 
 export default function About() {
   const team = [
@@ -12,7 +12,7 @@ export default function About() {
       name: 'Nachiket Shinde',
       role: 'Co-Founder & Developer',
       image: `${image}`,
-      bio: 'A dedicated coder with expertise in AI, ML, and software development. Focused on building innovative solutions, exploring new technologies, and solving real-world problems creatively.',
+      bio: 'A dedicated coder with expertise in AI, ML, and software development. Focused on building innovative solutions, exploring new technologies, and solving real-world problems creatively.',
     },
     {
       name: 'Afroz Sheikh',
@@ -23,11 +23,13 @@ export default function About() {
   ];
 
   return (
-    <div className="bg-white py-24 sm:py-32">
+    <div className="bg-white dark:bg-gray-900 py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">About Us</h2>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+            About Us
+          </h2>
+          <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
             We are a team of passionate technologists dedicated to solving complex problems through innovative solutions.
             Our mission is to empower businesses with cutting-edge technology solutions that drive growth and efficiency.
           </p>
@@ -36,20 +38,28 @@ export default function About() {
           {team.map((person) => (
             <div key={person.name} className="flex flex-col items-start">
               <img
-                className=" w-full rounded-2xl object-cover"
+                className="w-full rounded-2xl object-cover"
                 src={person.image}
                 alt={person.name}
               />
-              <h3 className="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900">{person.name}</h3>
-              <p className="text-base leading-7 text-blue-600">{person.role}</p>
-              <p className="mt-4 text-base leading-7 text-gray-600">{person.bio}</p>
+              <h3 className="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900 dark:text-gray-100">
+                {person.name}
+              </h3>
+              <p className="text-base leading-7 text-blue-600 dark:text-blue-400">
+                {person.role}
+              </p>
+              <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-400">
+                {person.bio}
+              </p>
             </div>
           ))}
         </div>
-        
+
         <div className="mx-auto mt-20 max-w-2xl lg:mx-0">
-          <h3 className="text-2xl font-bold tracking-tight text-gray-900">Our Vision</h3>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
+          <h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+            Our Vision
+          </h3>
+          <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
             To be the leading provider of innovative technology solutions that transform businesses and drive digital evolution.
             We strive to create lasting impact through our commitment to excellence and cutting-edge technology.
           </p>
