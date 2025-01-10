@@ -7,6 +7,7 @@ import vrksha from './images/vruksha.jpg'
 import todo from './images/todo.jpg'
 import care from './images/careconnect.jpg'
 import cc from './images/cc.jpg'
+import wer from './images/wether.jpg'
 const projects = [
     {
       id: "1",
@@ -85,7 +86,7 @@ const projects = [
         {
           id: "10",
           title: "Weather Tracker",
-          image : "https://jumpgrowth.com/app-of-week-weather-forecast-the-best-weather-forecast-app" , 
+          image : `${wer}` , 
           description: "A weather tracking application providing real-time weather updates, forecasts, and alerts using a clean and intuitive UI.",
           technologies: ["Java", "XML", "OpenWeather API"],
         },

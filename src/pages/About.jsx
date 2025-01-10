@@ -1,4 +1,5 @@
 import image from './pngtree-web-programmer-avatar-png-image_12529205.png';
+import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from 'react-icons/fa';
 
 export default function About() {
   const team = [
@@ -7,18 +8,30 @@ export default function About() {
       role: 'Co-Founder & Developer',
       image: `${image}`,
       bio: 'A coder specializing in Android development, PHP, SQL, Firebase, and web technologies, constantly striving to build innovative and impactful solutions.',
+      linkedin: 'https://www.linkedin.com/in/shoyeb-chaudhari-033b44234/',
+      github: 'https://github.com/ShoyebChaudhari45',
+      email: 'chaudharishoyeb@gmail.com',
+      phone: '+91-7499601744',
     },
     {
       name: 'Nachiket Shinde',
       role: 'Co-Founder & Developer',
       image: `${image}`,
       bio: 'A dedicated coder with expertise in AI, ML, and software development. Focused on building innovative solutions, exploring new technologies, and solving real-world problems creatively.',
+      linkedin: 'https://www.linkedin.com/in/nachiket-shinde-a4b378276/',
+      github: 'https://github.com/Nachiket858',
+      email: 'nachiketshinde8766@gmail.com',
+      phone: '+91-8766055949',
     },
     {
       name: 'Afroz Sheikh',
       role: 'Co-Founder & Developer',
       image: `${image}`,
       bio: 'A passionate coder and beginner in machine learning, skilled in building innovative projects, from AI-powered platforms to React-based applications, driven by creativity and growth.',
+      linkedin: 'https://www.linkedin.com/in/afroz-sheikh-404268262/',
+      github: 'https://github.com/AfrozSheikh',
+      email: 'afrozsheikh1112@gmail.com',
+      phone: '+91-9766432374',
     },
   ];
 
@@ -48,8 +61,38 @@ export default function About() {
               <p className="text-base leading-7 text-blue-600 dark:text-blue-400">
                 {person.role}
               </p>
+              <div className="flex mt-4 gap-4">
+                <a
+                  href={person.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-blue-600 dark:hover:text-blue-400"
+                >
+                  <FaLinkedin size={24} />
+                </a>
+                <a
+                  href={person.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-gray-800 dark:hover:text-gray-400"
+                >
+                  <FaGithub size={24} />
+                </a>
+              </div>
               <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-400">
                 {person.bio}
+              </p>
+              <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400 flex items-center">
+                <FaEnvelope className="mr-2 text-blue-600" />
+                <a href={`mailto:${person.email}`} className="hover:underline">
+                  {person.email}
+                </a>
+              </p>
+              <p className="text-sm leading-6 text-gray-600 dark:text-gray-400 flex items-center">
+                <FaPhone className="mr-2 text-blue-600" />
+                <a href={`tel:${person.phone}`} className="hover:underline">
+                  {person.phone}
+                </a>
               </p>
             </div>
           ))}
