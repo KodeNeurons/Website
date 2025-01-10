@@ -9,7 +9,7 @@ export default function About() {
       bio: 'A coder specializing in Android development, PHP, SQL, Firebase, and web technologies, constantly striving to build innovative and impactful solutions.',
     },
     {
-      name: 'Nachiket Shoyeb chaudhari',
+      name: 'Nachiket Shinde',
       role: 'Co-Founder & Developer',
       image: `${image}`,
       bio: 'A dedicated coder with expertise in AI, ML, and software development. Focused on building innovative solutions, exploring new technologies, and solving real-world problems creatively.',
