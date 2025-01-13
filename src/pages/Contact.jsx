@@ -15,7 +15,8 @@ export default function Contact() {
             <iframe
               width="100%"
               height="800px"
-              src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAoY42RpUQ0ZZOTUyVUVLUElSQ0NMVElCN1laTTRaRS4u&embed=true"
+              src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAWERg_NUMjNZUjFXOTM4WllGVVFQUzBTNUZZQlRJQS4u&embed=true"
+              // <iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAWERg_NUMjNZUjFXOTM4WllGVVFQUzBTNUZZQlRJQS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
               allowFullScreen
               title="Project Discussion"
               className="w-full h-[600px] bg-gray-50 dark:bg-gray-800"
