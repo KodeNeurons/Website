@@ -1,30 +1,161 @@
+import { useState } from "react";
+
 export default function Contact() {
+  const [result, setResult] = useState("");
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending...");
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", "83e66638-db7b-44ee-b2a8-bedf587bcadb");
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setResult("Form Submitted Successfully");
+      event.target.reset();
+    } else {
+      console.log("Error", data);
+      setResult(data.message);
+    }
+  };
+
   return (
-    <div className="bg-white dark:bg-gray-900 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
-            Book Your Project
+    <div>
+     
+
+      {/* Project Info Section */}
+      <div className="bg-gray-100 dark:bg-gray-900 py-16 text-gray-700 dark:text-gray-300  px-4 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4">
+            KodeNeurons: Let's Build Your Project Together
           </h2>
-          <p className="mt-2 text-lg leading-8 text-gray-600 dark:text-gray-400">
-            Let's discuss your project and bring your ideas to life.
+          <p className="text-lg">
+            Welcome to KodeNeurons! We specialize in creating custom projects across various
+            domains in Computer Science and Engineering. Share your requirements with us by
+            filling out the form below, and we'll bring your ideas to life with cutting-edge
+            technology and expertise.
           </p>
         </div>
-        <div className="mx-auto mt-16 max-w-4xl">
-          <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-300 dark:ring-gray-700">
-            <iframe
-              width="100%"
-              height="800px"
-              src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAWERg_NUMjNZUjFXOTM4WllGVVFQUzBTNUZZQlRJQS4u&embed=true"
-              // <iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAANAAWERg_NUMjNZUjFXOTM4WllGVVFQUzBTNUZZQlRJQS4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
-              allowFullScreen
-              title="Project Discussion"
-              className="w-full h-[600px] bg-gray-50 dark:bg-gray-800"
+      </div>
+
+      {/* Form Section */}
+      <div className="flex flex-col items-center py-8 justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+        <form
+          onSubmit={onSubmit}
+          className="w-full max-w-md bg-white dark:bg-gray-800 shadow-md rounded px-8 py-6"
+        >
+          
+          {/* Full Name */}
+          <div className="mb-4">
+            <label
+              htmlFor="fullName"
+              className="block text-gray-700 dark:text-gray-300 font-bold mb-2"
             >
-              Loading…
-            </iframe>
+              Your Full Name
+            </label>
+            <input
+              type="text"
+              name="fullName"
+              id="fullName"
+              required
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+            />
           </div>
-        </div>
+          {/* Contact Number */}
+          <div className="mb-4">
+            <label
+              htmlFor="contactNumber"
+              className="block text-gray-700 dark:text-gray-300 font-bold mb-2"
+            >
+              Contact Number
+            </label>
+            <input
+              type="tel"
+              name="contactNumber"
+              id="contactNumber"
+              required
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+            />
+          </div>
+          {/* Email */}
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 dark:text-gray-300 font-bold mb-2"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+            />
+          </div>
+          {/* College/Company/Institute */}
+          <div className="mb-4">
+            <label
+              htmlFor="institution"
+              className="block text-gray-700 dark:text-gray-300 font-bold mb-2"
+            >
+              College/Company/Institute
+            </label>
+            <input
+              type="text"
+              name="institution"
+              id="institution"
+              required
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+            />
+          </div>
+          {/* Project Name */}
+          <div className="mb-4">
+            <label
+              htmlFor="projectName"
+              className="block text-gray-700 dark:text-gray-300 font-bold mb-2"
+            >
+              Project Name
+            </label>
+            <input
+              type="text"
+              name="projectName"
+              id="projectName"
+              required
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+            />
+          </div>
+          {/* Project Description */}
+          <div className="mb-4">
+            <label
+              htmlFor="projectDescription"
+              className="block text-gray-700 dark:text-gray-300 font-bold mb-2"
+            >
+              Project Description
+            </label>
+            <textarea
+              name="projectDescription"
+              id="projectDescription"
+              required
+              className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+            ></textarea>
+          </div>
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 focus:outline-none"
+          >
+            Submit Form
+          </button>
+        </form>
+        <span className="mt-4 text-gray-700 dark:text-gray-300">{result}</span>
       </div>
     </div>
   );

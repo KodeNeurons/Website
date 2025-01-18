@@ -15,7 +15,8 @@ export default function Footer() {
             <Github className="h-6 w-6" />
           </a>
           <a
-            href="https://www.linkedin.com/company/kodeneurons/"
+          
+            href=" https://www.linkedin.com/company/kodeneurons3"
             className="text-gray-400 hover:text-gray-300"
             target="_blank"
             rel="noopener noreferrer"
