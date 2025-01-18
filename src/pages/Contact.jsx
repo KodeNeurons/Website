@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Contact() {
   const [result, setResult] = useState("");
@@ -18,20 +19,26 @@ export default function Contact() {
     const data = await response.json();
 
     if (data.success) {
-      setResult("Form Submitted Successfully");
+      setResult("");
       event.target.reset();
+
+      // Show success toast
+      toast.success("Form submitted successfully! We'll contact you soon.");
     } else {
       console.log("Error", data);
-      setResult(data.message);
+
+      // Show error toast
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
   return (
     <div>
-     
+      {/* Toaster for notifications */}
+      <Toaster position="top-center" reverseOrder={false} />
 
       {/* Project Info Section */}
-      <div className="bg-gray-100 dark:bg-gray-900 py-16 text-gray-700 dark:text-gray-300  px-4 text-center">
+      <div className="bg-gray-100 dark:bg-gray-900 py-16 text-gray-700 dark:text-gray-300 px-4 text-center">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-4xl font-bold mb-4">
             KodeNeurons: Let's Build Your Project Together
@@ -51,7 +58,6 @@ export default function Contact() {
           onSubmit={onSubmit}
           className="w-full max-w-md bg-white dark:bg-gray-800 shadow-md rounded px-8 py-6"
         >
-          
           {/* Full Name */}
           <div className="mb-4">
             <label
@@ -155,7 +161,6 @@ export default function Contact() {
             Submit Form
           </button>
         </form>
-        <span className="mt-4 text-gray-700 dark:text-gray-300">{result}</span>
       </div>
     </div>
   );
