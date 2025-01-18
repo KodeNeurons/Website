@@ -6,14 +6,7 @@ export default function Footer() {
     <footer className="bg-gray-800 text-white">
       <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
         <div className="flex justify-center space-x-6 md:order-2">
-          <a
-            href="https://github.com/KodeNeurons"
-            className="text-gray-400 hover:text-gray-300"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Github className="h-6 w-6" />
-          </a>
+         
           <a
           
             href=" https://www.linkedin.com/company/kodeneurons3"
