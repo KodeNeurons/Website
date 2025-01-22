@@ -1,12 +1,14 @@
 import image from './pngtree-web-programmer-avatar-png-image_12529205.png';
 import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from 'react-icons/fa';
-
+import afro from '../pages/imageF/aff.png'
+import nachi from '../pages/imageF/nachu.png' 
+import shoy from '../pages/imageF/shoyeb.png'
 export default function About() {
   const team = [
     {
       name: 'Shoyeb Chaudhari',
       role: 'Co-Founder & Developer',
-      image: `${image}`,
+      image: `${shoy}`,
       bio: 'A coder specializing in Android development, PHP, SQL, Firebase, and web technologies, constantly striving to build innovative and impactful solutions.',
       linkedin: 'https://www.linkedin.com/in/shoyeb-chaudhari-033b44234/',
       github: 'https://github.com/ShoyebChaudhari45',
@@ -16,7 +18,7 @@ export default function About() {
     {
       name: 'Nachiket Shinde',
       role: 'Co-Founder & Developer',
-      image: `${image}`,
+      image: `${nachi}`,
       bio: 'A dedicated coder with expertise in AI, ML, and software development. Focused on building innovative solutions, exploring new technologies, and solving real-world problems creatively.',
       linkedin: 'https://www.linkedin.com/in/nachiket-shinde-a4b378276/',
       github: 'https://github.com/Nachiket858',
@@ -26,7 +28,7 @@ export default function About() {
     {
       name: 'Afroz Sheikh',
       role: 'Co-Founder & Developer',
-      image: `${image}`,
+      image: `${afro}`,
       bio: 'A passionate coder and beginner in machine learning, skilled in building innovative projects, from AI-powered platforms to React-based applications, driven by creativity and growth.',
       linkedin: 'https://www.linkedin.com/in/afroz-sheikh-404268262/',
       github: 'https://github.com/AfrozSheikh',
@@ -51,10 +53,20 @@ export default function About() {
           {team.map((person) => (
             <div key={person.name} className="flex flex-col items-start">
               <img
-                className="w-full rounded-2xl object-cover"
-                src={person.image}
-                alt={person.name}
-              />
+  className="w-[70%] rounded-full object-cover 
+            transform transition-all duration-300
+            hover:scale-110 hover:shadow-xl
+            group-hover:opacity-90
+            cursor-pointer
+            ring-2 ring-offset-2 ring-transparent
+            hover:ring-blue-500
+            aspect-square" // This ensures perfect circle
+  src={person.image}
+  alt={person.name}
+  onError={(e) => {
+    e.target.src = "/api/placeholder/200/200"; // Fallback image
+  }}
+/>
               <h3 className="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900 dark:text-gray-100">
                 {person.name}
               </h3>
