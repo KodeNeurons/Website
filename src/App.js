@@ -25,7 +25,7 @@ function App() {
         <Navbar toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
         <main className="flex-grow pt-16">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home  isDarkMode={isDarkMode}/>} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />

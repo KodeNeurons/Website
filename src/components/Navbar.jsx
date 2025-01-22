@@ -1,50 +1,158 @@
-import { Menu, X, Sun, Moon } from 'lucide-react'; // Importing Sun and Moon icons
+import { Sun, Moon } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import imagee from './android-chrome-192x192-photoaidcom-cropped.png';
 
 const navigation = [
-  { name: 'Home', href: '/' },
   { name: 'Our Projects', href: '/projects' },
   { name: 'About', href: '/about' },
   { name: 'Book Your Project', href: '/contact' },
 ];
 
 export default function Navbar({ toggleTheme, isDarkMode }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   return (
     <header className={`fixed w-full z-50 ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-sm`}>
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-        <div className="flex lg:flex-1 items-center space-x-4">
-          <img src={imagee} className="h-9" alt="logo" />
-          <Link
-            to="/"
-            className={`-m-1.5 p-1.5 text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-blue-600'}`}
-          >
-            KodeNeurons
-          </Link>
-        </div>
-        <div className="flex items-center gap-x-4">
-          <div className="lg:hidden">
-            <button
-              type="button"
-              className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 ${isDarkMode ? 'text-white' : 'text-gray-700'}`}
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
-          </div>
+      <style jsx>{`
+        /* Logo 3D Effect */
+        .logo-effect {
+          --c: ${isDarkMode ? '#fff' : '#1d4ed8'};
+          background: linear-gradient(90deg, #0000 33%, ${isDarkMode ? '#fff5' : '#1d4ed855'}, #0000 67%) var(--_p,100%)/300% no-repeat;
+          color: #0000;
+          transform: perspective(500px) rotateY(calc(20deg*var(--_i,-1)));
+          text-shadow: calc(var(--_i,-1)* 0.08em) -.01em 0   var(--c),
+            calc(var(--_i,-1)*-0.08em)  .01em 2px ${isDarkMode ? '#fff4' : '#0004'};
+          transition: 0.3s;
+        }
 
-          {/* Theme Switch Button with Icon Only in Right Corner */}
+        .logo-effect:hover {
+          --_p: 0%;
+          --_i: 1;
+        }
+
+        .logo-image-effect {
+          transform: perspective(500px) rotateY(calc(20deg*var(--_i,-1)));
+          transition: 0.3s;
+          --_i: -1;
+        }
+
+        .logo-container:hover .logo-effect,
+        .logo-container:hover .logo-image-effect {
+          --_p: 0%;
+          --_i: 1;
+        }
+
+        /* Button Glitch Effect */
+        .nav-button {
+          position: relative;
+          overflow: hidden;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+        }
+
+        .nav-button::after {
+          --slice-0: inset(50% 50% 50% 50%);
+          --slice-1: inset(80% -6px 0 0);
+          --slice-2: inset(50% -6px 30% 0);
+          --slice-3: inset(10% -6px 85% 0);
+          --slice-4: inset(40% -6px 43% 0);
+          --slice-5: inset(80% -6px 5% 0);
+          
+          content: attr(data-text);
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(45deg, transparent 3%, #4F46E5 3%, #4F46E5 5%, #7C3AED 5%);
+          text-shadow: -1px -1px 0px #818CF8, 1px 1px 0px #4F46E5;
+          clip-path: var(--slice-0);
+          animation: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .nav-button:hover::after {
+          animation: 1s glitch;
+          animation-timing-function: steps(2, end);
+        }
+
+        @keyframes glitch {
+          0% {
+            clip-path: var(--slice-1);
+            transform: translate(-10px, -5px);
+          }
+          10% {
+            clip-path: var(--slice-3);
+            transform: translate(5px, 5px);
+          }
+          20% {
+            clip-path: var(--slice-1);
+            transform: translate(-5px, 5px);
+          }
+          30% {
+            clip-path: var(--slice-3);
+            transform: translate(0px, 3px);
+          }
+          40% {
+            clip-path: var(--slice-2);
+            transform: translate(-3px, 0px);
+          }
+          50% {
+            clip-path: var(--slice-3);
+            transform: translate(3px, 0px);
+          }
+          60% {
+            clip-path: var(--slice-4);
+            transform: translate(3px, 5px);
+          }
+          70% {
+            clip-path: var(--slice-2);
+            transform: translate(-5px, 5px);
+          }
+          80% {
+            clip-path: var(--slice-5);
+            transform: translate(10px, -5px);
+          }
+          90% {
+            clip-path: var(--slice-1);
+            transform: translate(-5px, 0px);
+          }
+          100% {
+            clip-path: var(--slice-1);
+            transform: translate(0);
+          }
+        }
+      `}</style>
+
+      <nav className="mx-auto flex max-w-7xl flex-col sm:flex-row items-center p-4 lg:px-8">
+        {/* Top row with logo and theme switch */}
+        <div className="w-full flex items-center justify-between mb-4 sm:mb-0 sm:w-auto">
+          <div className="flex items-center space-x-4 logo-container">
+            <img 
+              src={imagee} 
+              className="h-9 logo-image-effect" 
+              alt="logo" 
+            />
+            <Link
+              to="/"
+              className={`logo-effect -m-1.5 p-1.5 text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-blue-600'}`}
+            >
+              KodeNeurons
+            </Link>
+          </div>
+          
           <button
             onClick={toggleTheme}
-            className={`p-2.5 rounded-md ${isDarkMode ? 'text-white hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-100'}`}
+            className={`p-2.5 rounded-full ${
+              isDarkMode 
+                ? 'text-white bg-gray-700 shadow-lg shadow-gray-900/30' 
+                : 'text-gray-700 bg-gray-100 shadow-lg shadow-gray-200/50'
+            }`}
           >
             {isDarkMode ? (
               <Sun className="h-6 w-6" aria-hidden="true" />
@@ -53,34 +161,33 @@ export default function Navbar({ toggleTheme, isDarkMode }) {
             )}
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-12">
+
+        {/* Navigation links with glitch effect restored */}
+        <div className="flex justify-center items-center w-full sm:w-auto sm:ml-auto gap-2 sm:gap-4 px-2">
           {navigation.map((item) => (
             <Link
               key={item.name}
               to={item.href}
-              className={`text-sm font-semibold leading-6 ${location.pathname === item.href ? (isDarkMode ? 'text-blue-400' : 'text-blue-600') : (isDarkMode ? 'text-gray-300 hover:text-blue-400' : 'text-gray-900 hover:text-blue-600')}`}
+              data-text={item.name}
+              className={`
+                nav-button
+                min-w-[90px] sm:min-w-[100px] text-center 
+                px-3 sm:px-4 py-2 sm:py-2.5 
+                rounded-xl
+                text-xs sm:text-sm font-semibold tracking-wide
+                ${location.pathname === item.href
+                  ? 'bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] text-white'
+                  : isDarkMode
+                  ? 'bg-gradient-to-r from-[#2a2a2a] to-[#3a3a3a] text-gray-100'
+                  : 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800'
+                }
+              `}
             >
               {item.name}
             </Link>
           ))}
         </div>
       </nav>
-      {mobileMenuOpen && (
-        <div className={`lg:hidden ${isDarkMode ? 'bg-gray-900' : 'bg-white'}`}>
-          <div className="space-y-1 px-6 pb-3 pt-2">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`block rounded-lg px-3 py-2 text-base font-semibold leading-7 ${location.pathname === item.href ? (isDarkMode ? 'bg-blue-900 text-blue-400' : 'bg-blue-50 text-blue-600') : (isDarkMode ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-900 hover:bg-gray-50')}`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
     </header>
   );
 }
