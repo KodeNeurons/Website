@@ -1,7 +1,7 @@
 import image from './pngtree-web-programmer-avatar-png-image_12529205.png';
 import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from 'react-icons/fa';
 import afro from '../pages/imageF/aff.png'
-import nachi from '../pages/imageF/nachu.png' 
+import nachi from '../pages/imageF/nachu.jpg' 
 import shoy from '../pages/imageF/shoyeb.png'
 export default function About() {
   const team = [
