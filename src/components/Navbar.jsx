@@ -5,8 +5,10 @@ import imagee from './android-chrome-192x192-photoaidcom-cropped.png';
 
 const navigation = [
   { name: 'Our Projects', href: '/projects' },
-  { name: 'About', href: '/about' },
-  { name: 'Book Your Project', href: '/contact' },
+  { name: 'Book Project', href: '/contact' },
+  { name: 'Collab', href: '/UploadFrom' },
+  { name: 'About', href: '/about' }
+  
 ];
 
 export default function Navbar({ toggleTheme, isDarkMode }) {
@@ -146,47 +148,36 @@ export default function Navbar({ toggleTheme, isDarkMode }) {
             </Link>
           </div>
           
-          <button
-            onClick={toggleTheme}
-            className={`p-2.5 rounded-full ${
-              isDarkMode 
-                ? 'text-white bg-gray-700 shadow-lg shadow-gray-900/30' 
-                : 'text-gray-700 bg-gray-100 shadow-lg shadow-gray-200/50'
-            }`}
-          >
-            {isDarkMode ? (
-              <Sun className="h-6 w-6" aria-hidden="true" />
-            ) : (
-              <Moon className="h-6 w-6" aria-hidden="true" />
-            )}
-          </button>
+        
         </div>
 
         {/* Navigation links with glitch effect restored */}
         <div className="flex justify-center items-center w-full sm:w-auto sm:ml-auto gap-2 sm:gap-4 px-2">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              to={item.href}
-              data-text={item.name}
-              className={`
-                nav-button
-                min-w-[90px] sm:min-w-[100px] text-center 
-                px-3 sm:px-4 py-2 sm:py-2.5 
-                rounded-xl
-                text-xs sm:text-sm font-semibold tracking-wide
-                ${location.pathname === item.href
-                  ? 'bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] text-white'
-                  : isDarkMode
-                  ? 'bg-gradient-to-r from-[#2a2a2a] to-[#3a3a3a] text-gray-100'
-                  : 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800'
-                }
-              `}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </div>
+  {navigation.map((item) => (
+    <Link
+      key={item.name}
+      to={item.href}
+      data-text={item.name}
+      className={` 
+        nav-button
+        min-w-[70px] sm:min-w-[80px] text-center 
+        px-2 sm:px-3 py-1.5 sm:py-2
+        rounded-lg
+        text-xs sm:text-sm font-medium tracking-wide
+        ${location.pathname === item.href
+          ? 'bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] text-white'
+          : isDarkMode
+          ? 'bg-gradient-to-r from-[#2a2a2a] to-[#3a3a3a] text-gray-100'
+          : 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800'
+        }
+      `}
+    >
+      {item.name}
+    </Link>
+  ))}
+</div>
+
+
       </nav>
     </header>
   );
