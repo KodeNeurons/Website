@@ -9,7 +9,7 @@ export default function Footer() {
          
           <a
           
-            href=" https://www.linkedin.com/company/kodeneurons3"
+            href="https://www.linkedin.com/company/kodeneurons-3/"
             className="text-gray-400 hover:text-gray-300"
             target="_blank"
             rel="noopener noreferrer"

@@ -111,11 +111,7 @@ export default function Home() {
               Your Idea, Our Code
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-              We are <strong>CSMSS Chh. Shahu College of Engineering</strong>{" "}
-              students from
-              <strong> CSE Third Year (TY)</strong>. We specialize in creating
-              professional solutions in AI, Web Development, Mobile Apps, and
-              more - all at competitive prices!
+            We are a team of passionate and skilled developers specializing in creating cutting-edge solutions in AI, Web Development, Mobile Applications, and more. With a strong focus on innovation and quality, we deliver professional, scalable, and cost-effective solutions tailored to meet your business needs. Let us help you bring your ideas to life with technology that works for you!
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
