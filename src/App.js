@@ -7,6 +7,7 @@ import Projects from './pages/Projects';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import UploadForm from './pages/UploadFrom';
+import AlimonyCal from './pages/AlimonyCal';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
@@ -31,6 +32,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/uploadfrom" element={<UploadForm />} />
+            <Route path="/a" element={<AlimonyCal />} />
           </Routes>
         </main>
         <Footer />
