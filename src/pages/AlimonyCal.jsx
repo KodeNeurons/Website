@@ -50,16 +50,16 @@ function AlimonyCal() {
   return (
     <div className="min-h-screen bg-gray-50 p-6 flex items-center justify-center">
       <div className="max-w-3xl w-full bg-white p-8 rounded-2xl shadow-xl">
-        <h1 className="text-4xl font-bold mb-6">💍 Alimony Calculator AI</h1>
+        <h1 className="text-4xl font-bold mb-6">💍 Alimony Calculator </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <input name="husbandAge" type="number" placeholder="Husband's Age" value={form.husbandAge} onChange={handleChange} className="input border p-2 rounded-md" />
-            <input name="wifeAge" type="number" placeholder="Wife's Age" value={form.wifeAge} onChange={handleChange} className="input border p-2 rounded-md" />
-            <input name="duration" type="number" placeholder="Years Married" value={form.duration} onChange={handleChange} className="input border p-2 rounded-md" />
-            <input name="husbandIncome" type="number" placeholder="Husband's Income (₹/month)" value={form.husbandIncome} onChange={handleChange} className="input border p-2 rounded-md" />
-            <input name="wifeIncome" type="number" placeholder="Wife's Income (₹/month)" value={form.wifeIncome} onChange={handleChange} className="input border p-2 rounded-md" />
-            <input name="children" type="number" placeholder="No. of Children" value={form.children} onChange={handleChange} className="input border p-2 rounded-md" />
+            <input required name="husbandAge" type="number" placeholder="Husband's Age" value={form.husbandAge} onChange={handleChange} className="input border p-2 rounded-md" />
+            <input required name="wifeAge" type="number" placeholder="Wife's Age" value={form.wifeAge} onChange={handleChange} className="input border p-2 rounded-md" />
+            <input required name="duration" type="number" placeholder="Years Married" value={form.duration} onChange={handleChange} className="input border p-2 rounded-md" />
+            <input required name="husbandIncome" type="number" placeholder="Husband's Income (₹/month)" value={form.husbandIncome} onChange={handleChange} className="input border p-2 rounded-md" />
+            <input required name="wifeIncome" type="number" placeholder="Wife's Income (₹/month)" value={form.wifeIncome} onChange={handleChange} className="input border p-2 rounded-md" />
+            <input required name="children" type="number" placeholder="No. of Children" value={form.children} onChange={handleChange} className="input border p-2 rounded-md" />
 
             <select name="wifeEducation" value={form.wifeEducation} onChange={handleChange} className="input border p-2 rounded-md">
               <option value="">Wife's Education</option>
@@ -136,7 +136,7 @@ function AlimonyCal() {
 
         {reply && (
           <div className="mt-6 p-4 bg-gray-100 rounded-xl">
-            <h2 className="font-semibold mb-2">🔍 AI Suggestion:</h2>
+            <h2 className="font-semibold mb-2">🔍 Suggestion:</h2>
             <p className="whitespace-pre-line">{reply}</p>
           </div>
         )}
