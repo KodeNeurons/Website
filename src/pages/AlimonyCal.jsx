@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import axios from 'axios'; 
 
 function AlimonyCal() {
   const [form, setForm] = useState({
@@ -13,7 +13,12 @@ function AlimonyCal() {
     careerSacrifice: false,
     domesticAbuse: false,
     divorceFiledBy: '',
-    otherDetails: ''
+    otherDetails: '',
+    husbandEmploymentType: '',
+    wifeHealthCondition: '',
+    jointAssets: '',
+    livingStandard: '',
+    custodyDecision: ''
   });
 
   const [loading, setLoading] = useState(false);
@@ -44,7 +49,7 @@ function AlimonyCal() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6 flex items-center justify-center">
-      <div className="max-w-2xl w-full bg-white p-8 rounded-2xl shadow-xl">
+      <div className="max-w-3xl w-full bg-white p-8 rounded-2xl shadow-xl">
         <h1 className="text-4xl font-bold mb-6">💍 Alimony Calculator AI</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
 
@@ -70,6 +75,39 @@ function AlimonyCal() {
               <option value="Wife">Wife</option>
               <option value="Mutual">Mutual</option>
             </select>
+
+            <select name="husbandEmploymentType" value={form.husbandEmploymentType} onChange={handleChange} className="input border p-2 rounded-md">
+              <option value="">Husband's Employment Type</option>
+              <option value="Government">Government</option>
+              <option value="Private">Private</option>
+              <option value="Business">Business</option>
+            </select>
+
+            <select name="wifeHealthCondition" value={form.wifeHealthCondition} onChange={handleChange} className="input border p-2 rounded-md">
+              <option value="">Wife's Health Condition</option>
+              <option value="Good">Good</option>
+              <option value="Moderate">Moderate</option>
+              <option value="Poor">Poor</option>
+            </select>
+
+            <select name="livingStandard" value={form.livingStandard} onChange={handleChange} className="input border p-2 rounded-md">
+              <option value="">Living Standard</option>
+              <option value="Low">Low</option>
+              <option value="Mid">Mid</option>
+              <option value="High">High</option>
+            </select>
+
+            <select name="custodyDecision" value={form.custodyDecision} onChange={handleChange} className="input border p-2 rounded-md">
+              <option value="">Child Custody Decision</option>
+              <option value="Husband">Husband</option>
+              <option value="Wife">Wife</option>
+              <option value="Mutual">Mutual</option>
+              <option value="Undecided">Undecided</option>
+            </select>
+          </div>
+
+          <div className="mt-2">
+            <input name="jointAssets" type="text" placeholder="Joint Assets (e.g., house, land)" value={form.jointAssets} onChange={handleChange} className="w-full border p-2 rounded-md" />
           </div>
 
           <div className="flex items-center gap-2 mt-2">
@@ -84,7 +122,7 @@ function AlimonyCal() {
 
           <textarea
             name="otherDetails"
-            placeholder="Other details (like property issues, loans, etc)..."
+            placeholder="Other details (property issues, loans, etc)..."
             value={form.otherDetails}
             onChange={handleChange}
             rows={4}
