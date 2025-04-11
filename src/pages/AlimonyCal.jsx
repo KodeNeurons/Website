@@ -39,6 +39,8 @@ function AlimonyCal() {
 
     try {
       const res = await axios.post('https://alumni-calculator-server.onrender.com/api/gemini', form);
+      console.log(reply);
+      
       setReply(res.data.reply);
     } catch (err) {
       setReply("Something went wrong.");
@@ -48,7 +50,7 @@ function AlimonyCal() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 flex items-center justify-center">
+    <div className="min-h-screen bg-gray-50 p-6 flex items-center justify-center mt-11">
       <div className="max-w-3xl w-full bg-white p-8 rounded-2xl shadow-xl">
         <h1 className="text-4xl font-bold mb-6">💍 Alimony Calculator </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -137,7 +139,13 @@ function AlimonyCal() {
         {reply && (
           <div className="mt-6 p-4 bg-gray-100 rounded-xl">
             <h2 className="font-semibold mb-2">🔍 Suggestion:</h2>
-            <p className="whitespace-pre-line">{reply}</p>
+            {/* <p className="whitespace-pre-line">{reply}</p> */}
+            <p
+  className="whitespace-pre-line"
+  dangerouslySetInnerHTML={{
+    __html: reply.replace(/^(\d\.)/gm, '<strong>$1</strong>')
+  }}
+/>
           </div>
         )}
       </div>
