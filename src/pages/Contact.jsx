@@ -191,7 +191,7 @@ export default function Contact() {
 
           <div className="flex flex-col space-y-4 mt-4">
             <a
-              href="mailto:kodeneurons.team@gmail.com"
+              href="mailto:kodeneurons@gmail.com"
               className="flex items-center gap-3 text-gray-300 hover:text-[#00D1FF] transition"
             >
               <Mail className="w-5 h-5" /> kodeneurons@gmail.com
