@@ -1,14 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.a16d97f4.css",
-    "main.js": "/static/js/main.a8a0490f.js",
-    "static/media/pngtree-web-programmer-avatar-png-image_12529205.png": "/static/media/pngtree-web-programmer-avatar-png-image_12529205.dba4fdaed74a87cafb1f.png",
+    "main.css": "/static/css/main.900b89c7.css",
+    "main.js": "/static/js/main.cd5092c2.js",
+    "static/media/shoyeb.png": "/static/media/shoyeb.13a2b758e256bf8c29b3.png",
+    "static/media/aff.png": "/static/media/aff.fff8e351f5e0e1f6155f.png",
+    "static/media/my_photo.png": "/static/media/my_photo.f51bf2294a67021546fd.png",
+    "static/media/android-chrome-192x192-photoaidcom-cropped.png": "/static/media/android-chrome-192x192-photoaidcom-cropped.3a8d10bd716a2b17df8c.png",
     "index.html": "/index.html",
-    "main.a16d97f4.css.map": "/static/css/main.a16d97f4.css.map",
-    "main.a8a0490f.js.map": "/static/js/main.a8a0490f.js.map"
+    "main.900b89c7.css.map": "/static/css/main.900b89c7.css.map",
+    "main.cd5092c2.js.map": "/static/js/main.cd5092c2.js.map"
   },
   "entrypoints": [
-    "static/css/main.a16d97f4.css",
-    "static/js/main.a8a0490f.js"
+    "static/css/main.900b89c7.css",
+    "static/js/main.cd5092c2.js"
   ]
 }

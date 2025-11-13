@@ -1,124 +1,127 @@
-import image from './pngtree-web-programmer-avatar-png-image_12529205.png';
-import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from 'react-icons/fa';
-import afro from '../pages/imageF/aff.png'
-import nachi from '../pages/imageF/my_photo.png' 
-import shoy from '../pages/imageF/shoyeb.png'
+import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from "react-icons/fa";
+import afro from "../pages/imageF/aff.png";
+import nachi from "../pages/imageF/my_photo.png";
+import shoy from "../pages/imageF/shoyeb.png";
+
 export default function About() {
   const team = [
     {
-      name: 'Shoyeb Chaudhari',
-      role: 'Co-Founder & Developer',
-      image: `${shoy}`,
-      bio: 'A coder specializing in Android development, PHP, SQL, Firebase, and web technologies, constantly striving to build innovative and impactful solutions.',
-      linkedin: 'https://www.linkedin.com/in/shoyeb-chaudhari-033b44234/',
-      github: 'https://github.com/ShoyebChaudhari45',
-      email: 'chaudharishoyeb@gmail.com',
-      phone: '+91-7499601744',
+      name: "Shoyeb Chaudhari",
+      role: "Co-Founder | Tech Architect & Innovator",
+      image: shoy,
+      bio: "Driving innovation across Android, Web, and AI/ML solutions. Skilled in Python, PHP, Firebase, SQL, and AI automation, he focuses on building scalable digital ecosystems that accelerate KodeNeurons’ growth and impact.",
+      linkedin: "https://www.linkedin.com/in/shoyeb-chaudhari-033b44234/",
+      github: "https://github.com/ShoyebChaudhari45",
+      email: "chaudharishoyeb@gmail.com",
+      phone: "+91-7499601744",
     },
     {
-      name: 'Nachiket Shinde',
-      role: 'Co-Founder & Developer',
-      image: `${nachi}`,
-      bio: 'A dedicated coder with expertise in AI, ML, and software development. Focused on building innovative solutions, exploring new technologies, and solving real-world problems creatively.',
-      linkedin: 'https://www.linkedin.com/in/nachiket-shinde-a4b378276/',
-      github: 'https://github.com/Nachiket858',
-      email: 'nachiketshinde8766@gmail.com',
-      phone: '+91-8766055949',
+      name: "Nachiket Shinde",
+      role: "Co-Founder | AI Strategist & Product Visionary",
+      image: nachi,
+      bio: "Leads the AI and machine learning initiatives at KodeNeurons. With a deep passion for intelligent systems and data-driven insights, he transforms complex ideas into practical, high-impact innovations.",
+      linkedin: "https://www.linkedin.com/in/nachiket-shinde-a4b378276/",
+      github: "https://github.com/Nachiket858",
+      email: "nachiketshinde8766@gmail.com",
+      phone: "+91-8766055949",
     },
     {
-      name: 'Afroz Sheikh',
-      role: 'Co-Founder & Developer',
-      image: `${afro}`,
-      bio: 'A passionate coder and beginner in machine learning, skilled in building innovative projects, from AI-powered platforms to React-based applications, driven by creativity and growth.',
-      linkedin: 'https://www.linkedin.com/in/afroz-sheikh-404268262/',
-      github: 'https://github.com/AfrozSheikh',
-      email: 'afrozsheikh1112@gmail.com',
-      phone: '+91-9766432374',
+      name: "Afroz Sheikh",
+      role: "Co-Founder | UI Engineer & Growth Contributor",
+      image: afro,
+      bio: "A creative technologist contributing to the growth of KodeNeurons through modern front-end development and seamless user experience design. He bridges design and AI-driven web innovation.",
+      linkedin: "https://www.linkedin.com/in/afroz-sheikh-404268262/",
+      github: "https://github.com/AfrozSheikh",
+      email: "afrozsheikh1112@gmail.com",
+      phone: "+91-9766432374",
     },
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-900 py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
-            About Us
-          </h2>
-          <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-            We are a team of passionate technologists dedicated to solving complex problems through innovative solutions.
-            Our mission is to empower businesses with cutting-edge technology solutions that drive growth and efficiency.
-          </p>
-        </div>
-        <div className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          {team.map((person) => (
-            <div key={person.name} className="flex flex-col items-start">
-              <img
-  className="w-[70%] rounded-full object-cover 
-            transform transition-all duration-300
-            hover:scale-110 hover:shadow-xl
-            group-hover:opacity-90
-            cursor-pointer
-            ring-2 ring-offset-2 ring-transparent
-            hover:ring-blue-500
-            aspect-square" // This ensures perfect circle
-  src={person.image}
-  alt={person.name}
-  onError={(e) => {
-    e.target.src = "/api/placeholder/200/200"; // Fallback image
-  }}
-/>
-              <h3 className="mt-6 text-lg font-semibold leading-8 tracking-tight text-gray-900 dark:text-gray-100">
-                {person.name}
-              </h3>
-              <p className="text-base leading-7 text-blue-600 dark:text-blue-400">
-                {person.role}
-              </p>
-              <div className="flex mt-4 gap-4">
-                <a
-                  href={person.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-blue-600 dark:hover:text-blue-400"
-                >
-                  <FaLinkedin size={24} />
-                </a>
-                <a
-                  href={person.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-600 hover:text-gray-800 dark:hover:text-gray-400"
-                >
-                  <FaGithub size={24} />
-                </a>
-              </div>
-              <p className="mt-4 text-base leading-7 text-gray-600 dark:text-gray-400">
-                {person.bio}
-              </p>
-              <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400 flex items-center">
-                <FaEnvelope className="mr-2 text-blue-600" />
-                <a href={`mailto:${person.email}`} className="hover:underline">
-                  {person.email}
-                </a>
-              </p>
-              <p className="text-sm leading-6 text-gray-600 dark:text-gray-400 flex items-center">
-                <FaPhone className="mr-2 text-blue-600" />
-                <a href={`tel:${person.phone}`} className="hover:underline">
-                  {person.phone}
-                </a>
-              </p>
-            </div>
-          ))}
-        </div>
+    <div className="bg-[#0B0B0F] text-white min-h-screen py-24 px-6">
+      {/* Header Section */}
+      <div className="max-w-4xl mx-auto text-center mb-20">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] mb-6">
+          About KodeNeurons
+        </h2>
+        <p className="text-gray-400 text-lg leading-relaxed">
+          KodeNeurons is a next-generation tech startup founded by passionate
+          developers committed to transforming ideas into intelligent digital
+          products. Our goal is to bridge innovation and practicality through
+          AI, automation, and scalable software solutions that empower students,
+          startups, and enterprises alike.
+        </p>
+      </div>
 
-        <div className="mx-auto mt-20 max-w-2xl lg:mx-0">
-          <h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-            Our Vision
-          </h3>
-          <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-            To be the leading provider of innovative technology solutions that transform businesses and drive digital evolution.
-            We strive to create lasting impact through our commitment to excellence and cutting-edge technology.
-          </p>
-        </div>
+      {/* Team Section */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+        {team.map((person, index) => (
+          <div
+            key={index}
+            className="bg-[#101016] rounded-2xl border border-[#1F1F25] shadow-[0_0_25px_rgba(108,99,255,0.2)] p-8 flex flex-col items-center text-center transition-transform duration-300 hover:scale-[1.03] hover:shadow-[0_0_35px_rgba(108,99,255,0.4)]"
+          >
+            <div className="relative">
+              <img
+                src={person.image}
+                alt={person.name}
+                className="w-40 h-40 rounded-full object-cover ring-2 ring-transparent hover:ring-[#6C63FF] transition duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#6C63FF]/20 to-[#00D1FF]/20 blur-xl rounded-full opacity-0 hover:opacity-100 transition duration-500"></div>
+            </div>
+
+            <h3 className="mt-6 text-xl font-bold text-white">
+              {person.name}
+            </h3>
+            <p className="text-[#00D1FF] font-medium">{person.role}</p>
+
+            <p className="mt-4 text-gray-400 text-sm leading-relaxed">
+              {person.bio}
+            </p>
+
+            {/* Social Links */}
+            <div className="flex items-center justify-center gap-5 mt-5">
+              <a
+                href={person.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-[#00D1FF] transition"
+              >
+                <FaLinkedin size={22} />
+              </a>
+            
+               
+             
+              <a
+                href={`mailto:${person.email}`}
+                className="text-gray-400 hover:text-[#00D1FF] transition"
+              >
+                <FaEnvelope size={22} />
+              </a>
+              <a
+                href={`tel:${person.phone}`}
+                className="text-gray-400 hover:text-[#00D1FF] transition"
+              >
+                <FaPhone size={22} />
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Divider Line */}
+      <div className="h-[2px] w-3/4 mx-auto my-20 bg-gradient-to-r from-[#6C63FF] via-[#00D1FF] to-[#6C63FF] opacity-60 rounded-full"></div>
+
+      {/* Vision Section */}
+      <div className="max-w-4xl mx-auto text-center">
+        <h3 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] mb-6">
+          Our Vision
+        </h3>
+        <p className="text-gray-400 text-lg leading-relaxed">
+          To redefine innovation through collaboration, technology, and
+          creativity. At KodeNeurons, we aim to grow as a tech-driven ecosystem
+          where talent meets execution, and every idea turns into a solution
+          that creates real-world impact.
+        </p>
       </div>
     </div>
   );

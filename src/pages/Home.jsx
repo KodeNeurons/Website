@@ -1,310 +1,242 @@
-import {
-  Brain,
-  Code,
-  Database,
-  Layers,
-  CheckCircle,
-  Coffee,
-  Trophy,
-} from "lucide-react";
+import { Code, CheckCircle, Cog, Trophy } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import Typed from "typed.js"; // Import Typed.js
+import Typed from "typed.js";
 import "./animation.css";
 
-const features = [
+/* ---------- Content ---------- */
+const services = [
   {
-    name: "Custom Project Solutions",
-    description:
-      "Get professional help with your projects in AI, web development, mobile apps, and more - perfect for students and organizations.",
-    icon: CheckCircle,
+    title: "AI • ML Engineering",
+    desc: "Predictive models, data pipelines, and intelligent automation tuned for real business outcomes.",
+    icon: Cog,
   },
   {
-    name: "Competitive Pricing",
-    description:
-      "High-quality projects at budget-friendly prices. Get the best value for your investment.",
-    icon: Coffee,
-  },
-  {
-    name: "Latest Technologies",
-    description:
-      "Implement cutting-edge technologies like AI, Machine Learning, and Full Stack Development in your projects.",
+    title: "Full-Stack Web Apps",
+    desc: "Modern web products with clean APIs, robust auth, and scalable cloud infra.",
     icon: Code,
   },
   {
-    name: "Excellence Guaranteed",
-    description:
-      "Deliver impressive results with our professionally crafted solutions that meet your specific requirements.",
+    title: "Android & Cross-Platform",
+    desc: "Native Android and cross-platform apps with delightful UX and offline-first design.",
+    icon: CheckCircle,
+  },
+  {
+    title: "Quality & Reliability",
+    desc: "Secure, well-documented deliveries with CI/CD and post-launch support.",
     icon: Trophy,
   },
 ];
 
-const technologies = [
-  'AI/ML Projects',
-  'Android Apps',
-  'Web Development',
-  'React Projects',
-  'Java Projects',
-  'Python Projects',
-  'Database Projects',
-  'Full Stack Projects',
-  'Enterprise Solutions',
-  'Custom Software',
-  'Research Projects'
+const typedLines = [
+  "Artificial Intelligence & Machine Learning",
+  "Full-Stack Web Development",
+  "Android & Cross-Platform Apps",
+  "Python / Django • Java / Spring",
+  "Cloud, DevOps & Automation",
 ];
 
 export default function Home() {
   useEffect(() => {
-    // Initialize Typed.js
     const typed = new Typed(".typed-output", {
-      strings: technologies,
-      typeSpeed: 100,
-      backSpeed: 80,
-      backDelay: 1000,
+      strings: typedLines,
+      typeSpeed: 80,
+      backSpeed: 45,
+      backDelay: 1200,
       loop: true,
     });
-
-    // Cleanup Typed.js instance on unmount
-    return () => {
-      typed.destroy();
-    };
+    return () => typed.destroy();
   }, []);
 
   return (
-    <div className="bg-white dark:bg-gray-900">
-      <div className="relative isolate">
-        <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
-          <div className="text-center">
-            <style jsx>{`
-              .glitch-effect {
-                --c: #fff; /* text color */
-                color: #0000; /* transparent text */
-                border: none;
-                transform: perspective(500px)
-                  rotateY(calc(20deg * var(--_i, -1)));
-                text-shadow: calc(var(--_i, -1) * 0.08em) -0.01em 0 var(--c),
-                  calc(var(--_i, -1) * -0.08em) 0.01em 2px #0004;
-                outline-offset: 0.1em;
-                transition: 0.3s;
-                display: inline-block; /* Ensure the element is inline-block for proper positioning */
-                font-weight: bold;
-                font-size: 3rem; /* Adjust font size as needed */
-                margin: 0;
-                cursor: pointer;
-                padding: 0.1em 0.3em; /* Adjust padding as needed */
-              }
+    <div className="relative overflow-hidden bg-[#0C0C15] text-white">
+      {/* ---------- Background layers ---------- */}
+      <div className="pointer-events-none absolute inset-0 -z-20">
+        {/* base gradient */}
+        <div className="absolute inset-0 bg-[radial-gradient(100%_60%_at_0%_0%,rgba(108,99,255,0.12),transparent_60%),radial-gradient(100%_60%_at_100%_100%,rgba(0,209,255,0.12),transparent_60%)]" />
+        {/* subtle texture */}
+        <div className="absolute inset-0 opacity-[0.07] mix-blend-soft-light bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2440%22 viewBox=%220 0 40 40%22><path fill=%22%23ffffff%22 fill-opacity=%220.25%22 d=%22M0 39h40v1H0zM39 0h1v40h-1z%22/></svg>')]" />
+      </div>
 
-              .glitch-effect:hover,
-              .glitch-effect:focus-visible {
-                --_p: 0%;
-                --_i: 1;
-              }
+      {/* animated blobs */}
+      <style>{`
+        @keyframes floaty { 0%{transform:translateY(0)} 50%{transform:translateY(-10px)} 100%{transform:translateY(0)} }
+        .blob { filter: blur(40px); opacity:.35; animation: floaty 9s ease-in-out infinite; }
+        .blob2{ filter: blur(50px); opacity:.30; animation: floaty 12s ease-in-out infinite; animation-delay: .8s;}
+      `}</style>
+      <div className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full blob bg-gradient-to-br from-[#6C63FF] to-transparent" />
+      <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full blob2 bg-gradient-to-tl from-[#00D1FF] to-transparent" />
 
-              .glitch-effect:active {
-                text-shadow: none;
-                color: var(--c);
-                transition: 0s;
-              }
-            `}</style>
-
-            <h1 className="glitch-effect font-bold tracking-tight text-gray-900 dark:text-gray-100">
-              Your Idea, Our Code
-            </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-            We are a team of passionate and skilled developers specializing in creating cutting-edge solutions in AI, Web Development, Mobile Applications, and more. With a strong focus on innovation and quality, we deliver professional, scalable, and cost-effective solutions tailored to meet your business needs. Let us help you bring your ideas to life with technology that works for you!
+      {/* ---------- HERO ---------- */}
+      <section className="relative max-w-7xl mx-auto px-6 pt-28 pb-20 lg:pt-36">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          {/* Left: copy */}
+          <div>
+            <p className="text-xs tracking-[0.2em] text-[#00D1FF] uppercase mb-4">
+              KodeNeurons
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <h1 className="text-4xl md:text-5xl xl:text-6xl font-extrabold leading-[1.1]">
+              Build{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#00D1FF]">
+                Intelligent
+              </span>{" "}
+              Products that Scale
+            </h1>
+
+            <p className="mt-5 max-w-xl text-gray-300 text-lg leading-relaxed">
+              We design and deliver AI-driven web & mobile software with
+              production-grade quality — engineered for performance, reliability,
+              and growth.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 to="/contact"
-                data-text="Book Your Project"
-                className="nav-button bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+                className="px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] shadow-lg hover:shadow-[0_0_28px_rgba(108,99,255,0.45)] hover:scale-[1.03] transition"
               >
-                Book Your Project
+                Start a Project
               </Link>
               <Link
                 to="/projects"
-                data-text="View Our Projects"
-                className="nav-button bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-md shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+                className="px-6 py-3 rounded-xl font-semibold border border-white/15 text-white hover:bg-white/5 transition"
               >
-                View Our Projects <span aria-hidden="true">→</span>
+                View Portfolio →
               </Link>
             </div>
 
-            
-
-            {/* Dynamic Typed.js Text */}
-            <div className="mt-8 text-xl font-bold text-blue-600 dark:text-blue-400">
-            <h3 className="text-xl font-semibold text-center text-gray-900 dark:text-gray-100 mb-8">
-          We Provide Software Solutions On :
-        </h3>
-              <span className="typed-output text-4xl "></span>
+            {/* typed line */}
+            <div className="mt-8 text-base sm:text-lg text-gray-300">
+              We specialize in{" "}
+              <span className="typed-output text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#00D1FF]" />
             </div>
           </div>
-        </div>
-      </div>
 
-    
-
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-blue-600 dark:text-blue-400">
-            Why Choose Us?
-          </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
-            Your Trusted Technology Partner
-          </p>
-          <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-            As CSMSS CSE TY students, we understand the challenges and
-            expectations of academic and professional projects. We deliver
-            solutions that meet your requirements while being cost-effective.
-          </p>
-        </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-4">
-            {features.map((feature) => (
-              <div key={feature.name} className="flex flex-col">
-                <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900 dark:text-gray-100">
-                  <feature.icon
-                    className="h-5 w-5 flex-none text-blue-600 dark:text-blue-400"
-                    aria-hidden="true"
-                  />
-                  {feature.name}
-                </dt>
-                <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600 dark:text-gray-400">
-                  <p className="flex-auto">{feature.description}</p>
-                </dd>
+          {/* Right: illustration block (pure CSS/SVG) */}
+          <div className="relative">
+            {/* glass panel */}
+            <div className="relative rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 p-6 md:p-8 shadow-[0_20px_80px_rgba(0,0,0,.35)]">
+              {/* mock illustration */}
+              <div className="relative aspect-[5/3] rounded-2xl overflow-hidden bg-gradient-to-br from-[#141428] to-[#0E0E17]">
+                {/* grid lines */}
+                <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,rgba(255,255,255,.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.08)_1px,transparent_1px)] bg-[size:28px_28px]" />
+                {/* nodes */}
+                <div className="absolute left-6 top-6 h-3 w-3 rounded-full bg-[#6C63FF] shadow-[0_0_20px_#6C63FF]"></div>
+                <div className="absolute right-8 top-10 h-3 w-3 rounded-full bg-[#00D1FF] shadow-[0_0_20px_#00D1FF]"></div>
+                <div className="absolute left-1/2 bottom-8 -translate-x-1/2 h-3 w-3 rounded-full bg-white/80 shadow-[0_0_20px_rgba(255,255,255,.6)]"></div>
+                {/* “screen” */}
+                <div className="absolute inset-6 rounded-xl bg-[#0B0B14] border border-white/10 p-4">
+                  <div className="h-2 w-14 rounded bg-white/15 mb-4" />
+                  <div className="h-2 w-24 rounded bg-white/10 mb-6" />
+                  {/* bars */}
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="h-24 rounded-md bg-gradient-to-b from-[#6C63FF] to-transparent opacity-80" />
+                    <div className="h-24 rounded-md bg-gradient-to-b from-[#00D1FF] to-transparent opacity-80" />
+                    <div className="h-24 rounded-md bg-gradient-to-b from-white/80 to-transparent opacity-60" />
+                  </div>
+                </div>
               </div>
-            ))}
-          </dl>
+
+              {/* caption */}
+              <div className="mt-4 flex items-center justify-between">
+                <span className="text-sm text-gray-300/80">
+                  Prototype • Analytics • Deployment
+                </span>
+                <span className="text-sm text-[#00D1FF]">AI-Ready</span>
+              </div>
+            </div>
+            {/* soft halo */}
+            <div className="absolute -inset-6 -z-10 rounded-[28px] bg-gradient-to-r from-[#6C63FF]/20 to-[#00D1FF]/20 blur-2xl" />
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- SERVICES (glass) ---------- */}
+      <section className="relative max-w-7xl mx-auto px-6 pb-24">
+        <div className="text-center mb-12">
+          <h2 className="text-[#00D1FF] uppercase text-xs tracking-[0.25em]">
+            Services
+          </h2>
+          <p className="mt-3 text-3xl md:text-4xl font-bold">
+            From Concept to Production
+          </p>
+          <p className="mt-4 max-w-2xl mx-auto text-gray-300">
+            We deliver full-cycle engineering: discovery, design, development,
+            QA, deployment, and continuous improvement.
+          </p>
         </div>
 
-        <div className="my-10">
-       
-       <div className="flex flex-wrap justify-center gap-4">
-         {technologies.map((tech) => (
-           <span
-             key={tech}
-             className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 font-medium"
-           >
-             {tech}
-           </span>
-         ))}
-       </div>
-     </div>
-      </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((s, i) => (
+            <div
+              key={i}
+              className="group relative rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/10 p-6 transition-all duration-300 hover:translate-y-[-4px] hover:border-[#6C63FF]/40 hover:shadow-[0_10px_40px_rgba(108,99,255,.25)]"
+            >
+              <div className="mb-4 inline-flex rounded-xl bg-gradient-to-br from-[#6C63FF]/15 to-[#00D1FF]/15 p-3">
+                <s.icon className="h-6 w-6 text-[#00D1FF]" />
+              </div>
+              <h3 className="text-base font-semibold">{s.title}</h3>
+              <p className="mt-2 text-sm text-gray-300 leading-relaxed">
+                {s.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ---------- STACK TAGS ---------- */}
+      <section className="relative max-w-7xl mx-auto px-6 pb-28 border-t border-white/5">
+        <div className="text-center mb-8">
+          <h3 className="text-lg font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#00D1FF]">
+            Tech we ship with
+          </h3>
+        </div>
+        <div className="flex flex-wrap justify-center gap-3">
+          {[
+            "React • Next.js",
+            "Node.js • Express",
+            "Python • Django",
+            "Java • Spring Boot",
+            "PostgreSQL • MongoDB",
+            "TensorFlow • scikit-learn",
+            "Docker • CI/CD",
+            "AWS • Vercel",
+          ].map((t) => (
+            <span
+              key={t}
+              className="px-4 py-2 text-sm rounded-full border border-white/10 bg-white/[0.04] text-gray-200 hover:border-[#6C63FF]/40 hover:text-white transition"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* ---------- CTA STRIP ---------- */}
+      <section className="relative mx-6 mb-24">
+        <div className="mx-auto max-w-7xl rounded-3xl border border-white/10 bg-gradient-to-r from-[#111222] via-[#101325] to-[#0F1522] p-10 text-center shadow-[0_20px_80px_rgba(0,0,0,.35)]">
+          <h4 className="text-2xl md:text-3xl font-bold">
+            Ready to build your next product?
+          </h4>
+          <p className="mt-3 text-gray-300">
+            Partner with KodeNeurons — where innovation meets engineering
+            precision.
+          </p>
+          <div className="mt-6 flex justify-center gap-4">
+            <Link
+              to="/contact"
+              className="px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] shadow-lg hover:shadow-[0_0_28px_rgba(108,99,255,0.45)] hover:scale-[1.03] transition"
+            >
+              Let’s Talk
+            </Link>
+            <Link
+              to="/projects"
+              className="px-6 py-3 rounded-xl font-semibold border border-white/15 text-white hover:bg-white/5 transition"
+            >
+              See Case Studies
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
-
-// import { Brain, Code, Database, Layers, CheckCircle, Coffee, Trophy } from 'lucide-react';
-// import { Link } from "react-router-dom";
-
-// const features = [
-//   {
-//     name: 'Custom Project Solutions',
-//     description: 'Get professional help with your projects in AI, web development, mobile apps, and more - perfect for students and organizations.',
-//     icon: CheckCircle,
-//   },
-//   {
-//     name: 'Competitive Pricing',
-//     description: 'High-quality projects at budget-friendly prices. Get the best value for your investment.',
-//     icon: Coffee,
-//   },
-//   {
-//     name: 'Latest Technologies',
-//     description: 'Implement cutting-edge technologies like AI, Machine Learning, and Full Stack Development in your projects.',
-//     icon: Code,
-//   },
-//   {
-//     name: 'Excellence Guaranteed',
-//     description: 'Deliver impressive results with our professionally crafted solutions that meet your specific requirements.',
-//     icon: Trophy,
-//   },
-// ];
-
-// const technologies = [
-//   'AI/ML Projects',
-//   'Android Apps',
-//   'Web Development',
-//   'React Projects',
-//   'Java Projects',
-//   'Python Projects',
-//   'Database Projects',
-//   'IoT Projects',
-//   'Full Stack Projects',
-//   'Enterprise Solutions',
-//   'Custom Software',
-//   'Research Projects'
-// ];
-
-// export default function Home() {
-//   return (
-//     <div className="bg-white dark:bg-gray-900">
-//       <div className="relative isolate">
-//         <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
-//           <div className="text-center">
-//             <h1 className="font-bold tracking-tight text-gray-900 dark:text-gray-100 text-5xl">
-//               Professional Projects at Affordable Prices
-//             </h1>
-//             <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-//               Looking for custom project development? We create professional solutions
-//               in AI, Web Development, Mobile Apps, and more - all at competitive prices!
-//             </p>
-//             <div className="mt-10 flex items-center justify-center gap-x-6">
-//               <Link
-//                 to="/contact"
-//                 className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-//               >
-//                 Book Your Project
-//               </Link>
-//               <Link to="/projects" className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
-//                 View Our Projects <span aria-hidden="true">→</span>
-//               </Link>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-//         <div className="mx-auto max-w-2xl lg:text-center">
-//           <h2 className="text-base font-semibold leading-7 text-blue-600 dark:text-blue-400">Why Choose Us?</h2>
-//           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
-//             Your Trusted Technology Partner
-//           </p>
-//           <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-//             We understand your needs and deliver projects that meet your requirements while being cost-effective.
-//           </p>
-//         </div>
-//         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-//           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-4">
-//             {features.map((feature) => (
-//               <div key={feature.name} className="flex flex-col">
-//                 <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900 dark:text-gray-100">
-//                   <feature.icon className="h-5 w-5 flex-none text-blue-600 dark:text-blue-400" aria-hidden="true" />
-//                   {feature.name}
-//                 </dt>
-//                 <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600 dark:text-gray-400">
-//                   <p className="flex-auto">{feature.description}</p>
-//                 </dd>
-//               </div>
-//             ))}
-//           </dl>
-//         </div>
-
-//         <div className="mt-20 mb-20">
-//           <h3 className="text-2xl font-semibold text-center text-gray-900 dark:text-gray-100 mb-8">Solutions We Offer</h3>
-//           <div className="flex flex-wrap justify-center gap-4">
-//             {technologies.map((tech) => (
-//               <span
-//                 key={tech}
-//                 className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 font-medium hover:bg-blue-100 dark:hover:bg-blue-600 cursor-pointer"
-//               >
-//                 {tech}
-//               </span>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }

@@ -31,8 +31,8 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/uploadfrom" element={<UploadForm />} />
-            <Route path="/alimony-calculator" element={<AlimonyCal />} />
+            {/* <Route path="/uploadfrom" element={<UploadForm />} /> */}
+            {/* <Route path="/alimony-calculator" element={<AlimonyCal />} /> */}
           </Routes>
         </main>
         <Footer />
