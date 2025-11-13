@@ -1,6 +1,6 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { SendHorizonal, Linkedin, Mail, Phone, Github } from "lucide-react";
+import { SendHorizonal, Linkedin, Mail } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 // import confetti from "canvas-confetti";
 

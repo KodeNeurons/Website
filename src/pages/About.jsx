@@ -1,4 +1,4 @@
-import { FaLinkedin, FaGithub, FaEnvelope, FaPhone } from "react-icons/fa";
+import { FaLinkedin, FaEnvelope, FaPhone } from "react-icons/fa";
 import afro from "../pages/imageF/aff.png";
 import nachi from "../pages/imageF/my_photo.png";
 import shoy from "../pages/imageF/shoyeb.png";

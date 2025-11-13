@@ -6,8 +6,7 @@ import Home from './pages/Home';
 import Projects from './pages/Projects';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import UploadForm from './pages/UploadFrom';
-import AlimonyCal from './pages/AlimonyCal';
+
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true); // Default to dark mode
