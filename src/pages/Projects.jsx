@@ -1,28 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { PlayCircle } from "lucide-react";
 
+const YT_API_KEY =process.env.REACT_APP_YT_API_KEY ; 
+
+
+
+const PLAYLIST_ID = process.env.REACT_APP_Platlist_ID ; 
+
+
 export default function Projects() {
   const [videos, setVideos] = useState([]);
   const [selected, setSelected] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchVideos = async () => {
+    const fetchPlaylistVideos = async () => {
       try {
-        // 👇 Use backend port explicitly
-        const res = await fetch("https://kncbbd.onrender.com/api/youtube/videos");
-        console.log(res);
-        
+        const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${PLAYLIST_ID}&maxResults=50&key=${YT_API_KEY}`;
+  
+        const res = await fetch(url);
         const data = await res.json();
-        setVideos(data.videos || []);
+  
+        const videos = (data.items || []).map(item => ({
+          id: item.contentDetails.videoId,
+          title: item.snippet.title,
+          description: item.snippet.description,
+          thumbnail: item.snippet.thumbnails?.high?.url,
+        }));
+  
+        setVideos(videos);
       } catch (err) {
-        console.error("Error fetching videos:", err);
+        console.error("Playlist API error:", err);
       } finally {
         setLoading(false);
       }
     };
-    fetchVideos();
+  
+    fetchPlaylistVideos();
   }, []);
+  
+  
 
   if (loading) {
     return (
