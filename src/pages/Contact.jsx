@@ -194,7 +194,7 @@ export default function Contact() {
               href="mailto:kodeneurons@gmail.com"
               className="flex items-center gap-3 text-gray-300 hover:text-[#00D1FF] transition"
             >
-              <Mail className="w-5 h-5" /> kodeneurons@gmail.com
+              <Mail className="w-5 h-5" /> support@kodeneurons.tech
             </a>
             {/* <a
               href="tel:+918600403938"
