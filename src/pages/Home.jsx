@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import AnimatedSection from '../components/AnimatedSection';
+import SEO, { organizationSchema, websiteSchema } from '../components/SEO';
 
 /* ========== Data ========== */
 const stats = [
@@ -209,6 +210,13 @@ export default function Home() {
 
   return (
     <div className="overflow-hidden">
+      <SEO
+        title="Transform Your Ideas Into Powerful Software"
+        description="KodeNeurons builds AI-powered software, automation systems, and scalable digital products. Custom software development, SaaS, MVP, and API solutions for startups and enterprises."
+        keywords="AI software development, custom software, SaaS development, automation, machine learning, web applications, MVP development, API development, KodeNeurons"
+        path="/"
+        structuredData={[organizationSchema, websiteSchema]}
+      />
       {/* ===== HERO ===== */}
       <section className="relative min-h-screen flex items-center bg-mesh pt-20">
         {/* Decorative orbs */}
@@ -590,8 +598,8 @@ export default function Home() {
               <Link to="/contact" className="btn-primary text-lg px-10 py-4">
                 <span>Get In Touch</span>
               </Link>
-              <a href="mailto:hello@kodeneurons.com" className="btn-outline text-lg px-10 py-4">
-                hello@kodeneurons.com
+              <a href="mailto:hello@kodeneurons.in" className="btn-outline text-lg px-10 py-4">
+                hello@kodeneurons.in
               </a>
             </div>
           </AnimatedSection>

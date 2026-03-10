@@ -1,5 +1,6 @@
 import AnimatedSection from '../components/AnimatedSection';
 import { Link } from 'react-router-dom';
+import SEO, { createBreadcrumbSchema } from '../components/SEO';
 
 const techStack = [
   {
@@ -77,6 +78,13 @@ const levelColors = {
 export default function Technologies() {
   return (
     <div className="overflow-hidden">
+      <SEO
+        title="Technologies - Our Expert Tech Stack"
+        description="Explore KodeNeurons technology expertise: React, Node.js, Python, TensorFlow, AWS, PostgreSQL, and 30+ technologies across frontend, backend, AI/ML, cloud, and database."
+        keywords="React development, Node.js, Python, TensorFlow, AWS, PostgreSQL, MongoDB, AI ML technology stack, cloud infrastructure, DevOps"
+        path="/technologies"
+        structuredData={createBreadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Technologies', path: '/technologies' }])}
+      />
       {/* Hero */}
       <section className="relative pt-32 pb-20 bg-mesh">
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary-500/15 rounded-full blur-[120px]" />

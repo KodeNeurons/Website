@@ -1,4 +1,5 @@
 import AnimatedSection from '../components/AnimatedSection';
+import SEO, { createJobPostingSchema, createBreadcrumbSchema } from '../components/SEO';
 
 const perks = [
   { icon: '🏠', title: 'Remote-First', desc: 'Work from anywhere in the world. We believe in hiring talent, not zip codes.' },
@@ -87,6 +88,16 @@ const cultureValues = [
 export default function Careers() {
   return (
     <div className="overflow-hidden">
+      <SEO
+        title="Careers - Join Our Team"
+        description="Join KodeNeurons - a remote-first AI solutions company. Open positions in engineering, AI research, design, and infrastructure. Great perks and culture."
+        keywords="KodeNeurons careers, software developer jobs, AI engineer jobs, remote developer positions, tech jobs, frontend developer, DevOps engineer"
+        path="/careers"
+        structuredData={[
+          ...openPositions.map(pos => createJobPostingSchema(pos)),
+          createBreadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Careers', path: '/careers' }])
+        ]}
+      />
       {/* Hero */}
       <section className="relative pt-32 pb-20 bg-mesh">
         <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-primary-500/15 rounded-full blur-[120px]" />
@@ -212,7 +223,7 @@ export default function Careers() {
                       </div>
                     </div>
                     <a
-                      href="mailto:careers@kodeneurons.com"
+                      href="mailto:careers@kodeneurons.in"
                       className="btn-primary text-sm whitespace-nowrap self-start md:self-center"
                     >
                       <span>Apply Now</span>
@@ -243,7 +254,7 @@ export default function Careers() {
             <p className="text-dark-400 text-lg max-w-2xl mx-auto mb-10">
               We're always looking for talented people. Send us your resume and tell us how you can contribute.
             </p>
-            <a href="mailto:careers@kodeneurons.com" className="btn-primary text-lg px-10 py-4">
+            <a href="mailto:careers@kodeneurons.in" className="btn-primary text-lg px-10 py-4">
               <span>Send General Application</span>
             </a>
           </AnimatedSection>

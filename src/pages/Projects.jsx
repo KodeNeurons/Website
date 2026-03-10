@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import AnimatedSection from '../components/AnimatedSection';
 import { Link } from 'react-router-dom';
+import SEO, { createBreadcrumbSchema } from '../components/SEO';
 
 const categories = ['All', 'AI / ML', 'SaaS', 'E-Commerce', 'Automation', 'Mobile'];
 
@@ -71,6 +72,13 @@ export default function Projects() {
 
   return (
     <div className="overflow-hidden">
+      <SEO
+        title="Case Studies - Real Projects, Real Results"
+        description="Explore KodeNeurons case studies and portfolio. See how we've delivered AI analytics, automation suites, e-commerce platforms, SaaS products, and mobile apps."
+        keywords="software case studies, AI project portfolio, SaaS development examples, automation case study, e-commerce development, mobile app development"
+        path="/projects"
+        structuredData={createBreadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Case Studies', path: '/projects' }])}
+      />
       {/* Hero */}
       <section className="relative pt-32 pb-20 bg-mesh">
         <div className="absolute top-1/3 left-1/3 w-72 h-72 bg-primary-500/15 rounded-full blur-[120px]" />

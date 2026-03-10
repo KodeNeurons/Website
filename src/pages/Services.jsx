@@ -1,5 +1,6 @@
 import AnimatedSection from '../components/AnimatedSection';
 import { Link } from 'react-router-dom';
+import SEO, { createServiceSchema, createBreadcrumbSchema } from '../components/SEO';
 
 const servicesDetailed = [
   {
@@ -166,6 +167,16 @@ const whyChooseUs = [
 export default function Services() {
   return (
     <div className="overflow-hidden">
+      <SEO
+        title="Services - Custom Software, AI & SaaS Development"
+        description="Explore KodeNeurons services: Custom Software Development, AI & Automation, SaaS Platforms, Web Applications, Startup MVP Development, and API Integration."
+        keywords="custom software development services, AI automation, SaaS development, web application development, MVP development, API development, software consulting"
+        path="/services"
+        structuredData={[
+          createServiceSchema('Custom Software Development', 'End-to-end custom software solutions tailored to your unique business requirements.'),
+          createBreadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }])
+        ]}
+      />
       {/* Hero */}
       <section className="relative pt-32 pb-20 bg-mesh">
         <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-primary-500/15 rounded-full blur-[120px]" />

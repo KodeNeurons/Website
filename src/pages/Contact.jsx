@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import AnimatedSection from '../components/AnimatedSection';
+import SEO, { createFAQSchema, createBreadcrumbSchema } from '../components/SEO';
 
 const projectTypes = [
   'Custom Software',
@@ -28,8 +29,8 @@ const contactInfo = [
       </svg>
     ),
     title: 'Email Us',
-    value: 'hello@kodeneurons.com',
-    link: 'mailto:hello@kodeneurons.com',
+    value: 'hello@kodeneurons.in',
+    link: 'mailto:hello@kodeneurons.in',
   },
   {
     icon: (
@@ -96,6 +97,16 @@ export default function Contact() {
 
   return (
     <div className="overflow-hidden">
+      <SEO
+        title="Contact Us - Start Your Software Project"
+        description="Get in touch with KodeNeurons. Tell us about your project requirements and get a free consultation. We respond within 24 hours."
+        keywords="contact KodeNeurons, start software project, hire developers, AI development consultation, get quote software development"
+        path="/contact"
+        structuredData={[
+          createFAQSchema(faqs),
+          createBreadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }])
+        ]}
+      />
       {/* Hero */}
       <section className="relative pt-32 pb-20 bg-mesh">
         <div className="absolute top-1/4 right-1/3 w-72 h-72 bg-primary-500/15 rounded-full blur-[120px]" />
@@ -266,7 +277,7 @@ export default function Contact() {
                     <span className="text-white font-semibold text-sm">Fast Response</span>
                   </div>
                   <p className="text-dark-400 text-sm leading-relaxed">
-                    We typically respond within 24 hours. For urgent inquiries, email us directly at hello@kodeneurons.com
+                    We typically respond within 24 hours. For urgent inquiries, email us directly at hello@kodeneurons.in
                   </p>
                 </div>
 
@@ -274,13 +285,13 @@ export default function Contact() {
                 <div className="glass-card p-6">
                   <h4 className="font-semibold text-white mb-4">Quick Actions</h4>
                   <div className="space-y-3">
-                    <a href="mailto:hello@kodeneurons.com" className="flex items-center gap-3 text-dark-400 hover:text-primary-400 transition-colors text-sm">
+                    <a href="mailto:hello@kodeneurons.in" className="flex items-center gap-3 text-dark-400 hover:text-primary-400 transition-colors text-sm">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                       </svg>
                       Schedule a Call
                     </a>
-                    <a href="mailto:hello@kodeneurons.com?subject=Partnership Inquiry" className="flex items-center gap-3 text-dark-400 hover:text-primary-400 transition-colors text-sm">
+                    <a href="mailto:hello@kodeneurons.in?subject=Partnership Inquiry" className="flex items-center gap-3 text-dark-400 hover:text-primary-400 transition-colors text-sm">
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                       </svg>

@@ -1,5 +1,6 @@
 import AnimatedSection from '../components/AnimatedSection';
 import { Link } from 'react-router-dom';
+import SEO, { createBreadcrumbSchema } from '../components/SEO';
 
 const values = [
   {
@@ -57,6 +58,13 @@ const teamCulture = [
 export default function About() {
   return (
     <div className="overflow-hidden">
+      <SEO
+        title="About Us - Our Story, Mission & Values"
+        description="Learn about KodeNeurons - a next-generation AI solutions company. Our mission, values, team culture, and journey building the future of software development."
+        keywords="about KodeNeurons, AI company, software development team, company values, tech company culture, mission vision"
+        path="/about"
+        structuredData={createBreadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }])}
+      />
       {/* Hero */}
       <section className="relative pt-32 pb-20 bg-mesh">
         <div className="absolute top-1/4 left-1/3 w-72 h-72 bg-primary-500/15 rounded-full blur-[120px]" />
