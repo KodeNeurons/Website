@@ -1,233 +1,149 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { SendHorizonal, Linkedin, Mail } from "lucide-react";
+import { SendHorizonal, Linkedin, Mail, MessageSquare, MapPin, Clock } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-// import confetti from "canvas-confetti";
+import SEO from "../components/SEO";
+
+const contactInfo = [
+  { icon: Mail, label: "Email", value: "contact@kodeneurons.in", link: "mailto:kodeneurons@gmail.com" },
+  { icon: FaWhatsapp, label: "WhatsApp", value: "+91 7499-601-744", link: "https://wa.me/7499601744" },
+  { icon: Linkedin, label: "LinkedIn", value: "KodeNeurons", link: "https://www.linkedin.com/company/kodeneurons-3/" },
+  { icon: Clock, label: "Response Time", value: "Within 24 hours", link: null },
+  { icon: MapPin, label: "Location", value: "India · Remote-first team", link: null },
+];
 
 export default function Contact() {
-  const [result, setResult] = useState("");
+  const [sending, setSending] = useState(false);
 
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    setResult("Sending...");
-    const formData = new FormData(event.target);
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setSending(true);
+    const formData = new FormData(e.target);
     formData.append("access_key", "83e66638-db7b-44ee-b2a8-bedf587bcadb");
-
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData,
-    });
-
-    const data = await response.json();
+    const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: formData });
+    const data = await res.json();
+    setSending(false);
     if (data.success) {
-      setResult("");
-      event.target.reset();
-
-      // // 🎉 Confetti animation
-      // confetti({
-      //   particleCount: 150,
-      //   spread: 70,
-      //   origin: { y: 0.6 },
-      //   colors: ["#6C63FF", "#00D1FF", "#FFFFFF"],
-      // });
-
-      toast.success("✨ Message sent successfully! We’ll contact you soon.");
+      e.target.reset();
+      toast.success("Message sent! We'll reach you within 24 hours.", {
+        style: { background: "#fff", color: "#0A0F2C", border: "1px solid #e5e7eb" },
+        iconTheme: { primary: "#FF7A00", secondary: "#fff" },
+      });
     } else {
-      console.error("Error", data);
       toast.error("Something went wrong. Please try again.");
     }
   };
 
+  const inp = "w-full px-4 py-3.5 rounded-xl bg-[#FAFAFA] border border-gray-200 text-[#0A0F2C] placeholder-gray-400 text-sm focus:outline-none focus:border-[#FF7A00] focus:ring-1 focus:ring-[#FF7A00]/20 transition-all duration-200";
+
   return (
-    <div className="min-h-screen bg-[#0B0B0F] text-white relative overflow-hidden">
-      {/* Toast notifications */}
-      <Toaster position="top-center" reverseOrder={false} />
+    <div className="bg-white text-[#0A0F2C] min-h-screen">
+      <SEO
+        title="Contact Us"
+        description="Get in touch with KodeNeurons to discuss your next software or AI project. We guarantee a 24-hour response."
+        path="/contact"
+      />
+      <Toaster position="top-center" />
 
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#6C63FF]/10 via-[#00D1FF]/10 to-[#6C63FF]/10 blur-3xl opacity-70 -z-10"></div>
-
-      {/* Header */}
-      <section className="text-center pt-28 pb-10 px-6">
-        <h2 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] mb-6 animate-fade-in">
-          Let’s Build Something Exceptional Together 🚀
-        </h2>
-        <p className="max-w-2xl mx-auto text-gray-400 text-lg leading-relaxed animate-fade-in">
-          Have a project in mind? Whether it's AI, Web, or Mobile — share your
-          vision, and our team will turn it into a high-impact product.
-        </p>
+      {/* ─── Hero ─── */}
+      <section className="relative pt-32 pb-16 px-6 overflow-hidden">
+        <div className="absolute -top-24 left-1/3 w-[400px] h-[400px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(255,122,0,0.07), transparent 65%)" }} />
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 border border-orange-200 text-[#FF7A00] text-xs font-semibold tracking-widest uppercase mb-6">
+            <MessageSquare className="w-3.5 h-3.5" />
+            Get In Touch
+          </div>
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-5 text-[#0A0F2C]">
+            Let's Build Something{" "}
+            <span style={{ backgroundImage: "linear-gradient(135deg,#FF7A00,#FF9E3D)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              Great
+            </span>
+          </h1>
+          <p className="text-lg text-gray-500 leading-relaxed">
+            Have a project in mind? Share your vision — our team will get back to you within 24 hours.
+          </p>
+        </div>
       </section>
 
-      {/* Form Section */}
-      <div className="flex flex-col lg:flex-row justify-center items-start gap-10 px-6 pb-24 max-w-7xl mx-auto">
-        {/* Form */}
-        <form
-          onSubmit={onSubmit}
-          className="w-full max-w-lg bg-[#101016] border border-[#1F1F25] shadow-[0_0_25px_rgba(108,99,255,0.2)] rounded-2xl px-8 py-10 space-y-6 transition-transform duration-300 hover:scale-[1.01]"
-        >
-          <div>
-            <label
-              htmlFor="fullName"
-              className="block text-sm font-semibold text-[#00D1FF] mb-2"
-            >
-              Full Name
-            </label>
-            <input
-              type="text"
-              name="fullName"
-              id="fullName"
-              required
-              placeholder="Enter your full name"
-              className="w-full px-4 py-3 rounded-lg bg-[#0B0B0F] border border-[#2A2A33] text-white placeholder-gray-500 focus:border-[#6C63FF] focus:ring-2 focus:ring-[#6C63FF]/50 transition"
-            />
+      {/* ─── Main Content ─── */}
+      <section className="pb-24 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-10 items-start justify-center">
+
+          {/* Form Card */}
+          <div className="w-full max-w-xl bg-white rounded-3xl border border-gray-100 shadow-[0_4px_30px_rgba(0,0,0,0.06)] p-8 md:p-10">
+            <h2 className="text-2xl font-extrabold text-[#0A0F2C] mb-1">Send a Request</h2>
+            <p className="text-gray-400 text-sm mb-7">We'll respond within 24 hours.</p>
+
+            <form onSubmit={onSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-xs font-bold text-[#0A0F2C] mb-2 uppercase tracking-wide">Full Name</label>
+                  <input type="text" name="fullName" required placeholder="Your name" className={inp} />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-[#0A0F2C] mb-2 uppercase tracking-wide">Phone</label>
+                  <input type="tel" name="contactNumber" required placeholder="Contact number" className={inp} />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-[#0A0F2C] mb-2 uppercase tracking-wide">Email</label>
+                <input type="email" name="email" required placeholder="you@email.com" className={inp} />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-[#0A0F2C] mb-2 uppercase tracking-wide">College / Company</label>
+                <input type="text" name="institution" required placeholder="e.g. CSMSS / XYZ Corp" className={inp} />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-[#0A0F2C] mb-2 uppercase tracking-wide">Project Title</label>
+                <input type="text" name="projectName" required placeholder="Your project name" className={inp} />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-[#0A0F2C] mb-2 uppercase tracking-wide">Project Description</label>
+                <textarea name="projectDescription" rows="4" required placeholder="Briefly describe your project idea..." className={inp} />
+              </div>
+
+              <button
+                type="submit"
+                disabled={sending}
+                className="w-full py-4 bg-[#FF7A00] hover:bg-[#e86e00] text-white font-bold rounded-xl flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(255,122,0,0.35)] hover:shadow-[0_6px_28px_rgba(255,122,0,0.5)] hover:scale-[1.02] transition-all duration-300 disabled:opacity-60 disabled:scale-100"
+              >
+                <SendHorizonal className="w-4 h-4" />
+                {sending ? "Sending…" : "Submit Request"}
+              </button>
+            </form>
           </div>
 
-          <div>
-            <label
-              htmlFor="contactNumber"
-              className="block text-sm font-semibold text-[#00D1FF] mb-2"
-            >
-              Contact Number
-            </label>
-            <input
-              type="tel"
-              name="contactNumber"
-              id="contactNumber"
-              required
-              placeholder="Enter your contact number"
-              className="w-full px-4 py-3 rounded-lg bg-[#0B0B0F] border border-[#2A2A33] text-white placeholder-gray-500 focus:border-[#6C63FF] focus:ring-2 focus:ring-[#6C63FF]/50 transition"
-            />
-          </div>
+          {/* Info Panel */}
+          <div className="w-full max-w-xs mt-2">
+            <h3 className="text-xl font-extrabold text-[#0A0F2C] mb-2">Contact Directly</h3>
+            <p className="text-gray-400 text-sm mb-6 leading-relaxed">Prefer to reach out? We're available on all channels.</p>
 
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-semibold text-[#00D1FF] mb-2"
-            >
-              Email Address
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              required
-              placeholder="Enter your email"
-              className="w-full px-4 py-3 rounded-lg bg-[#0B0B0F] border border-[#2A2A33] text-white placeholder-gray-500 focus:border-[#6C63FF] focus:ring-2 focus:ring-[#6C63FF]/50 transition"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="institution"
-              className="block text-sm font-semibold text-[#00D1FF] mb-2"
-            >
-              College / Company / Institute
-            </label>
-            <input
-              type="text"
-              name="institution"
-              id="institution"
-              required
-              placeholder="e.g. CSMSS College / XYZ Corp"
-              className="w-full px-4 py-3 rounded-lg bg-[#0B0B0F] border border-[#2A2A33] text-white placeholder-gray-500 focus:border-[#6C63FF] focus:ring-2 focus:ring-[#6C63FF]/50 transition"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="projectName"
-              className="block text-sm font-semibold text-[#00D1FF] mb-2"
-            >
-              Project Title
-            </label>
-            <input
-              type="text"
-              name="projectName"
-              id="projectName"
-              required
-              placeholder="Enter project name"
-              className="w-full px-4 py-3 rounded-lg bg-[#0B0B0F] border border-[#2A2A33] text-white placeholder-gray-500 focus:border-[#6C63FF] focus:ring-2 focus:ring-[#6C63FF]/50 transition"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="projectDescription"
-              className="block text-sm font-semibold text-[#00D1FF] mb-2"
-            >
-              Project Description
-            </label>
-            <textarea
-              name="projectDescription"
-              id="projectDescription"
-              rows="4"
-              required
-              placeholder="Briefly describe your project idea..."
-              className="w-full px-4 py-3 rounded-lg bg-[#0B0B0F] border border-[#2A2A33] text-white placeholder-gray-500 focus:border-[#6C63FF] focus:ring-2 focus:ring-[#6C63FF]/50 transition"
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full py-3 bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] font-semibold rounded-lg text-white flex items-center justify-center gap-2 hover:shadow-[0_0_25px_rgba(108,99,255,0.4)] hover:scale-105 transition"
-          >
-            <SendHorizonal className="w-5 h-5" />
-            {result === "Sending..." ? "Sending..." : "Submit Request"}
-          </button>
-
-          {/* Support message */}
-          <p className="text-center text-gray-500 text-sm mt-3">
-            💬 We usually respond within <span className="text-[#00D1FF]">24 hours</span>.
-          </p>
-        </form>
-
-        {/* Right Floating Info Panel */}
-        <div className="hidden lg:flex flex-col justify-center items-start bg-[#101016] border border-[#1F1F25] rounded-2xl shadow-[0_0_20px_rgba(108,99,255,0.15)] p-8 w-80 space-y-6 animate-slide-in-right">
-          <h3 className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#00D1FF]">
-            Get in Touch
-          </h3>
-          <p className="text-gray-400 text-sm leading-relaxed">
-            Reach out directly through email, WhatsApp, or our professional profiles.
-          </p>
-
-          <div className="flex flex-col space-y-4 mt-4">
-            <a
-              href="mailto:kodeneurons@gmail.com"
-              className="flex items-center gap-3 text-gray-300 hover:text-[#00D1FF] transition"
-            >
-              <Mail className="w-5 h-5" /> support@kodeneurons.tech
-            </a>
-            {/* <a
-              href="tel:+918600403938"
-              className="flex items-center gap-3 text-gray-300 hover:text-[#00D1FF] transition"
-            >
-              <Phone className="w-5 h-5" /> +91 86004 03938
-            </a> */}
-            <a
-              href="https://www.linkedin.com/company/kodeneurons-3/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 text-gray-300 hover:text-[#00D1FF] transition"
-            >
-              <Linkedin className="w-5 h-5" /> LinkedIn
-            </a>
-            {/* <a
-              href="https://github.com/ShoyebChaudhari45"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 text-gray-300 hover:text-[#6C63FF] transition"
-            > */}
-           
-            <a
-              href="https://wa.me/7499601744"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 text-gray-300 hover:text-green-500 transition"
-            >
-              <FaWhatsapp className="w-5 h-5" /> WhatsApp
-            </a>
+            <div className="space-y-3">
+              {contactInfo.map(({ icon: Icon, label, value, link }) => (
+                <div key={label} className="flex items-center gap-3.5 p-4 rounded-2xl border border-gray-100 bg-[#FAFAFA] hover:border-[#FF7A00]/25 hover:bg-orange-50 hover:shadow-sm transition-all duration-200 group">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center flex-shrink-0 group-hover:border-[#FF7A00]/30 group-hover:bg-orange-50 transition-all">
+                    <Icon className="w-4 h-4 text-[#FF7A00]" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-wide">{label}</p>
+                    {link ? (
+                      <a href={link} target="_blank" rel="noopener noreferrer"
+                        className="text-sm font-semibold text-[#0A0F2C] hover:text-[#FF7A00] transition-colors">{value}</a>
+                    ) : (
+                      <p className="text-sm font-semibold text-[#0A0F2C]">{value}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
