@@ -1,108 +1,165 @@
-import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
-import { Menu, X } from "lucide-react"; // for mobile menu icons
-import imagee from "./android-chrome-192x192-photoaidcom-cropped.png";
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Projects", href: "/projects" },
-  { name: "Book Project", href: "/contact" },
-  // { name: "Collab", href: "/UploadFrom" },
-  { name: "About", href: "/about" },
+const navLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+  { name: 'Case Studies', path: '/projects' },
+  { name: 'Technologies', path: '/technologies' },
+  { name: 'About', path: '/about' },
+  { name: 'Careers', path: '/careers' },
 ];
 
-export default function Navbar({ toggleTheme, isDarkMode }) {
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const location = useLocation();
-  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsMobileOpen(false);
+  }, [location]);
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileOpen]);
 
   return (
-    <header className="fixed w-full top-0 left-0 z-50 backdrop-blur-md bg-[#0B0B0F]/80 border-b border-[#1A1A20] shadow-[0_0_12px_rgba(108,99,255,0.25)] transition-all duration-300">
-      <nav className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-        
-        {/* Logo Section */}
-        <div className="flex items-center gap-3">
-          <img src={imagee} alt="logo" className="h-9 w-9 rounded-md" />
-          <Link
-            to="/"
-            className="text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] text-2xl font-extrabold tracking-tight hover:opacity-90 transition-all duration-300"
-          >
-            KodeNeurons
-          </Link>
-        </div>
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled
+            ? 'bg-dark-950/80 backdrop-blur-xl border-b border-white/5 shadow-lg shadow-black/20'
+            : 'bg-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-3 group">
+              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-neon-purple flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                <span className="text-white font-display font-bold text-lg">K</span>
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary-400 to-neon-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-lg" />
+              </div>
+              <div>
+                <span className="font-display font-bold text-xl text-white tracking-tight">
+                  Kode<span className="gradient-text">Neurons</span>
+                </span>
+              </div>
+            </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
-          {navigation.map((item) => {
-            const isActive = location.pathname === item.href;
-            return (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`relative text-sm font-medium transition-all duration-300 ${
-                  isActive
-                    ? "text-white"
-                    : "text-gray-400 hover:text-white"
-                }`}
-              >
-                {item.name}
-                {isActive && (
-                  <span className="absolute left-0 -bottom-1 h-[2px] w-full bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] rounded-full animate-pulse"></span>
-                )}
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* CTA Button (Desktop) */}
-        <div className="hidden md:flex items-center gap-3">
-          <Link
-            to="/contact"
-            className="px-4 py-2 bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] text-white font-semibold text-sm rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-transform duration-300"
-          >
-            Book a Demo
-          </Link>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-gray-300 hover:text-white focus:outline-none"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </nav>
-
-      {/* Mobile Dropdown Menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-[#0B0B0F]/95 border-t border-[#1A1A20] shadow-lg animate-fadeIn">
-          <div className="flex flex-col px-6 py-4 space-y-4">
-            {navigation.map((item) => {
-              const isActive = location.pathname === item.href;
-              return (
+            {/* Desktop Nav */}
+            <div className="hidden lg:flex items-center gap-1">
+              {navLinks.map((link) => (
                 <Link
-                  key={item.name}
-                  to={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={`text-base font-medium transition-all duration-300 ${
-                    isActive
-                      ? "text-white"
-                      : "text-gray-400 hover:text-[#00D1FF]"
+                  key={link.path}
+                  to={link.path}
+                  className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                    location.pathname === link.path
+                      ? 'text-white bg-white/10'
+                      : 'text-dark-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  {item.name}
+                  {link.name}
+                  {location.pathname === link.path && (
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-gradient-to-r from-primary-500 to-neon-purple rounded-full" />
+                  )}
                 </Link>
-              );
-            })}
-            <Link
-              to="/contact"
-              onClick={() => setMobileOpen(false)}
-              className="text-center px-4 py-2 mt-2 bg-gradient-to-r from-[#6C63FF] to-[#00D1FF] text-white font-semibold text-sm rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition"
-            >
-              Book a Demo
-            </Link>
+              ))}
+            </div>
+
+            {/* CTA + Mobile Toggle */}
+            <div className="flex items-center gap-4">
+              <Link
+                to="/contact"
+                className="hidden lg:inline-flex btn-primary text-sm"
+              >
+                <span>Start Your Project</span>
+              </Link>
+
+              <button
+                onClick={() => setIsMobileOpen(!isMobileOpen)}
+                className="lg:hidden relative w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
+                aria-label="Toggle menu"
+              >
+                <div className="w-5 h-4 flex flex-col justify-between">
+                  <span
+                    className={`block h-0.5 bg-white rounded-full transition-all duration-300 origin-center ${
+                      isMobileOpen ? 'rotate-45 translate-y-[7px]' : ''
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 bg-white rounded-full transition-all duration-300 ${
+                      isMobileOpen ? 'opacity-0 scale-0' : ''
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 bg-white rounded-full transition-all duration-300 origin-center ${
+                      isMobileOpen ? '-rotate-45 -translate-y-[7px]' : ''
+                    }`}
+                  />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
-      )}
-    </header>
+      </nav>
+
+      {/* Mobile Menu */}
+      <div
+        className={`fixed inset-0 z-40 lg:hidden transition-all duration-500 ${
+          isMobileOpen ? 'visible' : 'invisible'
+        }`}
+      >
+        <div
+          className={`absolute inset-0 bg-dark-950/90 backdrop-blur-xl transition-opacity duration-500 ${
+            isMobileOpen ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={() => setIsMobileOpen(false)}
+        />
+        <div
+          className={`absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-dark-900/95 backdrop-blur-xl border-l border-white/10 transition-transform duration-500 ease-out ${
+            isMobileOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="flex flex-col h-full pt-24 px-6">
+            <div className="flex flex-col gap-1">
+              {navLinks.map((link, index) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`px-4 py-3.5 rounded-xl text-base font-medium transition-all duration-300 ${
+                    location.pathname === link.path
+                      ? 'text-white bg-white/10 border border-white/10'
+                      : 'text-dark-400 hover:text-white hover:bg-white/5'
+                  }`}
+                  style={{ transitionDelay: isMobileOpen ? `${index * 50}ms` : '0ms' }}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-8 pt-8 border-t border-white/10">
+              <Link to="/contact" className="btn-primary w-full text-center block">
+                <span>Start Your Project</span>
+              </Link>
+            </div>
+
+            <div className="mt-auto pb-8">
+              <p className="text-dark-500 text-sm">
+                © 2024 KodeNeurons.<br />All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
