@@ -67,7 +67,7 @@ export const organizationSchema = {
   ],
   contactPoint: {
     '@type': 'ContactPoint',
-    email: 'hello@kodeneurons.in',
+    email: 'contact@kodeneurons.in',
     contactType: 'customer service',
     availableLanguage: ['English'],
   },

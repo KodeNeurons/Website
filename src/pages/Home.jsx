@@ -598,8 +598,8 @@ export default function Home() {
               <Link to="/contact" className="btn-primary text-lg px-10 py-4">
                 <span>Get In Touch</span>
               </Link>
-              <a href="mailto:hello@kodeneurons.in" className="btn-outline text-lg px-10 py-4">
-                hello@kodeneurons.in
+              <a href="mailto:contact@kodeneurons.in" className="btn-outline text-lg px-10 py-4">
+                contact@kodeneurons.in
               </a>
             </div>
           </AnimatedSection>

@@ -223,7 +223,7 @@ export default function Careers() {
                       </div>
                     </div>
                     <a
-                      href="mailto:careers@kodeneurons.in"
+                      href="mailto:contact@kodeneurons.in"
                       className="btn-primary text-sm whitespace-nowrap self-start md:self-center"
                     >
                       <span>Apply Now</span>
@@ -254,7 +254,7 @@ export default function Careers() {
             <p className="text-dark-400 text-lg max-w-2xl mx-auto mb-10">
               We're always looking for talented people. Send us your resume and tell us how you can contribute.
             </p>
-            <a href="mailto:careers@kodeneurons.in" className="btn-primary text-lg px-10 py-4">
+            <a href="mailto:contact@kodeneurons.in" className="btn-primary text-lg px-10 py-4">
               <span>Send General Application</span>
             </a>
           </AnimatedSection>
