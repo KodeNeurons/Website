@@ -1,6 +1,6 @@
 import {
     Brain, Globe, Smartphone, Database,
-    CheckCircle2, ArrowRight, Zap, Star, ChevronRight,
+    CheckCircle2, ArrowRight, Star, ChevronRight,
     Cloud, Bot, Layers,
 } from "lucide-react";
 import { Link } from "react-router-dom";

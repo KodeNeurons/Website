@@ -1,7 +1,6 @@
 import {
     ShoppingCart, MapPin, ArrowRight, ExternalLink,
-    Star, Zap, Shield, Users, Globe, CheckCircle2,
-    Smartphone, Clock, Lock, Bell, Package,
+    Users, CheckCircle2, Clock, Lock, Bell, Package,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
