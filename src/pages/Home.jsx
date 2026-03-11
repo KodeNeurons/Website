@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Typed from "typed.js";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
@@ -8,6 +8,40 @@ import {
   Database, Code2, Activity,
   Zap, TrendingUp, Users, Clock,
 } from "lucide-react";
+
+/* ─── Scroll-reveal hook ─── */
+function useScrollReveal(threshold = 0.15) {
+  const ref = useRef(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { threshold }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [threshold]);
+  return [ref, visible];
+}
+
+/* ─── Count-up hook ─── */
+function useCounter(target, active, duration = 1400) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    let cur = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      cur += step;
+      if (cur >= target) { setVal(target); clearInterval(timer); }
+      else setVal(Math.floor(cur));
+    }, 16);
+    return () => clearInterval(timer);
+  }, [active, target, duration]);
+  return val;
+}
 
 /* ─── Data ─── */
 const services = [
@@ -122,6 +156,15 @@ const testimonials = [
 /* ─── Component ─── */
 export default function Home() {
   const typedRef = useRef(null);
+  const [statsRef, statsVisible] = useScrollReveal(0.2);
+  const [servicesRef, servicesVisible] = useScrollReveal(0.1);
+  const [aiRef, aiVisible] = useScrollReveal(0.2);
+  const [processRef, processVisible] = useScrollReveal(0.1);
+  const [testimonialsRef, testimonialsVisible] = useScrollReveal(0.1);
+  const [ctaRef, ctaVisible] = useScrollReveal(0.2);
+  const count50 = useCounter(50, statsVisible);
+  const count3 = useCounter(3, statsVisible);
+  const count100 = useCounter(100, statsVisible);
 
   useEffect(() => {
     const typed = new Typed(typedRef.current, {
@@ -146,24 +189,45 @@ export default function Home() {
           HERO
       ═══════════════════════════════════ */}
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-        {/* Subtle orange blob — top right */}
-        <div className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(255,122,0,0.08) 0%, transparent 65%)" }} />
+        {/* Animated orange blob — top right */}
+        <div className="animate-float absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(255,122,0,0.10) 0%, transparent 65%)" }} />
         {/* Subtle navy blob — bottom left */}
-        <div className="absolute bottom-0 -left-40 w-[400px] h-[400px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(10,15,44,0.04) 0%, transparent 65%)" }} />
+        <div className="animate-float absolute bottom-0 -left-40 w-[400px] h-[400px] rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(10,15,44,0.06) 0%, transparent 65%)", animationDelay: "3s" }} />
+
+        {/* Floating particles */}
+        {[
+          { x: "8%",  y: "18%", delay: "0s",   size: 6,  dur: 7 },
+          { x: "88%", y: "25%", delay: "1.2s",  size: 4,  dur: 9 },
+          { x: "18%", y: "72%", delay: "2.1s",  size: 5,  dur: 8 },
+          { x: "78%", y: "65%", delay: "0.6s",  size: 3,  dur: 10 },
+          { x: "50%", y: "88%", delay: "1.8s",  size: 4,  dur: 7 },
+          { x: "38%", y: "12%", delay: "3s",    size: 6,  dur: 9 },
+          { x: "62%", y: "40%", delay: "0.3s",  size: 3,  dur: 11 },
+          { x: "92%", y: "78%", delay: "2.5s",  size: 5,  dur: 8 },
+        ].map((p, i) => (
+          <div key={i} className="absolute rounded-full pointer-events-none"
+            style={{
+              left: p.x, top: p.y,
+              width: p.size, height: p.size,
+              background: "#FF7A00",
+              animation: `particleFloat ${p.dur}s ease-in-out infinite`,
+              animationDelay: p.delay,
+            }} />
+        ))}
 
         <div className="max-w-7xl mx-auto">
           <div className="max-w-4xl mx-auto text-center">
 
             {/* Eyebrow tag */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 border border-orange-200 text-[#FF7A00] text-xs font-semibold tracking-widest uppercase mb-8">
+            <div className="hero-animate hero-animate-1 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 border border-orange-200 text-[#FF7A00] text-xs font-semibold tracking-widest uppercase mb-8">
               <Cpu className="w-3.5 h-3.5" />
               AI-Powered Software Studio
             </div>
 
             {/* Headline */}
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.04] tracking-tight text-[#0A0F2C] mb-6">
+            <h1 className="hero-animate hero-animate-2 text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.04] tracking-tight text-[#0A0F2C] mb-6">
               We Build{" "}
               <span className="relative inline-block">
                 <span
@@ -186,19 +250,19 @@ export default function Home() {
             </h1>
 
             {/* Sub */}
-            <p className="text-lg md:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto mb-4">
+            <p className="hero-animate hero-animate-3 text-lg md:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto mb-4">
               KodeNeurons is a next-generation AI software studio. We design and deliver
               production-grade web, mobile, and AI products — on time, every time.
             </p>
 
             {/* Typed */}
-            <p className="text-base text-gray-400 mb-10">
+            <p className="hero-animate hero-animate-4 text-base text-gray-400 mb-10">
               Experts in{" "}
               <span ref={typedRef} className="font-semibold text-[#FF7A00]" />
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="hero-animate hero-animate-5 flex flex-wrap gap-4 justify-center">
               <Link
                 to="/contact"
                 className="group flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white bg-[#FF7A00] hover:bg-[#e86e00] shadow-[0_4px_20px_rgba(255,122,0,0.4)] hover:shadow-[0_8px_30px_rgba(255,122,0,0.5)] hover:scale-105 transition-all duration-300"
@@ -215,7 +279,7 @@ export default function Home() {
             </div>
 
             {/* Social proof chips */}
-            <div className="flex flex-wrap justify-center gap-6 mt-12 pt-10 border-t border-gray-100">
+            <div className="hero-animate hero-animate-6 flex flex-wrap justify-center gap-6 mt-12 pt-10 border-t border-gray-100">
               {[
                 { icon: CheckCircle2, text: "50+ Projects Shipped", color: "text-[#FF7A00]" },
                 { icon: CheckCircle2, text: "100% Client Satisfaction", color: "text-[#FF7A00]" },
@@ -234,22 +298,27 @@ export default function Home() {
       {/* ═══════════════════════════════════
           STATS BAND
       ═══════════════════════════════════ */}
-      <section className="py-16 px-6 bg-[#0A0F2C]">
+      <section className="py-16 px-6 bg-[#0A0F2C]" ref={statsRef}>
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
-          {stats.map(({ value, label, icon: Icon }) => (
-            <div key={label}>
-              <Icon className="w-6 h-6 text-[#FF7A00] mx-auto mb-3 opacity-80" />
-              <div className="text-4xl font-extrabold text-white">{value}</div>
-              <p className="mt-1.5 text-sm text-gray-400">{label}</p>
-            </div>
-          ))}
+          {stats.map(({ label, icon: Icon }, i) => {
+            const displayVals = [`${count50}+`, `${count3}`, "24h", `${count100}%`];
+            return (
+              <div key={label}
+                className={`reveal-scale${statsVisible ? " visible" : ""}`}
+                style={{ transitionDelay: `${i * 0.12}s` }}>
+                <Icon className="w-6 h-6 text-[#FF7A00] mx-auto mb-3 opacity-80" />
+                <div className="text-4xl font-extrabold text-white">{displayVals[i]}</div>
+                <p className="mt-1.5 text-sm text-gray-400">{label}</p>
+              </div>
+            );
+          })}
         </div>
       </section>
 
       {/* ═══════════════════════════════════
           SERVICES
       ═══════════════════════════════════ */}
-      <section className="py-24 px-6 bg-white" id="services">
+      <section className="py-24 px-6 bg-white" id="services" ref={servicesRef}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">What We Build</p>
@@ -266,10 +335,11 @@ export default function Home() {
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
+            {services.map((s, i) => (
               <div
                 key={s.title}
-                className="group relative bg-white rounded-2xl border border-gray-100 p-7 hover:border-[#FF7A00]/30 hover:shadow-[0_8px_40px_rgba(255,122,0,0.10)] transition-all duration-300 hover:-translate-y-1 cursor-default overflow-hidden"
+                className={`reveal${servicesVisible ? " visible" : ""} group relative bg-white rounded-2xl border border-gray-100 p-7 hover:border-[#FF7A00]/30 hover:shadow-[0_8px_40px_rgba(255,122,0,0.10)] transition-all duration-300 hover:-translate-y-1 cursor-default overflow-hidden`}
+                style={{ transitionDelay: `${i * 0.1}s` }}
               >
                 {/* Orange top stripe on hover */}
                 <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-[#FF7A00] to-[#FF9E3D] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -299,11 +369,11 @@ export default function Home() {
       {/* ═══════════════════════════════════
           AI CAPABILITIES HIGHLIGHT
       ═══════════════════════════════════ */}
-      <section className="py-24 px-6 bg-[#FAFAFA]">
+      <section className="py-24 px-6 bg-[#FAFAFA]" ref={aiRef}>
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
 
           {/* Left: Visual card */}
-          <div className="lg:w-1/2 w-full flex-shrink-0">
+          <div className={`reveal-left${aiVisible ? " visible" : ""} lg:w-1/2 w-full flex-shrink-0`}>
             <div className="relative bg-white rounded-3xl border border-gray-100 shadow-[0_20px_60px_rgba(0,0,0,0.07)] p-8 overflow-hidden">
               {/* Orange corner glow */}
               <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full"
@@ -329,7 +399,7 @@ export default function Home() {
                 { label: "Predictive Analytics", pct: 88 },
                 { label: "Computer Vision", pct: 82 },
                 { label: "Automation & Agents", pct: 91 },
-              ].map(({ label, pct }) => (
+              ].map(({ label, pct }, idx) => (
                 <div key={label} className="mb-4 last:mb-0">
                   <div className="flex justify-between mb-1.5">
                     <span className="text-xs font-medium text-gray-600">{label}</span>
@@ -339,8 +409,9 @@ export default function Home() {
                     <div
                       className="h-full rounded-full"
                       style={{
-                        width: `${pct}%`,
+                        width: aiVisible ? `${pct}%` : "0%",
                         background: "linear-gradient(90deg, #FF7A00, #FF9E3D)",
+                        transition: `width 1.1s ease ${0.3 + idx * 0.18}s`,
                       }}
                     />
                   </div>
@@ -350,7 +421,7 @@ export default function Home() {
           </div>
 
           {/* Right: Copy */}
-          <div className="lg:w-1/2">
+          <div className={`reveal-right${aiVisible ? " visible" : ""} lg:w-1/2`} style={{ transitionDelay: "0.2s" }}>
             <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-4">AI Capabilities</p>
             <h2 className="text-4xl md:text-5xl font-extrabold text-[#0A0F2C] mb-5 leading-tight">
               Cutting-edge AI,<br />engineered for the{" "}
@@ -390,7 +461,7 @@ export default function Home() {
       {/* ═══════════════════════════════════
           PROCESS
       ═══════════════════════════════════ */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-white" ref={processRef}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">How We Work</p>
@@ -410,7 +481,9 @@ export default function Home() {
             <div className="hidden md:block absolute top-10 left-[13%] right-[13%] h-px border-t-2 border-dashed border-orange-200" />
 
             {process.map((step, i) => (
-              <div key={step.num} className="group flex flex-col items-center text-center relative">
+              <div key={step.num}
+                className={`reveal${processVisible ? " visible" : ""} group flex flex-col items-center text-center relative`}
+                style={{ transitionDelay: `${i * 0.15}s` }}>
                 <div className="relative mb-6 z-10">
                   <div className="w-20 h-20 rounded-2xl bg-orange-50 border-2 border-orange-100 group-hover:bg-[#FF7A00] group-hover:border-[#FF7A00] flex flex-col items-center justify-center gap-1 transition-all duration-300 shadow-sm group-hover:shadow-[0_8px_25px_rgba(255,122,0,0.35)]">
                     <span className="text-xs font-bold text-[#FF7A00] group-hover:text-white/70 transition-colors">{step.num}</span>
@@ -428,16 +501,18 @@ export default function Home() {
       {/* ═══════════════════════════════════
           TECH STACK
       ═══════════════════════════════════ */}
-      <section className="py-16 px-6 bg-[#FAFAFA] border-y border-gray-100">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="py-16 px-6 bg-[#FAFAFA] border-y border-gray-100 overflow-hidden">
+        <div className="mx-auto text-center">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-8">Technologies we ship with</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {stack.map((t) => (
-              <span key={t}
-                className="px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-xl hover:border-[#FF7A00]/40 hover:text-[#FF7A00] hover:bg-orange-50 hover:shadow-sm transition-all duration-200 cursor-default">
-                {t}
-              </span>
-            ))}
+          <div className="overflow-hidden">
+            <div className="flex gap-3 animate-marquee" style={{ width: "max-content" }}>
+              {[...stack, ...stack].map((t, i) => (
+                <span key={i}
+                  className="px-4 py-2 text-sm font-medium text-gray-600 bg-white border border-gray-200 rounded-xl hover:border-[#FF7A00]/40 hover:text-[#FF7A00] hover:bg-orange-50 hover:shadow-sm transition-all duration-200 cursor-default whitespace-nowrap">
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -445,7 +520,7 @@ export default function Home() {
       {/* ═══════════════════════════════════
           TESTIMONIALS
       ═══════════════════════════════════ */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-white" ref={testimonialsRef}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">What Clients Say</p>
@@ -454,7 +529,9 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
-              <div key={i} className="bg-white border border-gray-100 rounded-2xl p-7 shadow-sm hover:shadow-[0_8px_30px_rgba(255,122,0,0.08)] hover:border-[#FF7A00]/20 transition-all duration-300">
+              <div key={i}
+                className={`reveal${testimonialsVisible ? " visible" : ""} bg-white border border-gray-100 rounded-2xl p-7 shadow-sm hover:shadow-[0_8px_30px_rgba(255,122,0,0.08)] hover:border-[#FF7A00]/20 transition-all duration-300`}
+                style={{ transitionDelay: `${i * 0.15}s` }}>
                 {/* Stars */}
                 <div className="flex gap-1 mb-5">
                   {[...Array(5)].map((_, j) => (
@@ -482,16 +559,21 @@ export default function Home() {
       {/* ═══════════════════════════════════
           CTA BANNER
       ═══════════════════════════════════ */}
-      <section className="py-24 px-6">
+      <section className="py-24 px-6" ref={ctaRef}>
         <div className="max-w-5xl mx-auto">
           <div
-            className="relative overflow-hidden rounded-3xl px-10 py-16 md:py-20 text-center text-white"
+            className={`reveal${ctaVisible ? " visible" : ""} relative overflow-hidden rounded-3xl px-10 py-16 md:py-20 text-center text-white`}
             style={{ background: "linear-gradient(135deg, #FF7A00 0%, #FF9E3D 100%)" }}
           >
             {/* Decorative circles */}
             <div className="absolute -top-16 -right-16 w-64 h-64 bg-white/10 rounded-full" />
             <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-white/10 rounded-full" />
             <div className="absolute top-8 left-8 w-20 h-20 bg-white/10 rounded-full" />
+            {/* Spinning decorative ring */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+              <div className="w-[520px] h-[520px] rounded-full border border-white/10 animate-spin-slow" />
+              <div className="absolute w-[360px] h-[360px] rounded-full border border-white/8 animate-spin-slow" style={{ animationDirection: "reverse", animationDuration: "15s" }} />
+            </div>
 
             <div className="relative z-10">
               <p className="text-xs font-bold uppercase tracking-widest mb-4 text-white/70">Let's Build Together</p>
@@ -504,7 +586,7 @@ export default function Home() {
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Link to="/contact"
-                  className="group flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-[#FF7A00] bg-white hover:bg-orange-50 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                  className="animate-pulse-ring group flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-[#FF7A00] bg-white hover:bg-orange-50 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
                   Start a Project
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
