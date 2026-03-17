@@ -1,6 +1,6 @@
 import {
     Brain, Globe, Smartphone, Database,
-    CheckCircle2, ArrowRight, Star, ChevronRight,
+    CheckCircle2, ArrowRight, Star,
     Cloud, Bot, Layers,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -132,7 +132,7 @@ const categories = [
 const deliveryPackages = [
     {
         name: "Starter",
-        price: "₹15,000",
+        price: "₹X,XXX",
         period: "one-time",
         desc: "Perfect for college projects, MVPs, and proof-of-concepts.",
         highlights: ["1–2 week delivery", "1 core feature", "Basic UI/UX", "Code handoff", "30-day support"],
@@ -141,7 +141,7 @@ const deliveryPackages = [
     },
     {
         name: "Professional",
-        price: "₹50,000",
+        price: "₹XX,XXX",
         period: "project",
         desc: "Full-featured product for startups and growing businesses.",
         highlights: ["3–6 week delivery", "Full feature set", "Premium design", "API + database", "CI/CD setup", "90-day support"],
@@ -187,6 +187,7 @@ export default function Services() {
             <SEO
                 title="Our Services & Pricing"
                 description="Explore our software engineering services: AI & Machine Learning, Full-Stack Web Development, Mobile Apps, Cloud architecture, and Analytics."
+                keywords="AI services, machine learning, full-stack development, mobile apps, cloud, devops, data engineering, software studio"
                 path="/services"
             />
             {/* Inject JSON-LD FAQ Schema */}
@@ -208,7 +209,7 @@ export default function Services() {
                         </span>
                     </h1>
                     <p className="text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto">
-                        Six core service areas. One team. Full-cycle engineering from MVP to enterprise — we handle design, development, deployment, and support.
+                        Six core services. One team. From MVP to scale.
                     </p>
                     <div className="mt-8 flex flex-wrap gap-4 justify-center">
                         <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white bg-[#FF7A00] hover:bg-[#e86e00] shadow-[0_4px_20px_rgba(255,122,0,0.35)] hover:scale-105 transition-all duration-300">
@@ -218,58 +219,58 @@ export default function Services() {
                 </div>
             </section>
 
-            {/* ─── Service Cards ─── */}
+            {/* --- Services --- */}
             <section className="pb-20 px-6">
-                <div className="max-w-7xl mx-auto space-y-8">
-                    {categories.map((s, i) => (
-                        <div key={s.title}
-                            className={`group flex flex-col ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-0 rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)] transition-all duration-300`}>
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-10">
+                        <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">What We Build</p>
+                        <h2 className="text-4xl md:text-5xl font-extrabold text-[#0A0F2C]">
+                            Core services
+                        </h2>
+                    </div>
 
-                            {/* Color panel */}
-                            <div className={`lg:w-72 flex-shrink-0 bg-gradient-to-br ${s.color} p-8 flex flex-col justify-between`}>
-                                <div>
-                                    {s.badge && (
-                                        <span className="inline-block text-[10px] font-bold uppercase tracking-wide bg-white/20 text-white px-2.5 py-1 rounded-full mb-5">
-                                            {s.badge}
-                                        </span>
-                                    )}
-                                    <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center mb-4">
-                                        <s.icon className="w-6 h-6 text-white" />
+                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {categories.map((s) => (
+                            <div
+                                key={s.title}
+                                className="group bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                            >
+                                <div className={`h-1.5 bg-gradient-to-r ${s.color}`} />
+                                <div className="p-7">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <div className={`w-12 h-12 rounded-2xl ${s.lightBg} ${s.lightBorder} border flex items-center justify-center`}>
+                                            <s.icon className={`w-5 h-5 ${s.lightText}`} />
+                                        </div>
+                                        <div>
+                                            <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Service</p>
+                                            <h3 className="text-lg font-extrabold text-[#0A0F2C]">{s.title}</h3>
+                                        </div>
                                     </div>
-                                    <h3 className="text-xl font-extrabold text-white mb-2">{s.title}</h3>
-                                    <p className="text-white/70 text-sm font-medium">{s.tagline}</p>
-                                </div>
-                                <div className="flex flex-wrap gap-2 mt-6">
-                                    {s.tools.map((t) => (
-                                        <span key={t} className="text-[10px] font-semibold text-white/90 bg-white/15 rounded-lg px-2.5 py-1">{t}</span>
-                                    ))}
-                                </div>
-                            </div>
 
-                            {/* Content panel */}
-                            <div className="flex-1 bg-white p-8 flex flex-col justify-between">
-                                <div>
-                                    <p className="text-gray-500 text-base leading-relaxed mb-6">{s.desc}</p>
-                                    <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
-                                        {s.features.map((f) => (
-                                            <div key={f} className="flex items-start gap-2.5">
-                                                <CheckCircle2 className="w-4 h-4 text-[#FF7A00] flex-shrink-0 mt-0.5" />
-                                                <span className="text-sm text-gray-600">{f}</span>
+                                    <p className="text-sm text-gray-500 leading-relaxed mb-4">{s.tagline}</p>
+
+                                    <div className="space-y-2">
+                                        {s.features.slice(0, 2).map((f) => (
+                                            <div key={f} className="flex items-start gap-2 text-sm text-gray-600">
+                                                <CheckCircle2 className="w-4 h-4 text-[#FF7A00] mt-0.5 flex-shrink-0" />
+                                                <span>{f}</span>
                                             </div>
                                         ))}
                                     </div>
-                                </div>
-                                <div className="mt-7 pt-6 border-t border-gray-100">
-                                    <Link to="/contact"
-                                        className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF7A00] hover:text-[#e86e00] group-hover:gap-3 transition-all duration-200">
-                                        Get a quote for this service <ChevronRight className="w-4 h-4" />
-                                    </Link>
+
+                                    <div className="mt-5 pt-4 border-t border-gray-100">
+                                        <Link to="/contact"
+                                            className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF7A00] hover:text-[#e86e00] group-hover:gap-3 transition-all duration-200">
+                                            Get a quote <ArrowRight className="w-4 h-4" />
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </section>
+
 
             {/* ─── Pricing ─── */}
             <section className="py-24 px-6 bg-[#FAFAFA] border-t border-gray-100">
@@ -322,7 +323,7 @@ export default function Services() {
             {/* ─── FAQ ─── */}
             <section className="py-24 px-6 bg-white">
                 <div className="max-w-3xl mx-auto">
-                    <div className="text-center mb-12">
+                    <div className="text-center mb-10">
                         <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">FAQ</p>
                         <h2 className="text-4xl font-extrabold text-[#0A0F2C]">Common questions</h2>
                     </div>

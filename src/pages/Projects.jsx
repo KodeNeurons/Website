@@ -49,6 +49,7 @@ export default function Projects() {
       <SEO
         title="Our Projects & Live Demos"
         description="Watch live demos and walkthroughs of the software products, AI agents, and systems we've built at KodeNeurons."
+        keywords="projects, live demos, software portfolio, AI demos, web apps, mobile apps"
         path="/projects"
       />
 
