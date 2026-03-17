@@ -3,6 +3,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import About from './pages/About';
@@ -16,6 +17,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
+        <ScrollToTop />
         <div className="App min-h-screen flex flex-col bg-white">
           <Navbar />
           <main className="flex-grow">

@@ -183,6 +183,7 @@ export default function Home() {
         title="AI & Software Studio"
         description="KodeNeurons leverages cutting-edge artificial intelligence and modern web technologies to engineer scalable, high-performance software for startups and enterprises."
         path="/"
+        googleVerification="vB906MQSu9v1Njir3KinXr_gLTywWY_RYy8vHLVvs1c"
       />
 
       {/* ═══════════════════════════════════
