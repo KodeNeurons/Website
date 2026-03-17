@@ -131,28 +131,6 @@ const typedLines = [
   "Data Engineering & Analytics",
 ];
 
-/* ─── Testimonial ─── */
-const testimonials = [
-  {
-    text: "KodeNeurons turned our complex AI idea into a production-ready product in weeks. Exceptional engineering.",
-    name: "Startup Founder",
-    role: "EdTech Company",
-    initials: "SF",
-  },
-  {
-    text: "From prototype to deployment, the team was transparent, fast, and technically brilliant. Highly recommended.",
-    name: "Product Manager",
-    role: "B2B SaaS",
-    initials: "PM",
-  },
-  {
-    text: "They delivered our Android app on time with outstanding UX. Best engineering team we've worked with.",
-    name: "Tech Director",
-    role: "Healthcare Startup",
-    initials: "TD",
-  },
-];
-
 /* ─── Component ─── */
 export default function Home() {
   const typedRef = useRef(null);
@@ -160,7 +138,6 @@ export default function Home() {
   const [servicesRef, servicesVisible] = useScrollReveal(0.1);
   const [aiRef, aiVisible] = useScrollReveal(0.2);
   const [processRef, processVisible] = useScrollReveal(0.1);
-  const [testimonialsRef, testimonialsVisible] = useScrollReveal(0.1);
   const [ctaRef, ctaVisible] = useScrollReveal(0.2);
   const count50 = useCounter(50, statsVisible);
   const count3 = useCounter(3, statsVisible);
