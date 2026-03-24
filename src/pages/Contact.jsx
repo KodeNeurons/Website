@@ -3,11 +3,12 @@ import toast, { Toaster } from "react-hot-toast";
 import { SendHorizonal, Linkedin, Mail, MessageSquare, MapPin, Clock } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import SEO from "../components/SEO";
+import { buildBreadcrumbSchema, buildUrl, siteMetadata } from "../lib/siteMetadata";
 
 const contactInfo = [
   { icon: Mail, label: "Email", value: "contact@kodeneurons.in", link: "mailto:contact@kodeneurons.in" },
   { icon: FaWhatsapp, label: "WhatsApp", value: "+91 7499-601-744", link: "https://wa.me/7499601744" },
-  { icon: Linkedin, label: "LinkedIn", value: "KodeNeurons", link: "https://www.linkedin.com/company/kodeneurons-3/" },
+  { icon: Linkedin, label: "LinkedIn", value: "Kodeneurons", link: "https://www.linkedin.com/company/kodeneurons-3/" },
   { icon: Clock, label: "Response Time", value: "Within 24 hours", link: null },
   { icon: MapPin, label: "Location", value: "India - Remote-first team", link: null },
 ];
@@ -39,10 +40,30 @@ export default function Contact() {
   return (
     <div className="bg-white text-[#0A0F2C] min-h-screen">
       <SEO
-        title="Contact Us"
-        description="Get in touch with KodeNeurons to discuss your next software or AI project. We guarantee a 24-hour response."
+        title="Contact Kodeneurons"
+        description="Contact Kodeneurons for AI development, software development, web apps, and mobile app projects. We reply within 24 hours."
         keywords="contact, hire developers, software studio, AI development, web development, mobile apps"
         path="/contact"
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            name: "Contact Kodeneurons",
+            url: buildUrl("/contact"),
+            description:
+              "Contact page for project inquiries, software consulting, and AI product development.",
+            mainEntity: {
+              "@type": "Organization",
+              name: siteMetadata.name,
+              email: siteMetadata.email,
+              telephone: siteMetadata.phone,
+            },
+          },
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+        ]}
       />
       <Toaster position="top-center" />
 

@@ -32,8 +32,8 @@ export default function Footer() {
           {/* Brand — wider column */}
           <div className="md:col-span-5">
             <Link to="/" className="flex items-center gap-2.5 mb-5">
-              <img src={knLogo} alt="KodeNeurons" loading="lazy" className="h-10 w-14 object-contain" />
-              <span className="text-xl font-extrabold text-white">Kode<span className="text-[#FF7A00]">Neurons</span></span>
+              <img src={knLogo} alt="Kodeneurons" loading="lazy" className="h-10 w-14 object-contain" />
+              <span className="text-xl font-extrabold text-white">Kode<span className="text-[#FF7A00]">neurons</span></span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
               A next-generation AI software studio — engineering intelligent web, mobile, and AI products for startups and enterprises worldwide.
@@ -83,8 +83,8 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/8 pt-8 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-500">
-          <p>© {new Date().getFullYear()} <span className="text-[#FF7A00] font-semibold">KodeNeurons</span>. All rights reserved.</p>
-          <p>Built with ❤️ by the KodeNeurons team · India 🇮🇳</p>
+          <p>© {new Date().getFullYear()} <span className="text-[#FF7A00] font-semibold">Kodeneurons</span>. All rights reserved.</p>
+          <p>Built with ❤️ by the Kodeneurons team · India 🇮🇳</p>
         </div>
       </div>
     </footer>

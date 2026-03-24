@@ -1,38 +1,89 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import {
+    buildOrganizationSchema,
+    buildUrl,
+    buildWebsiteSchema,
+    siteMetadata,
+} from '../lib/siteMetadata';
 
-export default function SEO({ title, description, keywords, type = 'website', path = '', googleVerification }) {
-    const siteUrl = 'https://kodeneurons.in'; // Update if domain changes
-    const siteName = 'KodeNeurons';
-    const fullUrl = `${siteUrl}${path}`;
-    const metaDescription = description || 'KodeNeurons - A next-generation AI software studio building intelligent web, mobile, and AI products for startups and enterprises worldwide.';
+export default function SEO({
+    title,
+    description,
+    keywords,
+    type = 'website',
+    path = '/',
+    image,
+    imageAlt,
+    robots = 'index,follow',
+    googleVerification,
+    schema = [],
+}) {
+    const fullUrl = buildUrl(path);
+    const titleHasBrand = title
+        ? /(kodeneurons|codeneurons|kode\s*neurons|code\s*neurons)/i.test(title)
+        : false;
+    const resolvedTitle = title
+        ? titleHasBrand
+            ? title
+            : `${title} | ${siteMetadata.name}`
+        : `${siteMetadata.name} | ${siteMetadata.defaultTitle}`;
+    const metaDescription = description || siteMetadata.defaultDescription;
+    const metaKeywords = keywords || siteMetadata.defaultKeywords;
+    const metaImage = image || siteMetadata.defaultImage;
+    const pageSchema = {
+        '@context': 'https://schema.org',
+        '@type': path === '/' ? 'WebPage' : 'WebPage',
+        name: resolvedTitle,
+        url: fullUrl,
+        description: metaDescription,
+        inLanguage: siteMetadata.language,
+        isPartOf: {
+            '@type': 'WebSite',
+            name: siteMetadata.name,
+            url: siteMetadata.siteUrl,
+        },
+    };
+    const schemas = [
+        buildOrganizationSchema(),
+        buildWebsiteSchema(),
+        pageSchema,
+        ...(Array.isArray(schema) ? schema : [schema]).filter(Boolean),
+    ];
 
     return (
         <Helmet>
-            {/* Standard metadata tags */}
-            <title>{title ? `${title} | ${siteName}` : `${siteName} | AI & Software Studio`}</title>
+            <title>{resolvedTitle}</title>
             <meta name="description" content={metaDescription} />
             {googleVerification ? <meta name="google-site-verification" content={googleVerification} /> : null}
-            <meta name="keywords" content={keywords || 'AI development, software studio, web development, React, India, app development, AI agents'} />
-            <meta name="robots" content="index,follow" />
-            <meta name="author" content={siteName} />
+            <meta name="keywords" content={metaKeywords} />
+            <meta name="robots" content={robots} />
+            <meta name="author" content={siteMetadata.name} />
             <link rel="canonical" href={fullUrl} />
 
-            {/* Open Graph / Facebook */}
             <meta property="og:type" content={type} />
             <meta property="og:url" content={fullUrl} />
-            <meta property="og:title" content={title ? `${title} | ${siteName}` : `${siteName} | AI & Software Studio`} />
+            <meta property="og:title" content={resolvedTitle} />
             <meta property="og:description" content={metaDescription} />
-            <meta property="og:site_name" content={siteName} />
-            <meta property="og:locale" content="en_IN" />
-            <meta property="og:image" content={`${siteUrl}/og-image.jpg`} />
+            <meta property="og:site_name" content={siteMetadata.name} />
+            <meta property="og:locale" content={siteMetadata.locale} />
+            <meta property="og:image" content={metaImage} />
+            <meta property="og:image:alt" content={imageAlt || resolvedTitle} />
 
-            {/* Twitter */}
             <meta property="twitter:card" content="summary_large_image" />
             <meta property="twitter:url" content={fullUrl} />
-            <meta property="twitter:title" content={title ? `${title} | ${siteName}` : `${siteName} | AI & Software Studio`} />
+            <meta property="twitter:title" content={resolvedTitle} />
             <meta property="twitter:description" content={metaDescription} />
-            <meta property="twitter:image" content={`${siteUrl}/og-image.jpg`} />
+            <meta property="twitter:image" content={metaImage} />
+
+            {schemas.map((entry, index) => (
+                <script
+                    key={`${entry['@type'] || 'schema'}-${index}`}
+                    type="application/ld+json"
+                >
+                    {JSON.stringify(entry)}
+                </script>
+            ))}
         </Helmet>
     );
 }

@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import { buildBreadcrumbSchema, buildUrl } from "../lib/siteMetadata";
 
 const categories = [
     {
@@ -185,13 +186,30 @@ export default function Services() {
     return (
         <div className="bg-white text-[#0A0F2C]">
             <SEO
-                title="Our Services & Pricing"
-                description="Explore our software engineering services: AI & Machine Learning, Full-Stack Web Development, Mobile Apps, Cloud architecture, and Analytics."
+                title="AI, Web, and Mobile Development Services"
+                description="Explore Kodeneurons services across AI development, web development, mobile apps, cloud engineering, analytics, and automation."
                 keywords="AI services, machine learning, full-stack development, mobile apps, cloud, devops, data engineering, software studio"
                 path="/services"
+                schema={[
+                    faqSchema,
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "ItemList",
+                        name: "Kodeneurons Services",
+                        itemListElement: categories.map((category, index) => ({
+                            "@type": "ListItem",
+                            position: index + 1,
+                            name: category.title,
+                            description: category.desc,
+                            url: buildUrl("/services"),
+                        })),
+                    },
+                    buildBreadcrumbSchema([
+                        { name: "Home", path: "/" },
+                        { name: "Services", path: "/services" },
+                    ]),
+                ]}
             />
-            {/* Inject JSON-LD FAQ Schema */}
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
             {/* ─── Hero ─── */}
             <section className="relative pt-32 pb-20 px-6 overflow-hidden">

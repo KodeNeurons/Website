@@ -8,6 +8,7 @@ export default function NotFound() {
         title="Page Not Found"
         description="The page you are looking for does not exist."
         path="/404"
+        robots="noindex,follow"
       />
       <section className="relative pt-32 pb-24 px-6 overflow-hidden">
         <div

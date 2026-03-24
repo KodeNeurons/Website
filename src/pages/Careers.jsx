@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import { buildBreadcrumbSchema, buildUrl } from "../lib/siteMetadata";
 
 const openRoles = [
     {
@@ -61,9 +62,22 @@ export default function Careers() {
     return (
         <div className="bg-white text-[#0A0F2C] min-h-screen">
             <SEO
-                title="Careers & Open Roles"
-                description="Join KodeNeurons and build the future of AI. We are a remote-first team looking for ambitious engineers and designers."
+                title="Careers and Open Roles"
+                description="Explore careers at Kodeneurons and apply for remote roles across AI, full-stack development, Android, and UI/UX."
                 path="/careers"
+                schema={[
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "CollectionPage",
+                        name: "Kodeneurons Careers",
+                        url: buildUrl("/careers"),
+                        description: "Hiring page for engineering and design roles at Kodeneurons.",
+                    },
+                    buildBreadcrumbSchema([
+                        { name: "Home", path: "/" },
+                        { name: "Careers", path: "/careers" },
+                    ]),
+                ]}
             />
 
             {/* ─── Hero ─── */}

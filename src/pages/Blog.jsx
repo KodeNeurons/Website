@@ -87,7 +87,7 @@ export default function Blog() {
         <div className="bg-white text-[#0A0F2C] min-h-screen">
             <SEO
                 title="Engineering Blog & AI Insights"
-                description="Engineering deep dives, AI insights, product thinking, and lessons from building real-world software by the KodeNeurons team."
+                description="Engineering deep dives, AI insights, product thinking, and lessons from building real-world software by the Kodeneurons team."
                 path="/blog"
             />
 

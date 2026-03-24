@@ -4,6 +4,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import { buildBreadcrumbSchema, buildUrl } from "../lib/siteMetadata";
 
 /* --- Live Products --- */
 const liveProducts = [
@@ -78,10 +79,24 @@ export default function Products() {
     return (
         <div className="bg-white text-[#0A0F2C] min-h-screen">
             <SEO
-                title="Products and Projects"
-                description="Explore KodeNeurons products and client-built platforms like Shop Near and Edison Cart. Live links, features, and project highlights."
+                title="Products, Platforms, and Case Studies"
+                description="Explore Kodeneurons products and client platforms including Shop Near and Edison Cart with feature highlights and live links."
                 keywords="products, projects, SaaS, e-commerce platform, hyperlocal discovery, Shop Near, Edison Cart, software studio"
                 path="/products"
+                schema={[
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "CollectionPage",
+                        name: "Kodeneurons Products",
+                        url: buildUrl("/products"),
+                        description:
+                            "Collection of product builds and client platforms created by Kodeneurons.",
+                    },
+                    buildBreadcrumbSchema([
+                        { name: "Home", path: "/" },
+                        { name: "Products", path: "/products" },
+                    ]),
+                ]}
             />
 
             {/* --- Hero --- */}

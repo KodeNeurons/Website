@@ -33,9 +33,9 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
-          <img src={knLogo} alt="KodeNeurons" className="h-10 w-14 object-contain" />
+          <img src={knLogo} alt="Kodeneurons" className="h-10 w-14 object-contain" />
           <span className="text-[#0A0F2C] text-lg font-extrabold tracking-tight">
-            Kode<span className="text-[#FF7A00]">Neurons</span>
+            Kode<span className="text-[#FF7A00]">neurons</span>
           </span>
         </Link>
 

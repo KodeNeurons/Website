@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Typed from "typed.js";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import { buildBreadcrumbSchema, siteMetadata } from "../lib/siteMetadata";
 import {
   Brain, Globe, Smartphone, ShieldCheck,
   ArrowRight, CheckCircle2, Cpu,
@@ -28,8 +29,14 @@ function useScrollReveal(threshold = 0.15) {
 
 /* ─── Count-up hook ─── */
 function useCounter(target, active, duration = 1400) {
-  const [val, setVal] = useState(0);
+  const isPrerendered =
+    typeof window === "undefined" ||
+    (typeof document !== "undefined" &&
+      document.documentElement.getAttribute("data-prerendered") === "true");
+  const [val, setVal] = useState(isPrerendered ? target : 0);
+
   useEffect(() => {
+    if (isPrerendered) return undefined;
     if (!active) return;
     let cur = 0;
     const step = target / (duration / 16);
@@ -39,7 +46,7 @@ function useCounter(target, active, duration = 1400) {
       else setVal(Math.floor(cur));
     }, 16);
     return () => clearInterval(timer);
-  }, [active, target, duration]);
+  }, [active, duration, isPrerendered, target]);
   return val;
 }
 
@@ -157,10 +164,29 @@ export default function Home() {
   return (
     <div className="bg-white text-[#0A0F2C]">
       <SEO
-        title="AI & Software Studio"
-        description="KodeNeurons leverages cutting-edge artificial intelligence and modern web technologies to engineer scalable, high-performance software for startups and enterprises."
+        title="Kodeneurons - AI Software Development Company in India"
+        description="Kodeneurons is an AI-first software development company building web apps, mobile apps, data systems, and machine learning products for startups and growing businesses."
+        keywords="kodeneurons, codeneurons, kode neurons, code neurons, Kodeneurons AI company, software development company India, AI development company, web development, mobile app development"
         path="/"
-        googleVerification="vB906MQSu9v1Njir3KinXr_gLTywWY_RYy8vHLVvs1c"
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: siteMetadata.name,
+            alternateName: ["kodeneurons", "codeneurons", "KodeNeurons", "CodeNeurons"],
+            url: siteMetadata.siteUrl,
+            image: siteMetadata.defaultImage,
+            description: "AI-first software studio delivering web, mobile, automation, and data engineering services.",
+            areaServed: "India",
+            serviceType: [
+              "AI Development",
+              "Web Development",
+              "Mobile App Development",
+              "Data Engineering",
+            ],
+          },
+          buildBreadcrumbSchema([{ name: "Home", path: "/" }]),
+        ]}
       />
 
       {/* ═══════════════════════════════════
@@ -201,7 +227,7 @@ export default function Home() {
             {/* Eyebrow tag */}
             <div className="hero-animate hero-animate-1 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 border border-orange-200 text-[#FF7A00] text-xs font-semibold tracking-widest uppercase mb-8">
               <Cpu className="w-3.5 h-3.5" />
-              AI-Powered Software Studio
+              Kodeneurons AI Software Studio
             </div>
 
             {/* Headline */}
@@ -229,7 +255,7 @@ export default function Home() {
 
             {/* Sub */}
             <p className="hero-animate hero-animate-3 text-lg md:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto mb-4">
-              KodeNeurons is a next-generation AI software studio. We design and deliver
+              Kodeneurons is a next-generation AI software studio. We design and deliver
               production-grade web, mobile, and AI products — on time, every time.
             </p>
 
@@ -539,7 +565,7 @@ export default function Home() {
                 Ready to launch your<br />next big idea?
               </h2>
               <p className="text-white/80 text-lg max-w-xl mx-auto mb-10">
-                Partner with KodeNeurons — where engineering precision meets innovation.
+                Partner with Kodeneurons — where engineering precision meets innovation.
                 We're ready when you are.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">

@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import { buildBreadcrumbSchema, buildUrl } from "../lib/siteMetadata";
 import afro from "../pages/imageF/aff.png";
 import nachi from "../pages/imageF/my_photo.png";
 import shoy from "../pages/imageF/shoyeb.png";
@@ -163,9 +164,23 @@ export default function About() {
   return (
     <div className="bg-white text-[#0A0F2C]">
       <SEO
-        title="About Us"
-        description="KodeNeurons is an AI startup built by engineers for businesses. Learn about our story, our team, our values, and our mission to democratize software."
+        title="About Kodeneurons"
+        description="Learn about Kodeneurons, our founders, our delivery approach, and how we build AI, web, and mobile products for startups and businesses."
         path="/about"
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            name: "About Kodeneurons",
+            url: buildUrl("/about"),
+            description:
+              "Background, team, values, and delivery philosophy behind Kodeneurons.",
+          },
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ]),
+        ]}
       />
 
       {/* ═══════════════════════════════ HERO ═══════════════════════════════ */}
