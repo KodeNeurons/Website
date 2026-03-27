@@ -63,6 +63,7 @@
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.65s ease, transform 0.65s ease;
+  will-change: transform, opacity;
 }
 .reveal.visible {
   opacity: 1;
@@ -72,6 +73,7 @@
   opacity: 0;
   transform: scale(0.88);
   transition: opacity 0.55s ease, transform 0.55s ease;
+  will-change: transform, opacity;
 }
 .reveal-scale.visible {
   opacity: 1;
@@ -81,6 +83,7 @@
   opacity: 0;
   transform: translateX(-32px);
   transition: opacity 0.65s ease, transform 0.65s ease;
+  will-change: transform, opacity;
 }
 .reveal-left.visible {
   opacity: 1;
@@ -90,10 +93,33 @@
   opacity: 0;
   transform: translateX(32px);
   transition: opacity 0.65s ease, transform 0.65s ease;
+  will-change: transform, opacity;
 }
 .reveal-right.visible {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* ── Stagger children reveal ── */
+.reveal-stagger-child {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+  transition-delay: calc(var(--stagger-index, 0) * 0.1s);
+  will-change: transform, opacity;
+}
+.reveal-stagger-child.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Mobile menu slide-down ── */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-down {
+  animation: slideDown 0.25s ease forwards;
 }
 
 /* ── Hero entrance animations ── */
@@ -172,3 +198,184 @@
 .animate-number-pop {
   animation: numberPop 0.4s ease forwards;
 }
+
+/* ══════════════════════════════════
+   ADVANCED ANIMATIONS
+   ══════════════════════════════════ */
+
+/* ── Morphing blob ── */
+@keyframes morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%      { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  50%      { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  75%      { border-radius: 50% 40% 50% 60% / 35% 45% 65% 40%; }
+}
+.animate-morph {
+  animation: morph 8s ease-in-out infinite;
+  will-change: border-radius;
+}
+
+/* ── Animated dot grid ── */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(255,122,0,0.10) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+@keyframes gridDrift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 28px 28px; }
+}
+.animate-grid-drift {
+  animation: gridDrift 6s linear infinite;
+}
+
+/* ── Floating shapes with 3D rotation ── */
+@keyframes floatRotate {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+  25%  { transform: translateY(-18px) rotate(90deg); opacity: 0.7; }
+  50%  { transform: translateY(-10px) rotate(180deg); opacity: 0.5; }
+  75%  { transform: translateY(-25px) rotate(270deg); opacity: 0.65; }
+  100% { transform: translateY(0) rotate(360deg); opacity: 0.5; }
+}
+
+/* ── Orbit around center ── */
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(var(--orbit-r, 120px)) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(var(--orbit-r, 120px)) rotate(-360deg); }
+}
+
+/* ── Scroll indicator bounce ── */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50%      { transform: translateY(10px); opacity: 0.3; }
+}
+.animate-scroll-bounce {
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+/* ── Card hover shine sweep ── */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.10), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 2;
+}
+.card-shine:hover::after {
+  animation: shineSweep 0.7s ease forwards;
+}
+@keyframes shineSweep {
+  to { left: 175%; }
+}
+
+/* ── Text glow pulse ── */
+@keyframes textGlow {
+  0%, 100% { filter: drop-shadow(0 0 12px rgba(255,122,0,0.25)); }
+  50%      { filter: drop-shadow(0 0 28px rgba(255,122,0,0.55)); }
+}
+.animate-text-glow {
+  animation: textGlow 3s ease-in-out infinite;
+}
+
+/* ── Breathing glow ── */
+@keyframes breathe {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%      { opacity: 0.7; transform: scale(1.12); }
+}
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+/* ── Ripple out ── */
+@keyframes rippleOut {
+  0%   { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+.animate-ripple {
+  animation: rippleOut 2.5s ease-out infinite;
+}
+
+/* ── 3D card perspective hover ── */
+.card-3d {
+  perspective: 800px;
+}
+.card-3d-inner {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+.card-3d:hover .card-3d-inner {
+  transform: rotateX(2deg) rotateY(-3deg) translateZ(8px);
+  box-shadow: 12px 16px 40px rgba(0,0,0,0.08), -4px -4px 20px rgba(255,122,0,0.06);
+}
+
+/* ── Gradient border glow ── */
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(255,122,0,0.12); }
+  50%      { border-color: rgba(255,122,0,0.45); }
+}
+.animate-border-glow {
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+/* ── Scale bounce entrance ── */
+@keyframes scaleBounceIn {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Draw SVG path ── */
+@keyframes drawPath {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ── Aurora gradient background ── */
+@keyframes aurora {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-aurora {
+  background-size: 400% 400%;
+  animation: aurora 12s ease infinite;
+}
+
+/* ── Magnetic hover float ── */
+@keyframes magneticFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-6px) scale(1.03); }
+}
+.hover-magnetic:hover {
+  animation: magneticFloat 0.6s ease;
+}
+
+/* ── Stat glow ── */
+.stat-glow {
+  text-shadow: 0 0 20px rgba(255,122,0,0.4), 0 0 60px rgba(255,122,0,0.15);
+}
+
+/* ── Enhanced hero entrance with blur ── */
+@keyframes heroBlurUp {
+  from { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.hero-blur-animate {
+  opacity: 0;
+  animation: heroBlurUp 0.8s ease forwards;
+}
+.hero-blur-1 { animation-delay: 0.05s; }
+.hero-blur-2 { animation-delay: 0.2s; }
+.hero-blur-3 { animation-delay: 0.35s; }
+.hero-blur-4 { animation-delay: 0.5s; }
+.hero-blur-5 { animation-delay: 0.65s; }
+.hero-blur-6 { animation-delay: 0.8s; }
+.hero-blur-7 { animation-delay: 0.95s; }

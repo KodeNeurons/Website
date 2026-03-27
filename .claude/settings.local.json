@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node:*)",
+      "Bash(npx react-scripts:*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s \"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=PLRYww6O0QMzUKQbjEwrQ7mxhTtBSkUG5d&maxResults=5&key=AIzaSyD8Xw86SihXWJy96iuTcRO8NDk49taNW78\")",
+      "Bash(curl:*)"
+    ]
+  }
+}

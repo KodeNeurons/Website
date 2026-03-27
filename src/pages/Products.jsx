@@ -5,6 +5,7 @@ import {
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import { buildBreadcrumbSchema, buildUrl } from "../lib/siteMetadata";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 /* --- Live Products --- */
 const liveProducts = [
@@ -73,6 +74,9 @@ const liveProducts = [
 ];
 
 export default function Products() {
+    const [productsRef, productsVisible] = useScrollReveal(0.05);
+    const [projectsRef, projectsVisible] = useScrollReveal(0.05);
+    const [ctaRef, ctaVisible] = useScrollReveal(0.2);
     const products = liveProducts.filter((p) => p.kind === "product");
     const projects = liveProducts.filter((p) => p.kind === "project");
 
@@ -101,22 +105,27 @@ export default function Products() {
 
             {/* --- Hero --- */}
             <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-                <div className="absolute -top-24 right-0 w-[600px] h-[600px] rounded-full pointer-events-none"
-                    style={{ background: "radial-gradient(circle, rgba(255,122,0,0.07), transparent 65%)" }} />
+                {/* Dot grid background */}
+                <div className="absolute inset-0 dot-grid animate-grid-drift opacity-40 pointer-events-none" />
+                {/* Morphing blobs */}
+                <div className="absolute -top-24 right-0 w-[600px] h-[600px] animate-morph pointer-events-none"
+                    style={{ background: "radial-gradient(circle, rgba(255,122,0,0.09), transparent 60%)" }} />
+                <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] animate-morph pointer-events-none"
+                    style={{ background: "radial-gradient(circle, rgba(16,185,129,0.06), transparent 55%)", animationDelay: "4s" }} />
 
-                <div className="max-w-4xl mx-auto text-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 border border-orange-200 text-[#FF7A00] text-xs font-semibold tracking-widest uppercase mb-6">
+                <div className="max-w-4xl mx-auto text-center relative z-10">
+                    <div className="hero-blur-animate hero-blur-1 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50/80 backdrop-blur-sm border border-orange-200 text-[#FF7A00] text-xs font-semibold tracking-widest uppercase mb-6">
                         <Package className="w-3.5 h-3.5" />
                         Products + Projects
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6">
+                    <h1 className="hero-blur-animate hero-blur-2 text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6">
                         Products and Projects built{" "}
-                        <span style={{ backgroundImage: "linear-gradient(135deg,#FF7A00,#FF9E3D)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+                        <span className="animate-text-glow" style={{ backgroundImage: "linear-gradient(135deg,#FF7A00,#FF9E3D)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                             by us
                         </span>
                         <br />for businesses and communities
                     </h1>
-                    <p className="text-lg md:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto">
+                    <p className="hero-blur-animate hero-blur-3 text-lg md:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto">
                         We build our own SaaS products and also deliver custom, production-grade solutions for clients - from MVP to launch and long-term support.
                     </p>
                 </div>
@@ -136,12 +145,13 @@ export default function Products() {
                         </p>
                     </div>
 
-                    <div className="space-y-10">
+                    <div className="space-y-10" ref={productsRef}>
                         {products.map((product, i) => (
                             <div key={product.id}
-                                className="group relative bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-[0_16px_60px_rgba(0,0,0,0.08)] hover:border-emerald-200/60 transition-all duration-400 overflow-hidden">
+                                className={`reveal${productsVisible ? " visible" : ""} card-shine group relative bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-[0_20px_70px_rgba(0,0,0,0.10)] hover:border-emerald-200/60 hover:-translate-y-1 transition-all duration-400 overflow-hidden`}
+                                style={{ transitionDelay: `${i * 0.15}s` }}>
 
-                                <div className={`h-1.5 bg-gradient-to-r ${product.gradient}`} />
+                                <div className={`h-1.5 bg-gradient-to-r ${product.gradient} animate-gradient-shimmer`} style={{ backgroundSize: "200% auto" }} />
 
                                 <div className={`flex flex-col ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-0`}>
                                     <div className={`lg:w-[380px] flex-shrink-0 bg-gradient-to-br ${product.gradient} p-10 flex flex-col justify-between min-h-[300px]`}>
@@ -180,13 +190,15 @@ export default function Products() {
                                             <span className={`inline-block text-xs font-bold uppercase tracking-widest ${product.accentColor} ${product.lightBg} border ${product.borderColor} px-3 py-1 rounded-full mb-5`}>
                                                 {product.category}
                                             </span>
-                                            <p className="text-gray-500 text-base leading-relaxed mb-7">{product.desc}</p>
+                                            <p className="text-gray-500 text-base leading-relaxed mb-4">{product.desc}</p>
+                                            <div className="space-y-2 mb-3">
                                             {product.features.map((f) => (
                                                 <div key={f} className="flex items-start gap-2.5">
                                                     <CheckCircle2 className={`w-4 h-4 flex-shrink-0 mt-0.5 ${product.accentColor}`} />
                                                     <span className="text-sm text-gray-600">{f}</span>
                                                 </div>
                                             ))}
+                                            </div>
                                         </div>
 
                                         <div className="mt-8 pt-6 border-t border-gray-100 flex flex-wrap items-center gap-4">
@@ -220,12 +232,13 @@ export default function Products() {
                         </p>
                     </div>
 
-                    <div className="space-y-10">
+                    <div className="space-y-10" ref={projectsRef}>
                         {projects.map((product, i) => (
                             <div key={product.id}
-                                className="group relative bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-[0_16px_60px_rgba(0,0,0,0.08)] hover:border-orange-200/60 transition-all duration-400 overflow-hidden">
+                                className={`reveal${projectsVisible ? " visible" : ""} card-shine group relative bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-[0_20px_70px_rgba(0,0,0,0.10)] hover:border-orange-200/60 hover:-translate-y-1 transition-all duration-400 overflow-hidden`}
+                                style={{ transitionDelay: `${i * 0.15}s` }}>
 
-                                <div className={`h-1.5 bg-gradient-to-r ${product.gradient}`} />
+                                <div className={`h-1.5 bg-gradient-to-r ${product.gradient} animate-gradient-shimmer`} style={{ backgroundSize: "200% auto" }} />
 
                                 <div className={`flex flex-col ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-0`}>
                                     <div className={`lg:w-[380px] flex-shrink-0 bg-gradient-to-br ${product.gradient} p-10 flex flex-col justify-between min-h-[300px]`}>
@@ -265,15 +278,17 @@ export default function Products() {
                                                 {product.category}
                                             </span>
                                             <p className="text-gray-500 text-base leading-relaxed mb-3">{product.desc}</p>
-                                            <p className="text-sm text-gray-400 mb-7">
+                                            <p className="text-sm text-gray-400 mb-4">
                                                 Client project with ongoing development and maintenance support.
                                             </p>
+                                            <div className="space-y-2 mb-3">
                                             {product.features.map((f) => (
                                                 <div key={f} className="flex items-start gap-2.5">
                                                     <CheckCircle2 className={`w-4 h-4 flex-shrink-0 mt-0.5 ${product.accentColor}`} />
                                                     <span className="text-sm text-gray-600">{f}</span>
                                                 </div>
                                             ))}
+                                            </div>
                                         </div>
 
                                         <div className="mt-8 pt-6 border-t border-gray-100 flex flex-wrap items-center gap-4">
@@ -299,16 +314,20 @@ export default function Products() {
             </section>
 
             {/* --- CTA --- */}
-            <section className="py-20 px-6">
-                <div className="max-w-4xl mx-auto rounded-3xl overflow-hidden relative text-white text-center px-8 py-16"
-                    style={{ background: "linear-gradient(135deg, #FF7A00, #FF9E3D)" }}>
-                    <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/10" />
-                    <div className="absolute -bottom-14 -left-14 w-56 h-56 rounded-full bg-white/10" />
+            <section className="py-20 px-6" ref={ctaRef}>
+                <div className={`reveal${ctaVisible ? " visible" : ""} max-w-4xl mx-auto rounded-3xl overflow-hidden relative text-white text-center px-8 py-16 animate-aurora`}
+                    style={{ background: "linear-gradient(135deg, #FF7A00 0%, #FF9E3D 25%, #FF7A00 50%, #e86e00 75%, #FF9E3D 100%)" }}>
+                    <div className="absolute -top-10 -right-10 w-48 h-48 bg-white/10 animate-morph" />
+                    <div className="absolute -bottom-14 -left-14 w-56 h-56 bg-white/10 animate-morph" style={{ animationDelay: "3s" }} />
+                    {/* Spinning ring */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                        <div className="w-[400px] h-[400px] rounded-full border border-white/8 animate-spin-slow" />
+                    </div>
                     <div className="relative z-10">
                         <h2 className="text-4xl font-extrabold mb-4">Need a custom product built?</h2>
-                        <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">We build custom products too. Tell us what you need.</p>
+                        <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">We build custom products too. Tell us what you need and we'll turn it into reality.</p>
                         <Link to="/contact"
-                            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-[#FF7A00] bg-white hover:bg-orange-50 shadow-lg hover:scale-105 transition-all duration-300">
+                            className="animate-pulse-ring inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-[#FF7A00] bg-white hover:bg-orange-50 shadow-lg hover:scale-105 transition-all duration-300">
                             Build Your Product <ArrowRight className="w-4 h-4" />
                         </Link>
                     </div>

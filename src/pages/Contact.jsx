@@ -4,6 +4,7 @@ import { SendHorizonal, Linkedin, Mail, MessageSquare, MapPin, Clock } from "luc
 import { FaWhatsapp } from "react-icons/fa";
 import SEO from "../components/SEO";
 import { buildBreadcrumbSchema, buildUrl, siteMetadata } from "../lib/siteMetadata";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const contactInfo = [
   { icon: Mail, label: "Email", value: "contact@kodeneurons.in", link: "mailto:contact@kodeneurons.in" },
@@ -14,6 +15,7 @@ const contactInfo = [
 ];
 
 export default function Contact() {
+  const [formRef, formVisible] = useScrollReveal(0.05);
   const [sending, setSending] = useState(false);
 
   const onSubmit = async (e) => {
@@ -41,7 +43,7 @@ export default function Contact() {
     <div className="bg-white text-[#0A0F2C] min-h-screen">
       <SEO
         title="Contact Kodeneurons"
-        description="Contact Kodeneurons for AI development, software development, web apps, and mobile app projects. We reply within 24 hours."
+        description="Start your next software project with Kodeneurons. Share your requirements and get a detailed response within 24 hours. AI, web, mobile, and data engineering."
         keywords="contact, hire developers, software studio, AI development, web development, mobile apps"
         path="/contact"
         schema={[
@@ -68,7 +70,7 @@ export default function Contact() {
       <Toaster position="top-center" />
 
       {/* --- Hero --- */}
-      <section className="relative pt-28 pb-12 px-6 overflow-hidden">
+      <section className="relative pt-28 pb-6 px-6 overflow-hidden">
         <div
           className="absolute -top-24 left-1/4 w-[520px] h-[520px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle, rgba(255,122,0,0.08), transparent 65%)" }}
@@ -89,7 +91,7 @@ export default function Contact() {
             </span>
           </h1>
           <p className="text-lg text-gray-500 leading-relaxed">
-            Share your idea. We reply within 24 hours.
+            Tell us about your project. We respond within 24 hours with a clear plan of action.
           </p>
         </div>
       </section>
@@ -97,9 +99,9 @@ export default function Contact() {
 
 
       {/* --- Main Content --- */}
-      <section className="pb-20 px-6 bg-[#FAFAFA]">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
-          <div className="bg-white rounded-3xl border border-gray-100 shadow-[0_20px_60px_rgba(0,0,0,0.08)] p-8 md:p-10">
+      <section className="pt-10 pb-20 px-6 bg-[#FAFAFA]">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start" ref={formRef}>
+          <div className={`reveal-left${formVisible ? " visible" : ""} bg-white rounded-3xl border border-gray-100 shadow-[0_20px_60px_rgba(0,0,0,0.08)] p-8 md:p-10`}>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-11 h-11 rounded-2xl bg-orange-50 border border-orange-200 flex items-center justify-center">
                 <SendHorizonal className="w-4 h-4 text-[#FF7A00]" />
@@ -129,8 +131,8 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#0A0F2C] mb-2 uppercase tracking-wide">College / Company</label>
-                <input type="text" name="institution" required placeholder="Company or college" autoComplete="organization" className={inp} />
+                <label className="block text-xs font-bold text-[#0A0F2C] mb-2 uppercase tracking-wide">Organization</label>
+                <input type="text" name="institution" required placeholder="Your company or institution" autoComplete="organization" className={inp} />
               </div>
 
               <div>
@@ -154,7 +156,7 @@ export default function Contact() {
             </form>
           </div>
 
-          <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
+          <div className={`reveal-right${formVisible ? " visible" : ""} bg-white rounded-3xl border border-gray-100 shadow-sm p-6`} style={{ transitionDelay: "0.2s" }}>
             <h3 className="text-lg font-extrabold text-[#0A0F2C] mb-2">Contact Directly</h3>
             <p className="text-gray-500 text-sm mb-5">Email, WhatsApp, or LinkedIn.</p>
 

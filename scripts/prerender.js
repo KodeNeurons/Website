@@ -16,6 +16,7 @@ const routes = [
   { path: "/products", filePath: path.join(buildDir, "products", "index.html") },
   { path: "/careers", filePath: path.join(buildDir, "careers", "index.html") },
   { path: "/contact", filePath: path.join(buildDir, "contact", "index.html") },
+  { path: "/blog", filePath: path.join(buildDir, "blog", "index.html") },
   { path: "/404", filePath: path.join(buildDir, "404.html") },
 ];
 

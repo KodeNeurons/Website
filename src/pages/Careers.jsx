@@ -1,46 +1,13 @@
 import {
-    Rocket, Brain, Globe, Code2, Heart,
-    ArrowRight, CheckCircle2, Users, Star,
-    Coffee, Lightbulb, MessageSquare,
+    Rocket, Brain, ArrowRight, CheckCircle2, Users, Star,
+    Coffee, Lightbulb, MessageSquare, Clock,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import { buildBreadcrumbSchema, buildUrl } from "../lib/siteMetadata";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
-const openRoles = [
-    {
-        title: "AI / ML Engineer (Intern or Full-time)",
-        type: "Remote · Flexible",
-        dept: "Engineering",
-        icon: Brain,
-        skills: ["Python", "TensorFlow / PyTorch", "Data pipelines", "FastAPI"],
-        desc: "Work on real-world AI products — model training, inference APIs, and deployment. Perfect for final-year students with a strong ML foundation.",
-    },
-    {
-        title: "Full-Stack Developer",
-        type: "Remote · Part-time or Full-time",
-        dept: "Engineering",
-        icon: Code2,
-        skills: ["React / Next.js", "Node.js or Django", "REST APIs", "PostgreSQL"],
-        desc: "Build web products from frontend to backend. You'll work directly with founders on real client projects with fast iteration cycles.",
-    },
-    {
-        title: "Android Developer",
-        type: "Remote · Flexible",
-        dept: "Mobile",
-        icon: Globe,
-        skills: ["Kotlin", "Jetpack Compose", "Firebase", "REST APIs"],
-        desc: "Design and build polished Android apps. Ideal for developers who care about UX details and want to ship real apps to real users.",
-    },
-    {
-        title: "UI/UX Designer",
-        type: "Remote · Part-time",
-        dept: "Design",
-        icon: Heart,
-        skills: ["Figma", "Prototyping", "Design Systems", "User Research"],
-        desc: "Create stunning interfaces for AI and web products. You'll shape how thousands of users experience our clients' products.",
-    },
-];
+/* No open roles currently */
 
 const perks = [
     { icon: Rocket, title: "Ship Real Products", desc: "Work on live client projects — not internal tools. Your work goes into production from week one." },
@@ -59,6 +26,10 @@ const values = [
 ];
 
 export default function Careers() {
+    const [statsRef, statsVisible] = useScrollReveal(0.1);
+    const [perksRef, perksVisible] = useScrollReveal(0.05);
+    const [rolesRef, rolesVisible] = useScrollReveal(0.05);
+    const [valuesRef, valuesVisible] = useScrollReveal(0.1);
     return (
         <div className="bg-white text-[#0A0F2C] min-h-screen">
             <SEO
@@ -98,28 +69,28 @@ export default function Careers() {
                     </h1>
                     <p className="text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto">
                         KodeNeurons is a small, ambitious team building AI-first software for startups and enterprises.
-                        We're always looking for curious, hardworking builders who want their work to matter.
+                        We're not hiring right now, but we're always open to hearing from exceptional talent.
                     </p>
 
                     <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                        <a href="#roles"
+                        <Link to="/contact"
                             className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white bg-[#FF7A00] hover:bg-[#e86e00] shadow-[0_4px_20px_rgba(255,122,0,0.35)] hover:scale-105 transition-all duration-300">
-                            See Open Roles <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                        </a>
+                            Send Your Portfolio <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                        </Link>
                     </div>
                 </div>
             </section>
 
             {/* ─── Stats ─── */}
-            <section className="py-14 px-6 bg-[#0A0F2C]">
+            <section className="py-14 px-6 bg-[#0A0F2C]" ref={statsRef}>
                 <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                     {[
                         { val: "3", label: "Founding Members" },
                         { val: "50+", label: "Projects Shipped" },
                         { val: "∞", label: "Ideas in the Backlog" },
                         { val: "100%", label: "Remote Team" },
-                    ].map(({ val, label }) => (
-                        <div key={label}>
+                    ].map(({ val, label }, i) => (
+                        <div key={label} className={`reveal-scale${statsVisible ? " visible" : ""}`} style={{ transitionDelay: `${i * 0.12}s` }}>
                             <p className="text-4xl font-extrabold" style={{ backgroundImage: "linear-gradient(135deg,#FF7A00,#FF9E3D)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{val}</p>
                             <p className="text-gray-400 text-sm mt-1.5">{label}</p>
                         </div>
@@ -134,9 +105,9 @@ export default function Careers() {
                         <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">Why Join Us</p>
                         <h2 className="text-4xl font-extrabold text-[#0A0F2C]">Work that actually matters</h2>
                     </div>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {perks.map(({ icon: Icon, title, desc }) => (
-                            <div key={title} className="group bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-[0_8px_30px_rgba(255,122,0,0.08)] hover:border-[#FF7A00]/20 hover:-translate-y-1 transition-all duration-300">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" ref={perksRef}>
+                        {perks.map(({ icon: Icon, title, desc }, i) => (
+                            <div key={title} className={`reveal-stagger-child${perksVisible ? " visible" : ""} group bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-[0_8px_30px_rgba(255,122,0,0.08)] hover:border-[#FF7A00]/20 hover:-translate-y-1 transition-all duration-300`} style={{ "--stagger-index": i }}>
                                 <div className="mb-4 w-11 h-11 rounded-xl bg-orange-50 group-hover:bg-[#FF7A00] flex items-center justify-center transition-colors duration-300">
                                     <Icon className="w-5 h-5 text-[#FF7A00] group-hover:text-white transition-colors duration-300" />
                                 </div>
@@ -148,46 +119,22 @@ export default function Careers() {
                 </div>
             </section>
 
-            {/* ─── Open Roles ─── */}
+            {/* ─── No Open Roles ─── */}
             <section id="roles" className="py-24 px-6 bg-[#FAFAFA] border-t border-gray-100">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-14">
+                <div className="max-w-3xl mx-auto text-center" ref={rolesRef}>
+                    <div className={`reveal${rolesVisible ? " visible" : ""}`}>
+                        <div className="w-16 h-16 rounded-2xl bg-orange-50 border-2 border-orange-100 flex items-center justify-center mx-auto mb-6">
+                            <Clock className="w-7 h-7 text-[#FF7A00]" />
+                        </div>
                         <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">Open Roles</p>
-                        <h2 className="text-4xl font-extrabold text-[#0A0F2C]">We're hiring</h2>
-                        <p className="text-gray-500 mt-3 max-w-xl mx-auto">Internship-friendly, remote-first, skill-focused. We care about what you build, not where you went to college.</p>
-                    </div>
-
-                    <div className="space-y-5">
-                        {openRoles.map((role) => (
-                            <div key={role.title} className="group bg-white rounded-2xl border border-gray-100 p-7 shadow-sm hover:shadow-[0_8px_30px_rgba(255,122,0,0.10)] hover:border-[#FF7A00]/25 transition-all duration-300">
-                                <div className="flex flex-col md:flex-row md:items-center gap-5">
-                                    <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center flex-shrink-0 group-hover:bg-[#FF7A00] transition-colors duration-300">
-                                        <role.icon className="w-5 h-5 text-[#FF7A00] group-hover:text-white transition-colors duration-300" />
-                                    </div>
-                                    <div className="flex-1">
-                                        <div className="flex flex-wrap items-center gap-3 mb-1">
-                                            <h3 className="text-lg font-bold text-[#0A0F2C]">{role.title}</h3>
-                                            <span className="text-xs bg-orange-50 border border-orange-200 text-[#FF7A00] font-semibold px-2.5 py-0.5 rounded-full">{role.dept}</span>
-                                        </div>
-                                        <p className="text-sm text-gray-400 mb-3">{role.type}</p>
-                                        <p className="text-sm text-gray-500 mb-4">{role.desc}</p>
-                                        <div className="flex flex-wrap gap-2">
-                                            {role.skills.map((s) => (
-                                                <span key={s} className="text-xs font-medium text-gray-600 bg-gray-50 border border-gray-200 rounded-lg px-2.5 py-1">{s}</span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                    <Link to="/contact" className="flex-shrink-0 hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-[#FF7A00] border border-[#FF7A00]/30 bg-orange-50 hover:bg-[#FF7A00] hover:text-white hover:shadow-[0_4px_14px_rgba(255,122,0,0.35)] transition-all duration-300">
-                                        Apply Now <ArrowRight className="w-3.5 h-3.5" />
-                                    </Link>
-                                </div>
-                                <div className="mt-4 md:hidden">
-                                    <Link to="/contact" className="w-full flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-[#FF7A00] border border-[#FF7A00]/30 bg-orange-50 hover:bg-[#FF7A00] hover:text-white transition-all duration-300">
-                                        Apply Now <ArrowRight className="w-3.5 h-3.5" />
-                                    </Link>
-                                </div>
-                            </div>
-                        ))}
+                        <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-4">No positions open right now</h2>
+                        <p className="text-gray-500 max-w-xl mx-auto mb-8">
+                            We're not actively hiring at the moment, but that changes fast. If you're a builder who loves shipping real products, we'd still love to hear from you.
+                        </p>
+                        <Link to="/contact"
+                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white bg-[#FF7A00] hover:bg-[#e86e00] shadow-[0_4px_20px_rgba(255,122,0,0.35)] hover:scale-105 transition-all duration-300">
+                            Send Your Portfolio <ArrowRight className="w-4 h-4" />
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -197,9 +144,9 @@ export default function Careers() {
                 <div className="max-w-3xl mx-auto text-center">
                     <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">Our Values</p>
                     <h2 className="text-3xl font-extrabold text-[#0A0F2C] mb-8">How we work</h2>
-                    <div className="space-y-4 text-left">
-                        {values.map((v) => (
-                            <div key={v} className="flex items-start gap-3 bg-[#FAFAFA] border border-gray-100 rounded-xl p-4 hover:border-[#FF7A00]/20 transition-colors duration-200">
+                    <div className="space-y-4 text-left" ref={valuesRef}>
+                        {values.map((v, i) => (
+                            <div key={v} className={`reveal-stagger-child${valuesVisible ? " visible" : ""} flex items-start gap-3 bg-[#FAFAFA] border border-gray-100 rounded-xl p-4 hover:border-[#FF7A00]/20 transition-colors duration-200`} style={{ "--stagger-index": i }}>
                                 <CheckCircle2 className="w-5 h-5 text-[#FF7A00] flex-shrink-0 mt-0.5" />
                                 <p className="text-gray-600 text-sm leading-relaxed">{v}</p>
                             </div>
@@ -215,10 +162,10 @@ export default function Careers() {
                     <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/10" />
                     <div className="absolute -bottom-14 -left-14 w-56 h-56 rounded-full bg-white/10" />
                     <div className="relative z-10">
-                        <h2 className="text-4xl font-extrabold mb-4">Don't see your role?</h2>
-                        <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">We're always open to exceptional talent. Send us your portfolio and tell us what you'd build with us.</p>
+                        <h2 className="text-4xl font-extrabold mb-4">Want to work with us?</h2>
+                        <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">Even though we're not hiring right now, exceptional talent is always welcome. Send us your portfolio and we'll reach out when the right role opens up.</p>
                         <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-[#FF7A00] bg-white hover:bg-orange-50 shadow-lg hover:scale-105 transition-all duration-300">
-                            Send Your Portfolio <ArrowRight className="w-4 h-4" />
+                            Get In Touch <ArrowRight className="w-4 h-4" />
                         </Link>
                     </div>
                 </div>

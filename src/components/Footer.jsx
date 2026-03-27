@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Mail, Linkedin, Instagram } from "lucide-react";
+import { ArrowRight, Mail, Linkedin, Instagram, MapPin } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import knLogo from "./kn-logo.png";
 
@@ -70,9 +70,18 @@ export default function Footer() {
           <div className="md:col-span-4">
             <h4 className="text-xs font-bold text-[#FF9E3D] uppercase tracking-widest mb-5">Get In Touch</h4>
             <div className="space-y-3 mb-6 text-sm text-gray-400">
-              <p>📧 <a href="mailto:kodeneurons@gmail.com" className="hover:text-white transition-colors">kodeneurons@gmail.com</a></p>
-              <p>💬 <a href="https://wa.me/7499601744" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">+91 7499-601-744</a></p>
-              <p>📍 India · Remote-first</p>
+              <p className="flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 flex-shrink-0 text-gray-500" />
+                <a href="mailto:kodeneurons@gmail.com" className="hover:text-white transition-colors">kodeneurons@gmail.com</a>
+              </p>
+              <p className="flex items-center gap-2">
+                <FaWhatsapp className="w-3.5 h-3.5 flex-shrink-0 text-gray-500" />
+                <a href="https://wa.me/7499601744" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">+91 7499-601-744</a>
+              </p>
+              <p className="flex items-center gap-2">
+                <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-gray-500" />
+                India · Remote-first
+              </p>
             </div>
             <Link to="/contact"
               className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-[#FF7A00] hover:bg-[#e86e00] shadow-[0_4px_14px_rgba(255,122,0,0.3)] hover:scale-105 transition-all duration-300">
@@ -84,7 +93,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/8 pt-8 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-500">
           <p>© {new Date().getFullYear()} <span className="text-[#FF7A00] font-semibold">Kodeneurons</span>. All rights reserved.</p>
-          <p>Built with ❤️ by the Kodeneurons team · India 🇮🇳</p>
+          <p>Built with care by the Kodeneurons team · India</p>
         </div>
       </div>
     </footer>

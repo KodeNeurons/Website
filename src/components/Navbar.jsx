@@ -72,7 +72,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl max-h-[80vh] overflow-y-auto">
+        <div className="lg:hidden animate-slide-down bg-white border-t border-gray-100 shadow-xl max-h-[80vh] overflow-y-auto">
           <div className="flex flex-col px-6 py-5 gap-1">
             {mainNav.map((item) => (
               <Link key={item.name} to={item.href}

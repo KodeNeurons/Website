@@ -1,6 +1,7 @@
 import { Calendar, Clock, ArrowRight, BookOpen, TrendingUp, Cpu, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const articles = [
     {
@@ -80,6 +81,9 @@ const articles = [
 
 
 export default function Blog() {
+    const [featuredRef, featuredVisible] = useScrollReveal(0.1);
+    const [articlesRef, articlesVisible] = useScrollReveal(0.05);
+    const [ctaRef, ctaVisible] = useScrollReveal(0.2);
     const featured = articles.find((a) => a.featured);
     const rest = articles.filter((a) => !a.featured);
 
@@ -114,9 +118,9 @@ export default function Blog() {
             </section>
 
             {/* ─── Featured Article ─── */}
-            <section className="px-6 pb-16">
+            <section className="px-6 pb-16" ref={featuredRef}>
                 <div className="max-w-7xl mx-auto">
-                    <div className={`group relative rounded-3xl overflow-hidden bg-gradient-to-br ${featured.color} p-0.5 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer`}>
+                    <div className={`reveal${featuredVisible ? " visible" : ""} group relative rounded-3xl overflow-hidden bg-gradient-to-br ${featured.color} p-0.5 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer`}>
                         <div className="bg-[#0A0F2C] rounded-3xl p-10 md:p-14 flex flex-col md:flex-row gap-10 items-center">
                             <div className="md:w-1/2">
                                 <div className="flex items-center gap-3 mb-5">
@@ -154,10 +158,11 @@ export default function Blog() {
                         <h2 className="text-2xl font-extrabold text-[#0A0F2C]">More Articles</h2>
                     </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {rest.map((article) => (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" ref={articlesRef}>
+                        {rest.map((article, i) => (
                             <div key={article.id}
-                                className="group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-[0_12px_40px_rgba(255,122,0,0.10)] hover:border-[#FF7A00]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                                className={`reveal-stagger-child${articlesVisible ? " visible" : ""} group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-[0_12px_40px_rgba(255,122,0,0.10)] hover:border-[#FF7A00]/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer`}
+                                style={{ "--stagger-index": i }}>
 
                                 {/* Color top banner */}
                                 <div className={`h-2 bg-gradient-to-r ${article.color}`} />
@@ -195,8 +200,8 @@ export default function Blog() {
             </section>
 
             {/* ─── Newsletter CTA ─── */}
-            <section className="py-20 px-6 bg-[#FAFAFA] border-t border-gray-100">
-                <div className="max-w-2xl mx-auto text-center">
+            <section className="py-20 px-6 bg-[#FAFAFA] border-t border-gray-100" ref={ctaRef}>
+                <div className={`reveal${ctaVisible ? " visible" : ""} max-w-2xl mx-auto text-center`}>
                     <div className="w-14 h-14 rounded-2xl bg-[#FF7A00] flex items-center justify-center mx-auto mb-5 shadow-[0_4px_20px_rgba(255,122,0,0.35)]">
                         <BookOpen className="w-6 h-6 text-white" />
                     </div>

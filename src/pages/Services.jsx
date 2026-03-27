@@ -6,6 +6,7 @@ import {
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import { buildBreadcrumbSchema, buildUrl } from "../lib/siteMetadata";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const categories = [
     {
@@ -133,7 +134,7 @@ const categories = [
 const deliveryPackages = [
     {
         name: "Starter",
-        price: "₹X,XXX",
+        price: "From ₹5,000",
         period: "one-time",
         desc: "Perfect for college projects, MVPs, and proof-of-concepts.",
         highlights: ["1–2 week delivery", "1 core feature", "Basic UI/UX", "Code handoff", "30-day support"],
@@ -142,7 +143,7 @@ const deliveryPackages = [
     },
     {
         name: "Professional",
-        price: "₹XX,XXX",
+        price: "From ₹25,000",
         period: "project",
         desc: "Full-featured product for startups and growing businesses.",
         highlights: ["3–6 week delivery", "Full feature set", "Premium design", "API + database", "CI/CD setup", "90-day support"],
@@ -169,6 +170,10 @@ const faqs = [
 ];
 
 export default function Services() {
+    const [servicesRef, servicesVisible] = useScrollReveal(0.05);
+    const [pricingRef, pricingVisible] = useScrollReveal(0.1);
+    const [faqRef, faqVisible] = useScrollReveal(0.1);
+    const [ctaRef, ctaVisible] = useScrollReveal(0.2);
     // Generate FAQ Schema
     const faqSchema = {
         "@context": "https://schema.org",
@@ -187,7 +192,7 @@ export default function Services() {
         <div className="bg-white text-[#0A0F2C]">
             <SEO
                 title="AI, Web, and Mobile Development Services"
-                description="Explore Kodeneurons services across AI development, web development, mobile apps, cloud engineering, analytics, and automation."
+                description="Explore Kodeneurons services across AI development, web development, mobile apps, cloud engineering, analytics, and automation. Get a custom quote within 24 hours."
                 keywords="AI services, machine learning, full-stack development, mobile apps, cloud, devops, data engineering, software studio"
                 path="/services"
                 schema={[
@@ -227,7 +232,7 @@ export default function Services() {
                         </span>
                     </h1>
                     <p className="text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto">
-                        Six core services. One team. From MVP to scale.
+                        Choose the expertise you need. We handle the engineering — from architecture to deployment.
                     </p>
                     <div className="mt-8 flex flex-wrap gap-4 justify-center">
                         <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white bg-[#FF7A00] hover:bg-[#e86e00] shadow-[0_4px_20px_rgba(255,122,0,0.35)] hover:scale-105 transition-all duration-300">
@@ -247,11 +252,12 @@ export default function Services() {
                         </h2>
                     </div>
 
-                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                        {categories.map((s) => (
+                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" ref={servicesRef}>
+                        {categories.map((s, i) => (
                             <div
                                 key={s.title}
-                                className="group bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                                className={`reveal-stagger-child${servicesVisible ? " visible" : ""} group bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 overflow-hidden`}
+                                style={{ "--stagger-index": i }}
                             >
                                 <div className={`h-1.5 bg-gradient-to-r ${s.color}`} />
                                 <div className="p-7">
@@ -267,8 +273,8 @@ export default function Services() {
 
                                     <p className="text-sm text-gray-500 leading-relaxed mb-4">{s.tagline}</p>
 
-                                    <div className="space-y-2">
-                                        {s.features.slice(0, 2).map((f) => (
+                                    <div className="space-y-2 mb-4">
+                                        {s.features.slice(0, 4).map((f) => (
                                             <div key={f} className="flex items-start gap-2 text-sm text-gray-600">
                                                 <CheckCircle2 className="w-4 h-4 text-[#FF7A00] mt-0.5 flex-shrink-0" />
                                                 <span>{f}</span>
@@ -276,7 +282,13 @@ export default function Services() {
                                         ))}
                                     </div>
 
-                                    <div className="mt-5 pt-4 border-t border-gray-100">
+                                    <div className="flex flex-wrap gap-1.5 mb-4">
+                                        {s.tools.map((t) => (
+                                            <span key={t} className="text-[10px] font-medium text-gray-500 bg-gray-50 border border-gray-200 rounded-lg px-2 py-0.5">{t}</span>
+                                        ))}
+                                    </div>
+
+                                    <div className="mt-4 pt-4 border-t border-gray-100">
                                         <Link to="/contact"
                                             className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF7A00] hover:text-[#e86e00] group-hover:gap-3 transition-all duration-200">
                                             Get a quote <ArrowRight className="w-4 h-4" />
@@ -291,7 +303,7 @@ export default function Services() {
 
 
             {/* ─── Pricing ─── */}
-            <section className="py-24 px-6 bg-[#FAFAFA] border-t border-gray-100">
+            <section className="py-24 px-6 bg-[#FAFAFA] border-t border-gray-100" ref={pricingRef}>
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-14">
                         <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">Pricing</p>
@@ -300,12 +312,10 @@ export default function Services() {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
-                        {deliveryPackages.map((pkg) => (
+                        {deliveryPackages.map((pkg, i) => (
                             <div key={pkg.name}
-                                className={`relative rounded-3xl p-8 transition-all duration-300 ${pkg.featured
-                                    ? "bg-[#0A0F2C] text-white shadow-2xl scale-105"
-                                    : "bg-white border border-gray-100 text-[#0A0F2C] shadow-sm hover:shadow-lg hover:-translate-y-1"
-                                    }`}>
+                                className={`reveal${pricingVisible ? " visible" : ""} relative rounded-3xl p-8 transition-all duration-300 ${pkg.featured ? "bg-[#0A0F2C] text-white shadow-2xl scale-105" : "bg-white border border-gray-100 text-[#0A0F2C] shadow-sm hover:shadow-lg hover:-translate-y-1"}`}
+                                style={{ transitionDelay: `${i * 0.15}s` }}>
                                 {pkg.featured && (
                                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FF7A00] text-white text-xs font-bold uppercase tracking-wide px-4 py-1.5 rounded-full shadow-lg">
                                         Most Popular
@@ -339,15 +349,15 @@ export default function Services() {
             </section>
 
             {/* ─── FAQ ─── */}
-            <section className="py-24 px-6 bg-white">
+            <section className="py-24 px-6 bg-white" ref={faqRef}>
                 <div className="max-w-3xl mx-auto">
                     <div className="text-center mb-10">
                         <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">FAQ</p>
                         <h2 className="text-4xl font-extrabold text-[#0A0F2C]">Common questions</h2>
                     </div>
                     <div className="space-y-4">
-                        {faqs.map(({ q, a }) => (
-                            <div key={q} className="bg-[#FAFAFA] rounded-2xl border border-gray-100 p-6 hover:border-[#FF7A00]/25 hover:shadow-sm transition-all duration-200">
+                        {faqs.map(({ q, a }, i) => (
+                            <div key={q} className={`reveal-stagger-child${faqVisible ? " visible" : ""} bg-[#FAFAFA] rounded-2xl border border-gray-100 p-6 hover:border-[#FF7A00]/25 hover:shadow-sm transition-all duration-200`} style={{ "--stagger-index": i }}>
                                 <div className="flex items-start gap-3">
                                     <div className="w-5 h-5 rounded-full bg-[#FF7A00] flex items-center justify-center flex-shrink-0 mt-0.5">
                                         <Star className="w-2.5 h-2.5 text-white" />
@@ -364,8 +374,8 @@ export default function Services() {
             </section>
 
             {/* ─── CTA ─── */}
-            <section className="py-20 px-6">
-                <div className="max-w-4xl mx-auto rounded-3xl overflow-hidden relative text-white text-center px-8 py-16"
+            <section className="py-20 px-6" ref={ctaRef}>
+                <div className={`reveal${ctaVisible ? " visible" : ""} max-w-4xl mx-auto rounded-3xl overflow-hidden relative text-white text-center px-8 py-16`}
                     style={{ background: "linear-gradient(135deg, #FF7A00, #FF9E3D)" }}>
                     <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/10" />
                     <div className="absolute -bottom-14 -left-14 w-56 h-56 rounded-full bg-white/10" />

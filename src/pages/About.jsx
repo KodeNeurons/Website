@@ -7,6 +7,7 @@ import {
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import { buildBreadcrumbSchema, buildUrl } from "../lib/siteMetadata";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 import afro from "../pages/imageF/aff.png";
 import nachi from "../pages/imageF/my_photo.png";
 import shoy from "../pages/imageF/shoyeb.png";
@@ -161,11 +162,20 @@ const differentiators = [
 ];
 
 export default function About() {
+  const [statsRef, statsVisible] = useScrollReveal(0.1);
+  const [originRef, originVisible] = useScrollReveal(0.1);
+  const [missionRef, missionVisible] = useScrollReveal(0.1);
+  const [timelineRef, timelineVisible] = useScrollReveal(0.1);
+  const [teamRef, teamVisible] = useScrollReveal(0.1);
+  const [valuesRef, valuesVisible] = useScrollReveal(0.1);
+  const [techRef, techVisible] = useScrollReveal(0.1);
+  const [diffRef, diffVisible] = useScrollReveal(0.1);
+
   return (
     <div className="bg-white text-[#0A0F2C]">
       <SEO
         title="About Kodeneurons"
-        description="Learn about Kodeneurons, our founders, our delivery approach, and how we build AI, web, and mobile products for startups and businesses."
+        description="Meet the founding team behind Kodeneurons — three engineers building AI-first software products for startups, students, and enterprises since 2024."
         path="/about"
         schema={[
           {
@@ -219,10 +229,10 @@ export default function About() {
       </section>
 
       {/* ═══════════════════════════════ STATS ═══════════════════════════════ */}
-      <section className="py-14 px-6 bg-[#0A0F2C]">
+      <section className="py-14 px-6 bg-[#0A0F2C]" ref={statsRef}>
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
-          {stats.map(({ value, label, icon: Icon }) => (
-            <div key={label} className="group">
+          {stats.map(({ value, label, icon: Icon }, i) => (
+            <div key={label} className={`reveal-scale${statsVisible ? " visible" : ""}`} style={{ transitionDelay: `${i * 0.1}s` }}>
               <Icon className="w-5 h-5 text-[#FF7A00] mx-auto mb-2 opacity-70" />
               <p className="text-3xl font-extrabold" style={{ backgroundImage: "linear-gradient(135deg,#FF7A00,#FF9E3D)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 {value}
@@ -234,10 +244,10 @@ export default function About() {
       </section>
 
       {/* ═══════════════════════════════ ORIGIN STORY ═══════════════════════════════ */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-white" ref={originRef}>
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
           {/* Left: Text */}
-          <div className="lg:w-1/2">
+          <div className={`reveal-left${originVisible ? " visible" : ""} lg:w-1/2`}>
             <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-4">Our Origin</p>
             <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-[#0A0F2C] leading-tight">
               Built by builders,<br />for builders
@@ -262,7 +272,7 @@ export default function About() {
           </div>
 
           {/* Right: Quote / highlight card */}
-          <div className="lg:w-1/2">
+          <div className={`reveal-right${originVisible ? " visible" : ""} lg:w-1/2`} style={{ transitionDelay: "0.2s" }}>
             <div className="relative bg-[#0A0F2C] rounded-3xl p-10 text-white overflow-hidden">
               <div className="absolute top-0 right-0 w-48 h-48 rounded-full"
                 style={{ background: "radial-gradient(circle, rgba(255,122,0,0.15), transparent 70%)" }} />
@@ -289,9 +299,9 @@ export default function About() {
       </section>
 
       {/* ═══════════════════════════════ MISSION & VISION ═══════════════════════════════ */}
-      <section className="py-20 px-6 bg-[#FAFAFA] border-y border-gray-100">
+      <section className="py-20 px-6 bg-[#FAFAFA] border-y border-gray-100" ref={missionRef}>
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8">
-          <div className="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-shadow">
+          <div className={`reveal-left${missionVisible ? " visible" : ""} bg-white rounded-3xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-shadow`}>
             <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center mb-5">
               <Target className="w-6 h-6 text-[#FF7A00]" />
             </div>
@@ -302,7 +312,7 @@ export default function About() {
               founding team. We don't just write code. We solve problems.
             </p>
           </div>
-          <div className="bg-white rounded-3xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-shadow">
+          <div className={`reveal-right${missionVisible ? " visible" : ""} bg-white rounded-3xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-shadow`} style={{ transitionDelay: "0.2s" }}>
             <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-5">
               <Lightbulb className="w-6 h-6 text-blue-600" />
             </div>
@@ -317,7 +327,7 @@ export default function About() {
       </section>
 
       {/* ═══════════════════════════════ TIMELINE ═══════════════════════════════ */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-white" ref={timelineRef}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">Our Journey</p>
@@ -330,7 +340,7 @@ export default function About() {
 
             <div className="space-y-10">
               {timeline.map(({ year, title, desc }, i) => (
-                <div key={year} className="relative flex gap-8 pl-20">
+                <div key={year} className={`reveal-stagger-child${timelineVisible ? " visible" : ""} relative flex gap-8 pl-20`} style={{ "--stagger-index": i }}>
                   {/* Dot */}
                   <div className="absolute left-4 top-1 w-7 h-7 rounded-full border-2 border-[#FF7A00] bg-white flex items-center justify-center z-10">
                     <div className="w-3 h-3 rounded-full bg-[#FF7A00]" />
@@ -350,7 +360,7 @@ export default function About() {
       </section>
 
       {/* ═══════════════════════════════ TEAM ═══════════════════════════════ */}
-      <section className="py-24 px-6 bg-[#FAFAFA] border-t border-gray-100">
+      <section className="py-24 px-6 bg-[#FAFAFA] border-t border-gray-100" ref={teamRef}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">The Founders</p>
@@ -362,7 +372,7 @@ export default function About() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {team.map((person, i) => (
-              <div key={i} className="group bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-[0_16px_50px_rgba(255,122,0,0.12)] hover:border-[#FF7A00]/20 hover:-translate-y-1.5 transition-all duration-400">
+              <div key={i} className={`reveal-stagger-child${teamVisible ? " visible" : ""} group bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-[0_16px_50px_rgba(255,122,0,0.12)] hover:border-[#FF7A00]/20 hover:-translate-y-1.5 transition-all duration-400`} style={{ "--stagger-index": i }}>
 
                 {/* Gradient top bar */}
                 <div className={`h-2 bg-gradient-to-r ${person.color}`} />
@@ -428,7 +438,7 @@ export default function About() {
       </section>
 
       {/* ═══════════════════════════════ CORE VALUES ═══════════════════════════════ */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-white" ref={valuesRef}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">How We Operate</p>
@@ -437,9 +447,10 @@ export default function About() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {coreValues.map(({ icon: Icon, title, desc, color, iconColor }) => (
+            {coreValues.map(({ icon: Icon, title, desc, color, iconColor }, i) => (
               <div key={title}
-                className="group bg-white rounded-2xl border border-gray-100 p-7 shadow-sm hover:shadow-[0_8px_30px_rgba(255,122,0,0.08)] hover:border-[#FF7A00]/20 hover:-translate-y-1 transition-all duration-300">
+                className={`reveal-stagger-child${valuesVisible ? " visible" : ""} group bg-white rounded-2xl border border-gray-100 p-7 shadow-sm hover:shadow-[0_8px_30px_rgba(255,122,0,0.08)] hover:border-[#FF7A00]/20 hover:-translate-y-1 transition-all duration-300`}
+                style={{ "--stagger-index": i }}>
                 <div className={`w-11 h-11 rounded-xl ${color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform`}>
                   <Icon className={`w-5 h-5 ${iconColor}`} />
                 </div>
@@ -452,15 +463,15 @@ export default function About() {
       </section>
 
       {/* ═══════════════════════════════ TECH CAPABILITIES ═══════════════════════════════ */}
-      <section className="py-20 px-6 bg-[#FAFAFA] border-t border-gray-100">
+      <section className="py-20 px-6 bg-[#FAFAFA] border-t border-gray-100" ref={techRef}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">Our Stack</p>
             <h2 className="text-4xl font-extrabold text-[#0A0F2C]">Technologies we master</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {techAreas.map(({ icon: Icon, label, items }) => (
-              <div key={label} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:border-[#FF7A00]/20 transition-all duration-300">
+            {techAreas.map(({ icon: Icon, label, items }, i) => (
+              <div key={label} className={`reveal-stagger-child${techVisible ? " visible" : ""} bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:border-[#FF7A00]/20 transition-all duration-300`} style={{ "--stagger-index": i }}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-9 h-9 rounded-xl bg-orange-50 flex items-center justify-center flex-shrink-0">
                     <Icon className="w-4 h-4 text-[#FF7A00]" />
@@ -481,9 +492,9 @@ export default function About() {
       </section>
 
       {/* ═══════════════════════════════ WHAT SETS US APART ═══════════════════════════════ */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-white" ref={diffRef}>
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-          <div className="lg:w-1/2">
+          <div className={`reveal-left${diffVisible ? " visible" : ""} lg:w-1/2`}>
             <p className="text-xs font-bold text-[#FF7A00] uppercase tracking-widest mb-3">Why KodeNeurons</p>
             <h2 className="text-4xl font-extrabold text-[#0A0F2C] mb-6 leading-tight">
               What sets us apart from every other studio
@@ -491,6 +502,9 @@ export default function About() {
             <p className="text-gray-500 mb-8 text-base leading-relaxed">
               There are thousands of freelancers and agencies out there. Here's why clients come to us — and why they stay.
             </p>
+            <Link to="/services" className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF7A00] hover:text-[#e86e00] mb-8 transition-colors">
+              View all our services <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
             <div className="space-y-4">
               {differentiators.map((d) => (
                 <div key={d} className="flex items-start gap-3">
@@ -502,7 +516,7 @@ export default function About() {
               ))}
             </div>
           </div>
-          <div className="lg:w-1/2 grid grid-cols-2 gap-4">
+          <div className={`reveal-right${diffVisible ? " visible" : ""} lg:w-1/2 grid grid-cols-2 gap-4`} style={{ transitionDelay: "0.2s" }}>
             {[
               { icon: Code2, title: "Code Ownership", desc: "100% IP transfer. All source code and assets are yours, always.", color: "text-[#FF7A00]", bg: "bg-orange-50" },
               { icon: Zap, title: "Fast Turnaround", desc: "Most projects shipped in 1–6 weeks from first call to delivery.", color: "text-blue-600", bg: "bg-blue-50" },
