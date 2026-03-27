@@ -5,7 +5,62 @@ import { buildBreadcrumbSchema, buildUrl } from "../lib/siteMetadata";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const YT_API_KEY = process.env.REACT_APP_YT_API_KEY;
+const CHANNEL_ID = process.env.REACT_APP_CHANNEL_ID;
 const PLAYLIST_ID = process.env.REACT_APP_PLAYLIST_ID || process.env.REACT_APP_Platlist_ID;
+const YT_BASE_URL = "https://www.googleapis.com/youtube/v3";
+
+async function fetchYoutubeJson(endpoint, params) {
+  const searchParams = new URLSearchParams({ ...params, key: YT_API_KEY });
+  const response = await fetch(`${YT_BASE_URL}/${endpoint}?${searchParams.toString()}`);
+  const data = await response.json();
+
+  if (!response.ok || data.error) {
+    throw new Error(data.error?.message || `YouTube API request failed with status ${response.status}`);
+  }
+
+  return data;
+}
+
+async function resolveUploadsPlaylistId() {
+  if (!CHANNEL_ID) {
+    return null;
+  }
+
+  const data = await fetchYoutubeJson("channels", {
+    part: "contentDetails",
+    id: CHANNEL_ID,
+    maxResults: "1",
+  });
+
+  return data.items?.[0]?.contentDetails?.relatedPlaylists?.uploads || null;
+}
+
+async function fetchPlaylistVideos(playlistId) {
+  let allItems = [];
+  let nextPageToken = "";
+
+  do {
+    const data = await fetchYoutubeJson("playlistItems", {
+      part: "snippet,contentDetails",
+      playlistId,
+      maxResults: "50",
+      ...(nextPageToken ? { pageToken: nextPageToken } : {}),
+    });
+
+    allItems = allItems.concat(
+      (data.items || []).map((item) => ({
+        id: item.contentDetails.videoId,
+        title: item.snippet.title,
+        description: item.snippet.description,
+        thumbnail: item.snippet.thumbnails?.high?.url || item.snippet.thumbnails?.medium?.url,
+      }))
+    );
+
+    nextPageToken = data.nextPageToken || "";
+  } while (nextPageToken);
+
+  return allItems.filter((video) => video.title !== "Private video" && video.title !== "Deleted video");
+}
 
 export default function Projects() {
   const [videosRef, videosVisible] = useScrollReveal(0.05);
@@ -15,8 +70,10 @@ export default function Projects() {
   const [fetchError, setFetchError] = useState(false);
 
   useEffect(() => {
-    if (!PLAYLIST_ID || !YT_API_KEY) {
-      console.warn("Missing YouTube configuration. Set REACT_APP_YT_API_KEY and REACT_APP_PLAYLIST_ID.");
+    if (!YT_API_KEY || (!CHANNEL_ID && !PLAYLIST_ID)) {
+      console.warn(
+        "Missing YouTube configuration. Set REACT_APP_YT_API_KEY and either REACT_APP_CHANNEL_ID or REACT_APP_PLAYLIST_ID."
+      );
       return undefined;
     }
 
@@ -25,34 +82,39 @@ export default function Projects() {
     const fetchAllVideos = async () => {
       setIsFetching(true);
       setFetchError(false);
-      let allItems = [];
-      let nextPageToken = "";
 
       try {
-        do {
-          const pageParam = nextPageToken ? `&pageToken=${nextPageToken}` : "";
-          const response = await fetch(
-            `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&playlistId=${PLAYLIST_ID}&maxResults=50${pageParam}&key=${YT_API_KEY}`
-          );
-          const data = await response.json();
+        const playlistCandidates = [];
+        const uploadsPlaylistId = await resolveUploadsPlaylistId();
 
-          if (data.error) {
-            throw new Error(data.error.message || "YouTube API error");
+        if (uploadsPlaylistId) {
+          playlistCandidates.push(uploadsPlaylistId);
+        }
+
+        if (PLAYLIST_ID && !playlistCandidates.includes(PLAYLIST_ID)) {
+          playlistCandidates.push(PLAYLIST_ID);
+        }
+
+        let loadedVideos = [];
+
+        for (const playlistCandidate of playlistCandidates) {
+          try {
+            loadedVideos = await fetchPlaylistVideos(playlistCandidate);
+
+            if (loadedVideos.length > 0) {
+              break;
+            }
+          } catch (candidateError) {
+            console.warn(`Failed to load YouTube playlist ${playlistCandidate}:`, candidateError);
           }
+        }
 
-          allItems = allItems.concat(
-            (data.items || []).map((item) => ({
-              id: item.contentDetails.videoId,
-              title: item.snippet.title,
-              description: item.snippet.description,
-              thumbnail: item.snippet.thumbnails?.high?.url || item.snippet.thumbnails?.medium?.url,
-            }))
-          );
-          nextPageToken = data.nextPageToken || "";
-        } while (nextPageToken && !ignore);
+        if (!loadedVideos.length) {
+          throw new Error("No videos found for the configured YouTube source.");
+        }
 
         if (!ignore) {
-          setVideos(allItems.filter((v) => v.title !== "Private video" && v.title !== "Deleted video"));
+          setVideos(loadedVideos);
         }
       } catch (error) {
         console.error("Playlist API error:", error);

@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.fc5071af.css",
-    "main.js": "/static/js/main.49576117.js",
+    "main.js": "/static/js/main.c2bb9435.js",
     "static/media/kn-logo.png": "/static/media/kn-logo.d6ef98dc6fadb4e8374c.png",
     "static/media/shoyeb.png": "/static/media/shoyeb.13a2b758e256bf8c29b3.png",
     "static/media/aff.png": "/static/media/aff.fff8e351f5e0e1f6155f.png",
     "static/media/my_photo.png": "/static/media/my_photo.f51bf2294a67021546fd.png",
     "index.html": "/index.html",
     "main.fc5071af.css.map": "/static/css/main.fc5071af.css.map",
-    "main.49576117.js.map": "/static/js/main.49576117.js.map"
+    "main.c2bb9435.js.map": "/static/js/main.c2bb9435.js.map"
   },
   "entrypoints": [
     "static/css/main.fc5071af.css",
-    "static/js/main.49576117.js"
+    "static/js/main.c2bb9435.js"
   ]
 }
