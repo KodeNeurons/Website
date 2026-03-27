@@ -5,7 +5,7 @@ import { buildBreadcrumbSchema, buildUrl } from "../lib/siteMetadata";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const YT_API_KEY = process.env.REACT_APP_YT_API_KEY;
-const PLAYLIST_ID = process.env.REACT_APP_Platlist_ID;
+const PLAYLIST_ID = process.env.REACT_APP_PLAYLIST_ID || process.env.REACT_APP_Platlist_ID;
 
 export default function Projects() {
   const [videosRef, videosVisible] = useScrollReveal(0.05);
@@ -16,6 +16,7 @@ export default function Projects() {
 
   useEffect(() => {
     if (!PLAYLIST_ID || !YT_API_KEY) {
+      console.warn("Missing YouTube configuration. Set REACT_APP_YT_API_KEY and REACT_APP_PLAYLIST_ID.");
       return undefined;
     }
 
