@@ -7,32 +7,7 @@ import { useScrollReveal } from "../hooks/useScrollReveal";
 const YT_API_KEY = process.env.REACT_APP_YT_API_KEY;
 const PLAYLIST_ID = process.env.REACT_APP_Platlist_ID;
 
-const featuredShowcases = [
-  {
-    id: "ai-workflows",
-    title: "AI Workflow Automation",
-    description:
-      "Custom agents and workflow automation systems that reduce manual operations and speed up decision-making.",
-    label: "AI Systems",
-  },
-  {
-    id: "web-platforms",
-    title: "SaaS and Web Platforms",
-    description:
-      "Scalable web applications built for internal operations, e-commerce, and customer-facing digital products.",
-    label: "Web Apps",
-  },
-  {
-    id: "mobile-solutions",
-    title: "Mobile and Location-Based Products",
-    description:
-      "Android and cross-platform applications with clean UX, real-time sync, and production-ready backend integration.",
-    label: "Mobile Apps",
-  },
-];
-
 export default function Projects() {
-  const [gridRef, gridVisible] = useScrollReveal(0.05);
   const [videosRef, videosVisible] = useScrollReveal(0.05);
   const [videos, setVideos] = useState([]);
   const [selected, setSelected] = useState(null);
